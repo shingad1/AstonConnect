@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstonConnect">
-        <activity android:name=".StartActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoginRegister.RegisterActivity" />
+        <activity android:name=".LoginRegister.LoginActivity" />
+        <activity android:name=".LoginRegister.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,59 @@
+package com.devin.astonconnect;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.devin.astonconnect.LoginRegister.StartActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+public class MainActivity extends AppCompatActivity {
+    //Firebase Authentication and user
+    private FirebaseAuth fAuth;
+    private FirebaseUser fUser;
+    private Button logoutBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+        logoutBtn = findViewById(R.id.logoutBtn);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fAuth.signOut();
+                sendToStart();
+            }
+        });
+    }
+
+    /**
+     * Checks to see if the current user is logged in. If they are not, then it will prompt them to
+     * either register or log in through the StartActivity
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(fUser == null){
+            sendToStart();
+        }
+    }
+
+    /** Simply sends the user to the startActivity (state not logged in) **/
+    private void sendToStart(){
+        Intent intent = new Intent(MainActivity.this, StartActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+}
