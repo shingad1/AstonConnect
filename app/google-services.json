@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "837807331671",
+    "firebase_url": "https://astonconnect-8c8f6.firebaseio.com",
+    "project_id": "astonconnect-8c8f6",
+    "storage_bucket": "astonconnect-8c8f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837807331671:android:abb544087e314fd6cf8612",
+        "android_client_info": {
+          "package_name": "com.devin.astonconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837807331671-jjhrd378vqbh7ls0rkd4v4amf8ksrfbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsJGrnS9ESxWu85pjZ42eF_FdMcQ8p6aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837807331671-jjhrd378vqbh7ls0rkd4v4amf8ksrfbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
