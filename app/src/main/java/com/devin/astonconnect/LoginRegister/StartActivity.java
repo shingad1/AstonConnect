@@ -36,7 +36,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent loginIntent = new Intent(StartActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
-                finish(); //stops the user from going back here when they press on the back button
+                finish();
             }
         });
 
