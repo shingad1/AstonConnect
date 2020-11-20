@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstonConnect">
-        <activity android:name=".LoginRegister.PostActivity"></activity>
+        <activity android:name=".PostActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginRegister.RegisterActivity" />
         <activity android:name=".LoginRegister.LoginActivity" />

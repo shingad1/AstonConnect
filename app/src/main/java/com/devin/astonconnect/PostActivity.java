@@ -1,4 +1,4 @@
-package com.devin.astonconnect.LoginRegister;
+package com.devin.astonconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
