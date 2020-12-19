@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.Post.ReviewImagePostActivity;
+import com.devin.astonconnect.Post.ReviewTextPostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NewsfeedFragment extends Fragment {
@@ -48,14 +49,14 @@ public class NewsfeedFragment extends Fragment {
         createTextPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Create text post clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ReviewTextPostActivity.class);
+                startActivity(intent);
             }
         });
 
         createImagePostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Create image post clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), ReviewImagePostActivity.class);
                 startActivity(intent);
             }

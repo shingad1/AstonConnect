@@ -129,11 +129,9 @@ public class ReviewImagePostActivity extends AppCompatActivity {
                         hashMap.put("title", title.getText().toString());
                         hashMap.put("description", description.getText().toString());
                         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        hashMap.put("isImagePost", false);
+                        hashMap.put("isImagePost", true);
 
                         reference.child(postid).setValue(hashMap);
-
-                        //Dismiss progress bar here
 
                         startActivity(new Intent(ReviewImagePostActivity.this, MainActivity.class));
                         finish();
