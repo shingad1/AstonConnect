@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostActivity">
+    tools:context=".Post.ReviewImagePostActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -45,7 +45,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/image_taken"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.498">
 
         <Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/cancel_button"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

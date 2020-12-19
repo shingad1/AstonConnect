@@ -1,5 +1,6 @@
 package com.devin.astonconnect;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,15 +12,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.devin.astonconnect.Post.ReviewImagePostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NewsfeedFragment extends Fragment {
 
     private Animation rotateOpen, rotateClose, fromBottom, toBottom;
-    private FloatingActionButton add_btn, createPostBtn, createImagePostBtn;
+    private FloatingActionButton add_btn, createTextPostBtn, createImagePostBtn;
     private Boolean clicked = false; //for animation purposes
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +27,7 @@ public class NewsfeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 
         add_btn            = view.findViewById(R.id.add_btn);
-        createPostBtn      = view.findViewById(R.id.createPostBtn);
+        createTextPostBtn = view.findViewById(R.id.createPostBtn);
         createImagePostBtn = view.findViewById(R.id.createImagePostBtn);
 
         //Animations for the buttons
@@ -43,7 +43,7 @@ public class NewsfeedFragment extends Fragment {
             }
         });
 
-        createPostBtn.setOnClickListener(new View.OnClickListener() {
+        createTextPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Create text post clicked", Toast.LENGTH_SHORT).show();
@@ -54,6 +54,8 @@ public class NewsfeedFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Create image post clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ReviewImagePostActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -68,21 +70,21 @@ public class NewsfeedFragment extends Fragment {
 
     private void setVisibility(Boolean clicked){
         if(!clicked){
-            createPostBtn.setVisibility(View.VISIBLE);
+            createTextPostBtn.setVisibility(View.VISIBLE);
             createImagePostBtn.setVisibility(View.VISIBLE);
         } else {
-            createPostBtn.setVisibility(View.INVISIBLE);
+            createTextPostBtn.setVisibility(View.INVISIBLE);
             createImagePostBtn.setVisibility(View.INVISIBLE);
         }
     }
 
     private void setAnimation(Boolean clicked){
         if(!clicked){
-            createPostBtn.startAnimation(fromBottom);
+            createTextPostBtn.startAnimation(fromBottom);
             createImagePostBtn.startAnimation(fromBottom);
             add_btn.startAnimation(rotateOpen);
         } else {
-            createPostBtn.startAnimation(toBottom);
+            createTextPostBtn.startAnimation(toBottom);
             createImagePostBtn.startAnimation(toBottom);
             add_btn.startAnimation(rotateClose);
         }
