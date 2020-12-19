@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.R;
 import com.google.android.gms.tasks.Continuation;
@@ -41,11 +42,16 @@ public class ReviewImagePostActivity extends AppCompatActivity {
     private ImageView close, image_taken;
     private Button postBtn, cancelBtn;
     private EditText description, title;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_image_post);
+
+        //Loading Dialog, passed in the activity and the loading resource file we want to show
+        loadingDialog = new LoadingDialog(ReviewImagePostActivity.this, R.layout.custom_loading_dialog);
+
 
         close       = findViewById(R.id.close);
         image_taken = findViewById(R.id.image_taken);
@@ -91,6 +97,8 @@ public class ReviewImagePostActivity extends AppCompatActivity {
 
     private void uploadImage(){
         //Progressbar stuff goes here
+        loadingDialog.startLoadingAnimation();
+
 
         if(imageUri != null){
             StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + "jpg");

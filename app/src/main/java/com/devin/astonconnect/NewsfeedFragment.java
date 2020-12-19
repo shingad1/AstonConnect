@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.Post.ReviewImagePostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,6 +21,7 @@ public class NewsfeedFragment extends Fragment {
     private Animation rotateOpen, rotateClose, fromBottom, toBottom;
     private FloatingActionButton add_btn, createTextPostBtn, createImagePostBtn;
     private Boolean clicked = false; //for animation purposes
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
