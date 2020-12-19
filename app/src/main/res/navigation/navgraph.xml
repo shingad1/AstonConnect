@@ -6,20 +6,15 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/journalFragment"
-        android:name="com.devin.astonconnect.JournalFragment"
-        android:label="fragment_journal"
-        tools:layout="@layout/fragment_journal" />
+        android:id="@+id/activityFragment"
+        android:name="com.devin.astonconnect.ActivityFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_activity" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.devin.astonconnect.NewsfeedFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_newsfeed" />
-    <fragment
-        android:id="@+id/calendarFragment"
-        android:name="com.devin.astonconnect.CalendarFragment"
-        android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.devin.astonconnect.ChatFragment"
@@ -30,4 +25,9 @@
         android:name="com.devin.astonconnect.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/journalFragment"
+        android:name="com.devin.astonconnect.JournalFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_journal" />
 </navigation>

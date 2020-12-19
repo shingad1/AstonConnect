@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Journal"  android:icon="@drawable/ic_journal"  android:id="@+id/journalFragment"/>
-    <item android:title="Newsfeed" android:icon="@drawable/ic_home"     android:id="@+id/homeFragment"/>
+    <item android:title="Activity"  android:icon="@drawable/ic_heart"  android:id="@+id/activityFragment"/>
     <item android:title="Search"   android:icon="@drawable/ic_search"   android:id="@+id/searchFragment"/>
-    <item android:title="Calendar" android:icon="@drawable/ic_calendar" android:id="@+id/calendarFragment"/>
+    <item android:title="Newsfeed" android:icon="@drawable/ic_home"     android:id="@+id/homeFragment"/>
+    <item android:title="Journal" android:icon="@drawable/ic_journal" android:id="@+id/journalFragment"/>
     <item android:title="Chat"     android:icon="@drawable/ic_chat"     android:id="@+id/chatFragment"/>
 </menu>

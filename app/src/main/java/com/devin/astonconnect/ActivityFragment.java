@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NewsfeedFragment extends Fragment {
+public class ActivityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_newsfeed, container, false);
+        View view = inflater.inflate(R.layout.fragment_activity, container, false);
         return view;
     }
 }
