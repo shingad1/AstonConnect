@@ -24,11 +24,12 @@
         android:id="@+id/createPostBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="invisible"
         android:src="@drawable/ic_textpost"
+        android:tint="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/add_btn"
         app:layout_constraintEnd_toEndOf="@+id/add_btn" />
 
@@ -36,7 +37,7 @@
         android:id="@+id/createImagePostBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         android:visibility="invisible"
