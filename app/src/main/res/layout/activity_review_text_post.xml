@@ -53,7 +53,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/custom_input"
             android:hint="Title"
-            android:maxLines="5"
+            android:maxLines="3"
             android:paddingLeft="10dp" />
 
 

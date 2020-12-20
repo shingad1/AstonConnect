@@ -21,23 +21,48 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:id="@+id/profile_image" />
+                android:id="@+id/profile_image"
+                android:src="@mipmap/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/fullname"
+                android:text="Fullname"
                 android:fontFamily="@font/sf_font"
                 android:layout_gravity="center_vertical"
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
-        
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title Text"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/mainDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula arcu. Quisque vel lacus efficitur, molestie elit tincidunt, sollicitudin velit. Donec ullamcorper quam ac facilisis tempor."
+            android:textColor="#1C1C1C"
+            android:textSize="15sp"
+            />
+
+
         <ImageView
             android:id="@+id/post_image"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:src="@mipmap/ic_launcher"/>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -75,7 +100,8 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:id="@+id/likes" />
+            android:text="x Likes"
+            android:id="@+id/likeText" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,6 +111,7 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
+            android:text="Devin Shingadia"
             android:id="@+id/publisher" />
 
         <TextView
@@ -95,8 +122,10 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
+            android:text="Description"
+            android:visibility="visible"
             android:textColor="@color/black"
-            android:id="@+id/description" />
+            android:id="@+id/bottomDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,7 +135,14 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
+            android:text="View all 20 Comments"
             android:id="@+id/comments" />
 
+
+
+
+
+
     </LinearLayout>
+
 </RelativeLayout>
