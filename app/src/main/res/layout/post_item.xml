@@ -21,14 +21,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:id="@+id/profile_image"
-                android:src="@mipmap/ic_launcher"/>
+                android:id="@+id/profile_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/fullname"
-                android:text="Fullname"
                 android:fontFamily="@font/sf_font"
                 android:layout_gravity="center_vertical"
                 android:textSize="20sp"
@@ -39,7 +37,6 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title Text"
             android:maxLines="3"
             android:textColor="@color/black"
             android:textSize="24sp"/>
@@ -48,7 +45,6 @@
             android:id="@+id/mainDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ligula arcu. Quisque vel lacus efficitur, molestie elit tincidunt, sollicitudin velit. Donec ullamcorper quam ac facilisis tempor."
             android:textColor="#1C1C1C"
             android:textSize="15sp"
             />
@@ -59,8 +55,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:src="@mipmap/ic_launcher"/>
+            android:visibility="visible" />
 
 
 
@@ -100,7 +95,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="x Likes"
             android:id="@+id/likeText" />
 
         <TextView
@@ -111,7 +105,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="Devin Shingadia"
             android:id="@+id/publisher" />
 
         <TextView
@@ -122,7 +115,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="Description"
             android:visibility="visible"
             android:textColor="@color/black"
             android:id="@+id/bottomDescription" />
@@ -135,14 +127,7 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="View all 20 Comments"
             android:id="@+id/comments" />
 
-
-
-
-
-
     </LinearLayout>
-
 </RelativeLayout>
