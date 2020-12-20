@@ -8,6 +8,18 @@ public class Post {
     private String  publisher;
     private String  title;
 
+
+    public Post(String description, Boolean isimagepost, String postid, String postimage, String publisher, String title) {
+        this.description = description;
+        this.isimagepost = isimagepost;
+        this.postid = postid;
+        this.postimage = postimage;
+        this.publisher = publisher;
+        this.title = title;
+    }
+
+    public Post() {}
+
     public String  getdescription() { return description; }
     public Boolean getisimagepost() { return isimagepost; }
     public String  gettitle()       { return title; }
@@ -22,6 +34,4 @@ public class Post {
     public void settitle(String title)              { this.title = title; }
     public void setdescription(String description)  { this.description = description; }
     public void setpostid(String postid)            { this.postid = postid; }
-
-
 }
