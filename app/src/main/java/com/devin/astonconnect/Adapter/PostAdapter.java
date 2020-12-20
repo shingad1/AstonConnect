@@ -1,6 +1,7 @@
 package com.devin.astonconnect.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
+import com.devin.astonconnect.Post.CommentsActivity;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,6 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.title.setText(post.gettitle());
         holder.isImagePost = post.getisimagepost();
         holder.postid = post.getpostid();
+        holder.publisherId = post.getpublisher();
 
         /** Change the visibility of the post (viewholder) based on values **/
         if(post.getisimagepost() == false){
@@ -71,6 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         getPublisherInfo(holder.profile_image, holder.fullname, holder.publisher, post.getpublisher());
         isLiked(post.getpostid(), holder.like);
         numberOfLikes(holder.likeText, post.getpostid());
+        getComments(post.getpostid(), holder.comments);
     }
 
     @Override
@@ -146,13 +151,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         });
     }
 
+    private void getComments(String postid, final TextView comments){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments").child(postid);
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                comments.setText("View all " + snapshot.getChildrenCount() + " comments");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    /**
+     * Contains the onclick functionality
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView profile_image, post_image, like, comment, bookmark;
         public TextView  title, mainDescription, likeText, username, fullname, publisher, bottomDescription, comments;
         public Boolean isImagePost;
         public String postid;
+        public String publisherId;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -189,7 +213,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, CommentsActivity.class);
+                    intent.putExtra("postid", postid);
+                    intent.putExtra("publisherid", publisherId);
+                    mContext.startActivity(intent);
+                }
+            });
+
+            comments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, CommentsActivity.class);
+                    intent.putExtra("postid", postid);
+                    intent.putExtra("publisherid", publisherId);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
-
 }
