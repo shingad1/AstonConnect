@@ -104,7 +104,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="x likes"
             android:id="@+id/likeText" />
 
         <TextView
@@ -115,7 +114,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="publisher"
             android:id="@+id/publisher" />
 
         <TextView
@@ -127,7 +125,6 @@
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
             android:textColor="@color/black"
-            android:text="bottom description"
             android:id="@+id/bottomDescription" />
 
         <TextView
@@ -138,7 +135,6 @@
             android:textStyle="bold"
             android:fontFamily="@font/sf_font"
             android:textSize="15sp"
-            android:text="x comments"
             android:id="@+id/comments" />
 
     </LinearLayout>
