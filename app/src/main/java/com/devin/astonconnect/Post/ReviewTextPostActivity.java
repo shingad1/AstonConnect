@@ -81,10 +81,10 @@ public class ReviewTextPostActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("postid", postid);
         hashMap.put("title", title.getText().toString());
-        hashMap.put("postImage", "null");
+        hashMap.put("postimage", "null");
         hashMap.put("description", description.getText().toString());
         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        hashMap.put("isImagePost", false);
+        hashMap.put("isimagepost", false);
 
         reference.child(postid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

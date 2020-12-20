@@ -125,11 +125,11 @@ public class ReviewImagePostActivity extends AppCompatActivity {
 
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("postid", postid);
-                        hashMap.put("postImage", myUrl);
+                        hashMap.put("postimage", myUrl);
                         hashMap.put("title", title.getText().toString());
                         hashMap.put("description", description.getText().toString());
                         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        hashMap.put("isImagePost", true);
+                        hashMap.put("isimagepost", true);
 
                         reference.child(postid).setValue(hashMap);
 
