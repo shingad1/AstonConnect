@@ -57,17 +57,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             holder.bottomDescription.setVisibility(View.GONE);
             holder.mainDescription.setVisibility(View.VISIBLE);
             holder.mainDescription.setText(post.getdescription());
-        } else {
+
+        } else if(post.getisimagepost() == true){
+
             holder.post_image.setVisibility(View.VISIBLE);
             holder.bottomDescription.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(post.getpostimage()).into(holder.post_image);
-            holder.bottomDescription.setText(post.getdescription());
-        }
-
-        if(post.getdescription() == ""){
-            holder.bottomDescription.setVisibility(View.GONE);
-        } else {
-            holder.bottomDescription.setVisibility(View.VISIBLE);
             holder.bottomDescription.setText(post.getdescription());
         }
 
@@ -123,7 +118,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             likeText            = itemView.findViewById(R.id.likeText);
             fullname            = itemView.findViewById(R.id.fullname);
             publisher           = itemView.findViewById(R.id.publisher);
-            bottomDescription   = itemView.findViewById(R.id.bottomDescription);
+            bottomDescription = itemView.findViewById(R.id.bottomDescription);
             comments            = itemView.findViewById(R.id.comments);
         }
     }
