@@ -2,18 +2,24 @@ package com.devin.astonconnect.Post;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.devin.astonconnect.Adapter.CommentAdapter;
 import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.MainActivity;
+import com.devin.astonconnect.Model.Comment;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CommentsActivity extends AppCompatActivity {
 
@@ -34,8 +42,13 @@ public class CommentsActivity extends AppCompatActivity {
     private ImageView back;
     private String postid;
     private String publisherid;
-
     private FirebaseUser firebaseUser;
+
+
+    //Recyclerview stuff
+    private RecyclerView recyclerView;
+    private CommentAdapter commentAdapter;
+    private List<Comment> mComments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +59,21 @@ public class CommentsActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profile_image);
         postBtn      = findViewById(R.id.postBtn);
         back         = findViewById(R.id.back);
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //Recyclerview stuff
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        mComments = new ArrayList<>();
+        commentAdapter = new CommentAdapter(this, mComments);
+        recyclerView.setAdapter(commentAdapter);
+
+
+
+
+        //Displaying comment
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +83,7 @@ public class CommentsActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        postid      = intent.getStringExtra("postid");
+        postid      = intent.getStringExtra("postid"); //from postadapter? when you click comments
         publisherid = intent.getStringExtra("publisherid");
 
 
@@ -74,6 +99,7 @@ public class CommentsActivity extends AppCompatActivity {
         });
 
         getUserImage();
+        getComments();
     }
 
     private void addComment(){
@@ -101,6 +127,27 @@ public class CommentsActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void getComments(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mComments.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Comment comment = snapshot.getValue(Comment.class);
+                    mComments.add(comment);
+                    Log.w("Comment", comment.getcomment());
+                }
+                commentAdapter.notifyDataSetChanged();
+                System.out.println("Number of comments" + String.valueOf(mComments.size()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

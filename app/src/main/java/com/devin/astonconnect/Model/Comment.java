@@ -10,6 +10,8 @@ public class Comment {
         this.publisher = publisher;
     }
 
+    public Comment() {}
+
     public String getcomment()                   { return comment; }
     public void   setcomment(String comment)     { this.comment = comment; }
 
