@@ -64,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lando Norris"
+                    android:id="@+id/fullname"
                     android:textSize="24sp"
                     android:fontFamily="@font/sf_font"
                     android:textColor="@color/black"
@@ -77,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/sf_font"
+                android:id="@+id/bioText"
                 android:maxLines="5"
                 android:text="Lando Norris (born 13 November 1999) is a Belgian-British racing driver,[4] currently competing inFormula One with McLaren, racing under the British flag. He won the MSA Formula championship in 2015, and the Toyota Racing Series, Eurocup Formula Renault 2.0 and Formula Renault 2.0 Northern European Cup in 2016.He also received the McLaren Autosport BRDC Award that year" />
 
@@ -87,7 +89,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/firstBtn"
+                    android:id="@+id/chatBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -97,7 +99,7 @@
                     android:textColor="#5E5E5E" />
 
                 <Button
-                    android:id="@+id/secondBtn"
+                    android:id="@+id/followBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -113,6 +115,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="-10dp"
                 android:layout_marginRight="-10dp"
+                android:background="@drawable/button_border"
                 android:id="@+id/selection_bar"
                 android:orientation="horizontal" >
 
@@ -120,7 +123,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/photoPostBtn"
+                    android:id="@+id/viewPhotoPostBtn"
                     android:src="@drawable/ic_image_icon"
                     style="?android:attr/buttonBarButtonStyle"/>
 
@@ -128,7 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/textPostBtn"
+                    android:id="@+id/viewTextPostBtn"
                     android:src="@drawable/ic_textpost"
                     style="?android:attr/buttonBarButtonStyle"/>
             </LinearLayout>

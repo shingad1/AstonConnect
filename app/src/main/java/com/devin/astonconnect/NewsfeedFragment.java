@@ -1,10 +1,13 @@
 package com.devin.astonconnect;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +45,7 @@ public class NewsfeedFragment extends Fragment {
     private PostAdapter postAdapter;
     private List<Post> mPosts;
     private List<String> followingList;
-    private ImageView logOutBtn;
+    private ImageView logOutBtn, profile;
 
     //Floating Action button stuff
     private Animation rotateOpen, rotateClose, fromBottom, toBottom;
@@ -71,6 +74,18 @@ public class NewsfeedFragment extends Fragment {
         add_btn            = view.findViewById(R.id.add_btn);
         createTextPostBtn = view.findViewById(R.id.createPostBtn);
         createImagePostBtn = view.findViewById(R.id.createImagePostBtn);
+
+        //display profile stuff
+        profile = view.findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                editor.apply();
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
+            }
+        });
 
         //logout btn
         logOutBtn = view.findViewById(R.id.logOutBtn);
