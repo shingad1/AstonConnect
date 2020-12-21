@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.devin.astonconnect.Model.ProfileFragment;
+import com.devin.astonconnect.ProfileFragment;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
