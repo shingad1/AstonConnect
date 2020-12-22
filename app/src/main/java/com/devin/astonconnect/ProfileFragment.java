@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.devin.astonconnect.Adapter.FavouritePostAdapter;
 import com.devin.astonconnect.Adapter.PhotoPostAdapter;
 import com.devin.astonconnect.Adapter.TextPostAdapter;
 import com.devin.astonconnect.Model.Post;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +43,7 @@ public class ProfileFragment extends Fragment {
     private ImageView backBtn, profileImage, viewPhotoPostBtn, viewTextPostBtn;
     private TextView fullname,bioText;
     private Button chatBtn, followBtn;
-    private RecyclerView recyclerViewPost, recyclerViewText;
+    private RecyclerView recyclerViewPost, recyclerViewText, recyclerViewFavourites;
     private FirebaseUser firebaseUser;
     private String profileId;
     private PhotoPostAdapter photoPostAdapter;
@@ -50,6 +52,11 @@ public class ProfileFragment extends Fragment {
     //text post  stuff
     private TextPostAdapter textPostAdapter;
     private List<Post> textPosts;
+
+    //favourited posts stuff
+    private FavouritePostAdapter favouritePostAdapter;
+    private List<Post> favouritedPosts;
+    private List<String> savedPostList; //temporarily holds the keys of the saved posts, retrieves them using this list and then populates adapter
 
 
     @Override
@@ -67,6 +74,16 @@ public class ProfileFragment extends Fragment {
         chatBtn          = view.findViewById(R.id.chatBtn);
         followBtn        = view.findViewById(R.id.followBtn);
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
+
+        //Recyclerview stuff showing mixed image and text posts for favourites
+        recyclerViewFavourites = view.findViewById(R.id.recycler_view_favourites);
+        recyclerViewFavourites.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager3 = new GridLayoutManager(getContext(), 3);
+        recyclerViewFavourites.setLayoutManager(linearLayoutManager3);
+        favouritedPosts = new ArrayList<>();
+        favouritePostAdapter = new FavouritePostAdapter(getContext(), favouritedPosts);
+        recyclerViewFavourites.setAdapter(favouritePostAdapter);
+
 
         //Recyclerview stuff showing image posts
         recyclerViewPost = view.findViewById(R.id.recycler_view_post);
@@ -124,6 +141,18 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //view favourited posts
+        followBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(followBtn.getText().equals("Favourite posts")){ //meaning you are viewing your own profile
+                    recyclerViewText.setVisibility(View.GONE);
+                    recyclerViewPost.setVisibility(View.GONE);
+                    recyclerViewFavourites.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         //normal stuff
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +184,8 @@ public class ProfileFragment extends Fragment {
         getUserInfo();
         //Load the user's photo posts to populate the adapter called 'PhotoPostAdapter' and adapter caled 'TextPostAdapter'
         getPosts();
+        //Get saved posts for favourited posts
+        readSavedPosts();
 
         return view;
     }
@@ -228,6 +259,50 @@ public class ProfileFragment extends Fragment {
 
                 Collections.reverse(textPosts); //show the latest first
                 textPostAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void readSavedPosts(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bookmarked").child(firebaseUser.getUid());
+        savedPostList = new ArrayList<>();
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    savedPostList.add(snapshot.getKey());
+                }
+                getSavedPosts(); //have the ID's of the saved posts, now need to retrieve the actual posts..
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getSavedPosts(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                favouritedPosts.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post post = snapshot.getValue(Post.class);
+                    for(String id :savedPostList){
+                        if (post.getpostid().equals(id)) {
+                            favouritedPosts.add(post);
+                        }
+                    }
+                }
+                favouritePostAdapter.notifyDataSetChanged();
             }
 
             @Override
