@@ -167,6 +167,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 recyclerViewPost.setVisibility(View.VISIBLE);
                 recyclerViewText.setVisibility(View.GONE);
+                recyclerViewFavourites.setVisibility(View.GONE);
             }
         });
 
@@ -175,6 +176,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 recyclerViewText.setVisibility(View.VISIBLE);
                 recyclerViewPost.setVisibility(View.GONE);
+                recyclerViewFavourites.setVisibility(View.GONE);
             }
         });
 
