@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment {
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
 
         //Get the profile id of the user, passed in from the mainactviity newsfeedfragment
-        SharedPreferences prefs = getActivity().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileId = prefs.getString("profileid", "none");
 
         /**If the profileid is the current user's ID then they will be able to see edit profile, instead of chat (Chat -> Edit Profile) */
@@ -65,8 +66,29 @@ public class ProfileFragment extends Fragment {
            checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
         }
 
-        //Retrieve and set the user information
-        getUserInfo();
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String btnText = chatBtn.getText().toString();
+
+                if(btnText.equals("Edit Profile")){
+                    //go to edit profile
+                } else if (btnText.equals("follow")){
+
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
+                            .child("following").child(profileId).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
+                            .child("followers").child(firebaseUser.getUid()).setValue(true);
+
+                } else if (btnText.equals("following")){
+
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
+                            .child("following").child(profileId).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
+                            .child("followers").child(firebaseUser.getUid()).removeValue();
+                }
+            }
+        });
 
         //normal stuff
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,10 +99,11 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //Retrieve and set the user information
+        getUserInfo();
+
         return view;
     }
-
-
 
     private void getUserInfo(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileId);
@@ -92,7 +115,9 @@ public class ProfileFragment extends Fragment {
                     return;
                 }
                 User user = snapshot.getValue(User.class);
-                Glide.with(getContext()).load(user.getimageurl()).into(profileImage);
+                System.out.println(profileId);
+                String profileid = profileId;
+                if(user.getimageurl() != null) { Glide.with(getContext()).load(user.getimageurl()).into(profileImage); }
                 fullname.setText(user.getfullname());
                 bioText.setText(user.getbio());
             }

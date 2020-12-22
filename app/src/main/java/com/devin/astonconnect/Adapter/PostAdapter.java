@@ -240,7 +240,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 @Override
                 public void onClick(View view) {
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", publisher.getText().toString());
+                    editor.putString("profileid", publisherId);
                     editor.apply();
                     Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                 }
@@ -251,7 +251,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 @Override
                 public void onClick(View view) {
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", publisher.getText().toString());
+                    editor.putString("profileid", publisherId);
                     editor.apply();
                     Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                 }

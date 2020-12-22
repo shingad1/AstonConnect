@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -74,8 +75,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 editor.putString("profileid", user.getid());
                 editor.apply();
 
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
-                        new ProfileFragment()).commit();
+                Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_profileFragment);
+                /** OLD WAY BELOW **/
+                //((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                //        new ProfileFragment()).commit();
             }
         });
 
