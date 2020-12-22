@@ -78,6 +78,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         isLiked(post.getpostid(), holder.like);
         numberOfLikes(holder.likeText, post.getpostid());
         getComments(post.getpostid(), holder.comments);
+        isBookmarked(post.getpostid(), holder.bookmark);
     }
 
     @Override
@@ -169,6 +170,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         });
     }
 
+    private void isBookmarked(String postid, ImageView imageView){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Bookmarked")
+                .child(firebaseUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(postid).exists()){
+                    imageView.setImageResource(R.drawable.ic_bookmarked);
+                    imageView.setTag("Bookmarked");
+                } else {
+                    imageView.setImageResource(R.drawable.ic_bookmark_outline);
+                    imageView.setTag("Bookmark");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     /**
      * Contains the onclick functionality
      */
@@ -198,6 +225,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             publisher           = itemView.findViewById(R.id.publisher);
             bottomDescription   = itemView.findViewById(R.id.bottomDescription);
             comments            = itemView.findViewById(R.id.comments);
+
+            /** OnClick functionality to save a post **/
+            bookmark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (bookmark.getTag().equals("Bookmark")){
+                        FirebaseDatabase.getInstance().getReference().child("Bookmarked").child(firebaseUser.getUid())
+                                .child(postid).setValue(true);
+                    } else {
+                        FirebaseDatabase.getInstance().getReference().child("Bookmarked").child(firebaseUser.getUid())
+                                .child(postid).removeValue();
+                        bookmark.setTag("Bookmark");
+                    }
+                }
+            });
+
 
             /** OnClick functionality for the viewholder **/
             like.setOnClickListener(new View.OnClickListener() {
