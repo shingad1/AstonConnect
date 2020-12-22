@@ -7,9 +7,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.devin.astonconnect.Adapter.PhotoAdapter;
+import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +29,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class ProfileFragment extends Fragment {
@@ -36,6 +43,8 @@ public class ProfileFragment extends Fragment {
     private RecyclerView recyclerViewPost, recyclerViewText;
     private FirebaseUser firebaseUser;
     private String profileId;
+    private PhotoAdapter photoPostAdapter;
+    private List<Post> mPosts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +60,17 @@ public class ProfileFragment extends Fragment {
         bioText          = view.findViewById(R.id.bioText);
         chatBtn          = view.findViewById(R.id.chatBtn);
         followBtn        = view.findViewById(R.id.followBtn);
-        recyclerViewPost = view.findViewById(R.id.recycler_view_post);
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
+
+        //Recyclerview stuff showing image posts
+        recyclerViewPost = view.findViewById(R.id.recycler_view_post);
+        recyclerViewPost.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerViewPost.setLayoutManager(linearLayoutManager);
+        mPosts = new ArrayList<>();
+        photoPostAdapter = new PhotoAdapter(getContext(), mPosts);
+        recyclerViewPost.setAdapter(photoPostAdapter);
+
 
         //Get the profile id of the user, passed in from the mainactviity newsfeedfragment
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
@@ -101,6 +119,8 @@ public class ProfileFragment extends Fragment {
 
         //Retrieve and set the user information
         getUserInfo();
+        //Load the user's photo posts to populate the adapter called 'PhotoPostAdapter'
+        getPhotoPosts();
 
         return view;
     }
@@ -142,6 +162,31 @@ public class ProfileFragment extends Fragment {
                 } else {
                     followBtn.setText("follow");
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getPhotoPosts(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mPosts.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post post = snapshot.getValue(Post.class);
+                    if(post.getisimagepost() == true){
+                        if (post.getpublisher().equals(profileId)) {
+                            mPosts.add(post);
+                        }
+                    }
+                }
+                Collections.reverse(mPosts); //show the latest first
+                photoPostAdapter.notifyDataSetChanged();
             }
 
             @Override

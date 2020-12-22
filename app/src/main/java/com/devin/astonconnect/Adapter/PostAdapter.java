@@ -235,7 +235,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
-            //not working
             fullname.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -246,7 +245,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
-            //not working
             post_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
