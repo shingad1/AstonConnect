@@ -19,7 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.devin.astonconnect.Adapter.PhotoAdapter;
+import com.devin.astonconnect.Adapter.PhotoPostAdapter;
+import com.devin.astonconnect.Adapter.TextPostAdapter;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +44,13 @@ public class ProfileFragment extends Fragment {
     private RecyclerView recyclerViewPost, recyclerViewText;
     private FirebaseUser firebaseUser;
     private String profileId;
-    private PhotoAdapter photoPostAdapter;
+    private PhotoPostAdapter photoPostAdapter;
     private List<Post> mPosts;
+
+    //text post  stuff
+    private TextPostAdapter textPostAdapter;
+    private List<Post> textPosts;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,8 +74,18 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewPost.setLayoutManager(linearLayoutManager);
         mPosts = new ArrayList<>();
-        photoPostAdapter = new PhotoAdapter(getContext(), mPosts);
+        photoPostAdapter = new PhotoPostAdapter(getContext(), mPosts);
         recyclerViewPost.setAdapter(photoPostAdapter);
+
+
+        //RecyclerView stuff showing text posts
+        recyclerViewText = view.findViewById(R.id.recycler_view_text);
+        recyclerViewText.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
+        recyclerViewText.setLayoutManager(linearLayoutManager1);
+        textPosts = new ArrayList<>();
+        textPostAdapter = new TextPostAdapter(getContext(), textPosts);
+        recyclerViewText.setAdapter(textPostAdapter);
 
 
         //Get the profile id of the user, passed in from the mainactviity newsfeedfragment
@@ -117,10 +133,28 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        viewPhotoPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewPost.setVisibility(View.VISIBLE);
+                recyclerViewText.setVisibility(View.GONE);
+            }
+        });
+
+        viewTextPostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewText.setVisibility(View.VISIBLE);
+                recyclerViewPost.setVisibility(View.GONE);
+            }
+        });
+
+
+
         //Retrieve and set the user information
         getUserInfo();
-        //Load the user's photo posts to populate the adapter called 'PhotoPostAdapter'
-        getPhotoPosts();
+        //Load the user's photo posts to populate the adapter called 'PhotoPostAdapter' and adapter caled 'TextPostAdapter'
+        getPosts();
 
         return view;
     }
@@ -171,7 +205,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getPhotoPosts(){
+    private void getPosts(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -183,10 +217,17 @@ public class ProfileFragment extends Fragment {
                         if (post.getpublisher().equals(profileId)) {
                             mPosts.add(post);
                         }
+                    } else if (post.getisimagepost() == false){
+                        if (post.getpublisher().equals(profileId)){
+                            textPosts.add(post);
+                        }
                     }
                 }
                 Collections.reverse(mPosts); //show the latest first
                 photoPostAdapter.notifyDataSetChanged();
+
+                Collections.reverse(textPosts); //show the latest first
+                textPostAdapter.notifyDataSetChanged();
             }
 
             @Override
