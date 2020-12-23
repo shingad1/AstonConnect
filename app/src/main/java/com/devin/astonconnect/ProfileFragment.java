@@ -124,6 +124,22 @@ public class ProfileFragment extends Fragment {
 
                 if(btnText.equals("Edit Profile")){
                     //go to edit profile
+                } else if (btnText.equals("Chat")){
+                    //go to chat..
+                }
+            }
+        });
+
+        //view favourited posts
+        followBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String btnText = followBtn.getText().toString();
+
+                if(followBtn.getText().equals("Favourite posts")){ //meaning you are viewing your own profile
+                    recyclerViewText.setVisibility(View.GONE);
+                    recyclerViewPost.setVisibility(View.GONE);
+                    recyclerViewFavourites.setVisibility(View.VISIBLE);
                 } else if (btnText.equals("follow")){
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
@@ -137,18 +153,6 @@ public class ProfileFragment extends Fragment {
                             .child("following").child(profileId).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
                             .child("followers").child(firebaseUser.getUid()).removeValue();
-                }
-            }
-        });
-
-        //view favourited posts
-        followBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(followBtn.getText().equals("Favourite posts")){ //meaning you are viewing your own profile
-                    recyclerViewText.setVisibility(View.GONE);
-                    recyclerViewPost.setVisibility(View.GONE);
-                    recyclerViewFavourites.setVisibility(View.VISIBLE);
                 }
             }
         });
