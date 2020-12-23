@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.Model.Comment;
@@ -23,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -52,7 +49,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment comment = mComments.get(position);
 
         holder.comment.setText(comment.getcomment());
-        getUserDetails(holder.profile_image, holder.fullname, comment.getpublisher()); //?
+        //Retrieves the user details based on the comment.getpublisher() value.
+        getUserDetails(holder.profile_image, holder.fullname, comment.getpublisher());
 
        /**
         holder.comment.setOnClickListener(new View.OnClickListener() {

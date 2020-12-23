@@ -6,11 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.R;
-
 import java.util.List;
 
 public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.ViewHolder>{
@@ -49,7 +47,6 @@ public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             postImage = itemView.findViewById(R.id.postImage);
         }
     }

@@ -51,7 +51,6 @@ public class TextPostAdapter extends RecyclerView.Adapter<TextPostAdapter.ViewHo
             super(itemView);
 
             postTitle = itemView.findViewById(R.id.postTitle);
-
         }
     }
 }

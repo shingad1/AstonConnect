@@ -27,8 +27,6 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
         this.mFavouritePosts = mFavouritePosts;
     }
 
-    public FavouritePostAdapter() { }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

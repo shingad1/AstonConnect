@@ -182,9 +182,6 @@ public class NewsfeedFragment extends Fragment {
         });
     }
 
-
-
-
     private void onAddButtonClicked() {
         setVisibility(clicked);
         setAnimation(clicked);
