@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/newsfeedFragment">
 
     <fragment
         android:id="@+id/activityFragment"
@@ -11,10 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_activity" />
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/newsfeedFragment"
         android:name="com.devin.astonconnect.NewsfeedFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_newsfeed" >
+        android:label="fragment_newsfeed"
+        tools:layout="@layout/fragment_newsfeed">
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
