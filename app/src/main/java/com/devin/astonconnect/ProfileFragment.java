@@ -32,7 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -123,7 +122,7 @@ public class ProfileFragment extends Fragment {
                 String btnText = chatBtn.getText().toString();
 
                 if(btnText.equals("Edit Profile")){
-                    //go to edit profile
+                    startActivity(new Intent(getContext(), ProfileEditActivity.class));
                 } else if (btnText.equals("Chat")){
                     //go to chat..
                 }
