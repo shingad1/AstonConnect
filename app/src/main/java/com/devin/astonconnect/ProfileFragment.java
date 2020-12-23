@@ -280,7 +280,7 @@ public class ProfileFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     savedPostList.add(snapshot.getKey());
                 }
-                getSavedPosts(); //have the ID's of the saved posts, now need to retrieve the actual posts..
+                getSavedPosts(); //have the ID's of the saved posts, now need to retrieve the actual posts..and add them to the favouritedPosts list
             }
 
             @Override

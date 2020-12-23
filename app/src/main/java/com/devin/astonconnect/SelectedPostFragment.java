@@ -34,8 +34,6 @@ public class SelectedPostFragment extends Fragment {
     private List<Post> mPosts;
     private String postid;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class SelectedPostFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).popBackStack(); //Pops the last fragment transaction which would be set in PhotoPostAdapter (Line 63)
-                getActivity().finish();
             }
         });
 
