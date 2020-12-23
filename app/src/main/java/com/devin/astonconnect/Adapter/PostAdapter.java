@@ -296,6 +296,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
+
             /**
             post_image.setOnClickListener(new View.OnClickListener() {
                 @Override
