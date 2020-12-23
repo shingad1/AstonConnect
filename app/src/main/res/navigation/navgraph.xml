@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/newsfeedFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/activityFragment"
@@ -11,16 +11,13 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_activity" />
     <fragment
-        android:id="@+id/newsfeedFragment"
+        android:id="@+id/homeFragment"
         android:name="com.devin.astonconnect.NewsfeedFragment"
-        android:label="fragment_newsfeed"
-        tools:layout="@layout/fragment_newsfeed">
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_newsfeed" >
         <action
-            android:id="@+id/action_newsfeedFragment_to_profileFragment"
+            android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_newsfeedFragment_to_selectedPostFragment"
-            app:destination="@id/selectedPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -45,14 +42,5 @@
         android:id="@+id/profileFragment"
         android:name="com.devin.astonconnect.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_selectedPostFragment"
-            app:destination="@id/selectedPostFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/selectedPostFragment"
-        android:name="com.devin.astonconnect.Post.SelectedPostFragment"
-        android:label="fragment_selected_post"
-        tools:layout="@layout/fragment_selected_post" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

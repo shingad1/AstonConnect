@@ -1,12 +1,10 @@
 package com.devin.astonconnect.Adapter;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -38,20 +36,6 @@ public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.View
         Post post = mPosts.get(position);
         Glide.with(mContext).load(post.getpostimage()).into(holder.postImage);
 
-
-        /** Opening post in full from clicking on it's image **/
-        holder.postImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("postid", post.getpostid());
-                editor.apply();
-
-                Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_selectedPostFragment);
-
-            }
-        });
-
     }
 
     @Override
@@ -67,7 +51,6 @@ public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.View
             super(itemView);
 
             postImage = itemView.findViewById(R.id.postImage);
-
         }
     }
 }

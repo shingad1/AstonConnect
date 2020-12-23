@@ -16,9 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.devin.astonconnect.Adapter.PostAdapter;
+import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Post.ReviewImagePostActivity;
@@ -79,7 +83,7 @@ public class NewsfeedFragment extends Fragment {
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
                 editor.apply();
-                Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_profileFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
             }
         });
 

@@ -180,6 +180,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
+
         //Retrieve and set the user information
         getUserInfo();
         //Load the user's photo posts to populate the adapter called 'PhotoPostAdapter' and adapter caled 'TextPostAdapter'

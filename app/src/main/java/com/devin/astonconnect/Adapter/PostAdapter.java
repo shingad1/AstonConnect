@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.Post.CommentsActivity;
@@ -221,7 +222,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             mainDescription     = itemView.findViewById(R.id.mainDescription);
             likeText            = itemView.findViewById(R.id.likeText);
             fullname            = itemView.findViewById(R.id.fullname);
-            username            = itemView.findViewById(R.id.username);
             publisher           = itemView.findViewById(R.id.publisher);
             bottomDescription   = itemView.findViewById(R.id.bottomDescription);
             comments            = itemView.findViewById(R.id.comments);
@@ -240,48 +240,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     }
                 }
             });
-
-
-            /** Opening the profile Page by clicking on Profile Image or Fullname **/
-            profile_image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", publisherId);
-                    editor.apply();
-
-                    Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_profileFragment);
-                }
-            });
-
-            fullname.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", publisherId);
-                    editor.apply();
-
-                    Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_profileFragment);
-                }
-            });
-
-
-            /** Opening post in full from clicking on it's image **/
-            post_image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("postid", postid);
-                    editor.apply();
-
-                    Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_selectedPostFragment);
-
-                }
-            });
-
-
 
 
             /** OnClick functionality for the viewholder **/
@@ -326,7 +284,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", publisherId);
                     editor.apply();
-                    Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_profileFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                 }
             });
 
@@ -336,7 +294,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", publisherId);
                     editor.apply();
-                    Navigation.findNavController(view).navigate(R.id.action_newsfeedFragment_to_selectedPostFragment);
+                    Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                 }
             });
         }
