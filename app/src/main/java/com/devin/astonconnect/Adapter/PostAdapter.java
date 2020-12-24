@@ -299,7 +299,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", publisherId);
                     editor.apply();
-                    
+
                     if(Navigation.findNavController(view).getCurrentDestination().getId() == R.id.newsfeedFragment){
                         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                     }

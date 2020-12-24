@@ -36,15 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         Bundle intent = getIntent().getExtras();
-        if (intent != null){
+        if (intent != null) {
             String publisher = intent.getString("publisherid");
             SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
             editor.putString("profileid", publisher);
-
-            //May not work..
-            //getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container, new ProfileFragment()).commit();
-        } else {
-           // getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_container, new NewsfeedFragment()).commit();
         }
     }
 

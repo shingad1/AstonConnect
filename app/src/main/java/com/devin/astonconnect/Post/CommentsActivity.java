@@ -2,6 +2,8 @@ package com.devin.astonconnect.Post;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,8 +76,15 @@ public class CommentsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+
+                navController.navigateUp();
+                navController.navigate(R.id.newsfeedFragment);
+
+                /**
                 startActivity(new Intent(CommentsActivity.this, MainActivity.class));
                 finish();
+                 **/
             }
         });
 
