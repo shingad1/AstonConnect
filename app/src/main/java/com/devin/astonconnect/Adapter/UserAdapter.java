@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -90,6 +91,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             .child("following").child(user.getid()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getid())
                             .child("followers").child(currentUser.getUid()).setValue(true);
+
+                    //Triggers activity overview item
+                    addActivityItem( user.getid());
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(currentUser.getUid())
                             .child("following").child(user.getid()).removeValue();
@@ -98,6 +102,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 }
             }
         });
+    }
+
+    private void addActivityItem(String userid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("details", "Is now following you");
+        hashMap.put("postid", "");
+        hashMap.put("ispost", false);
+
+        reference.push().setValue(hashMap);
     }
 
     @Override

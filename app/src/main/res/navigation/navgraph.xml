@@ -6,10 +6,19 @@
     app:startDestination="@id/newsfeedFragment">
 
     <fragment
-        android:id="@+id/activityFragment"
-        android:name="com.devin.astonconnect.ActivityFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_activity" />
+        android:id="@+id/activityOverviewFragment"
+        android:name="com.devin.astonconnect.ActivityOverviewFragment"
+        android:label="fragment_activity_overview"
+        tools:layout="@layout/fragment_activity_overview" >
+        <action
+            android:id="@+id/action_activityOverviewFragment_to_selectedPostFragment"
+            app:destination="@id/selectedPostFragment" />
+        <action
+            android:id="@+id/action_activityOverviewFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/newsfeedFragment"
         android:name="com.devin.astonconnect.NewsfeedFragment"

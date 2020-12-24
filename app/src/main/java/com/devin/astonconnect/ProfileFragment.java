@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -146,6 +147,8 @@ public class ProfileFragment extends Fragment {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(profileId)
                             .child("followers").child(firebaseUser.getUid()).setValue(true);
 
+                    addActivityItem();//Set activity item
+
                 } else if (btnText.equals("following")){
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
@@ -182,8 +185,6 @@ public class ProfileFragment extends Fragment {
                 recyclerViewFavourites.setVisibility(View.GONE);
             }
         });
-
-
 
         //Retrieve and set the user information
         getUserInfo();
@@ -315,5 +316,17 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+    }
+
+    private void addActivityItem(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(profileId);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("details", "Is now following you");
+        hashMap.put("postid", "");
+        hashMap.put("ispost", false);
+
+        reference.push().setValue(hashMap);
     }
 }

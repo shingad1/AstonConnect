@@ -70,9 +70,6 @@ public class CommentsActivity extends AppCompatActivity {
         commentAdapter = new CommentAdapter(this, mComments);
         recyclerView.setAdapter(commentAdapter);
 
-
-
-
         //Displaying comment
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +106,9 @@ public class CommentsActivity extends AppCompatActivity {
         hashMap.put("comment", userComment.getText().toString());
         hashMap.put("publisher", firebaseUser.getUid());
         reference.push().setValue(hashMap);
+
+
+        addActivityItem();
 
         userComment.setText("");
     }
@@ -149,5 +149,17 @@ public class CommentsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void addActivityItem(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(publisherid);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        hashMap.put("details", "Commented: " + userComment.getText().toString());
+        hashMap.put("postid", postid);
+        hashMap.put("ispost", true);
+
+        reference.push().setValue(hashMap);
     }
 }

@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 import java.util.List;
 
 /** Used to display favourited posts **/
@@ -191,7 +193,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
             }
         });
-
     }
 
     /**
@@ -248,6 +249,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                         FirebaseDatabase.getInstance().getReference().child("Likes").child(postid)
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(true);
+
+                        addActivityItem(publisherId, postid); //ADDS NOTIFICATION ITEM TO THE LIST
+
                     } else { //the user has liked the post, clicking like will remove it from the database
                         FirebaseDatabase.getInstance().getReference().child("Likes").child(postid)
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -266,15 +270,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
-            comments.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, CommentsActivity.class);
-                    intent.putExtra("postid", postid);
-                    intent.putExtra("publisherid", publisherId);
-                    mContext.startActivity(intent);
-                }
-            });
 
             fullname.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -296,7 +291,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
 
-
             /**
             post_image.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -308,6 +302,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             });
              **/
+        }
+
+        private void addActivityItem(String userid, String postid){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("userid", firebaseUser.getUid());
+            hashMap.put("details", "liked your post");
+            hashMap.put("postid", postid);
+            hashMap.put("ispost", true);
+
+            reference.push().setValue(hashMap);
         }
     }
 }

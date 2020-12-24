@@ -3,18 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityFragment">
+    tools:context=".ActivityOverviewFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Activity Overview"
+        android:id="@+id/activityOverviewText"
         android:textSize="20sp"
         android:fontFamily="@font/sf_font"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recyclerView"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityOverviewText"
+        android:layout_margin="10dp"
+        />
 
 
 
