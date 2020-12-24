@@ -12,9 +12,9 @@ public class Comment {
 
     public Comment() {}
 
-    public String getcomment()                   { return comment; }
-    public void   setcomment(String comment)     { this.comment = comment; }
+    public String getComment()                   { return comment; }
+    public String getPublisher()                 { return publisher; }
 
-    public void   setpublisher(String publisher) { this.publisher = publisher; }
-    public String getpublisher()                 { return publisher; }
+    public void   setComment(String comment)     { this.comment = comment; }
+    public void   setPublisher(String publisher) { this.publisher = publisher; }
 }

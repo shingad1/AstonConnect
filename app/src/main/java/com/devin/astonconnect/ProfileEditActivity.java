@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.Model.User;
-import com.devin.astonconnect.Post.ReviewImagePostActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -77,10 +76,10 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                fullnameText.setText(user.getfullname());
-                usernameText.setText(user.getusername());
-                bioText.setText(user.getbio());
-                Glide.with(getApplicationContext()).load(user.getimageurl()).into(profile_image);
+                fullnameText.setText(user.getFullname());
+                usernameText.setText(user.getUsername());
+                bioText.setText(user.getBio());
+                Glide.with(getApplicationContext()).load(user.getImageurl()).into(profile_image);
             }
 
             @Override

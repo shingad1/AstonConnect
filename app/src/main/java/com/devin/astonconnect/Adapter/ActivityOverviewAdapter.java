@@ -23,8 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -50,16 +48,16 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActivityItem activityItem = activityItemList.get(position);
 
-        holder.detailsText.setText(activityItem.getdetails());
-        holder.ispost = activityItem.getispost();
-        holder.postid = activityItem.getpostid();
-        holder.profileid = activityItem.getuserid();
-        getUserDetails(holder.profileImage, holder.fullnameText, activityItem.getuserid());
+        holder.detailsText.setText(activityItem.getDetails());
+        holder.ispost = activityItem.getIsPost();
+        holder.postid = activityItem.getPostId();
+        holder.profileid = activityItem.getUserId();
+        getUserDetails(holder.profileImage, holder.fullnameText, activityItem.getUserId());
 
 
-        if(activityItem.getispost()){
+        if(activityItem.getIsPost()){
             holder.postImage.setVisibility(View.VISIBLE);
-            getPostDetails(holder.postImage, activityItem.getpostid());
+            getPostDetails(holder.postImage, activityItem.getPostId());
         } else {
             holder.postImage.setVisibility(View.GONE);
         }
@@ -119,8 +117,8 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(context).load(user.getimageurl()).into(profileImage);
-                fullname.setText(user.getfullname());
+                Glide.with(context).load(user.getImageurl()).into(profileImage);
+                fullname.setText(user.getFullname());
             }
 
             @Override
@@ -136,7 +134,7 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Post post = snapshot.getValue(Post.class);
-                Glide.with(context).load(post.getpostimage()).into(postImage);
+                Glide.with(context).load(post.getPostImage()).into(postImage);
             }
 
             @Override

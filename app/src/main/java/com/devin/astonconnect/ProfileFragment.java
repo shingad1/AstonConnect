@@ -208,9 +208,9 @@ public class ProfileFragment extends Fragment {
                 User user = snapshot.getValue(User.class);
                 System.out.println(profileId);
                 String profileid = profileId;
-                if(user.getimageurl() != null) { Glide.with(getContext()).load(user.getimageurl()).into(profileImage); }
-                fullname.setText(user.getfullname());
-                bioText.setText(user.getbio());
+                if(user.getImageurl() != null) { Glide.with(getContext()).load(user.getImageurl()).into(profileImage); }
+                fullname.setText(user.getFullname());
+                bioText.setText(user.getBio());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -250,12 +250,12 @@ public class ProfileFragment extends Fragment {
                 mPosts.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
-                    if(post.getisimagepost() == true){
-                        if (post.getpublisher().equals(profileId)) {
+                    if(post.getIsImagePost() == true){
+                        if (post.getPublisher().equals(profileId)) {
                             mPosts.add(post);
                         }
-                    } else if (post.getisimagepost() == false){
-                        if (post.getpublisher().equals(profileId)){
+                    } else if (post.getIsImagePost() == false){
+                        if (post.getPublisher().equals(profileId)){
                             textPosts.add(post);
                         }
                     }
@@ -303,7 +303,7 @@ public class ProfileFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     for(String id :savedPostList){
-                        if (post.getpostid().equals(id)) {
+                        if (post.getPostId().equals(id)) {
                             favouritedPosts.add(post);
                         }
                     }

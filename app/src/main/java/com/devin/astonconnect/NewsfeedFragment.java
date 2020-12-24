@@ -16,13 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Adapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.devin.astonconnect.Adapter.PostAdapter;
-import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Post.ReviewImagePostActivity;
@@ -167,7 +163,7 @@ public class NewsfeedFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     for(String id : followingList){
-                        if(post.getpublisher().equals(id)){
+                        if(post.getPublisher().equals(id)){
                             mPosts.add(post);
                         }
                     }

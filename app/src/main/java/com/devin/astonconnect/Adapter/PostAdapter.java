@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.Post.CommentsActivity;
@@ -53,32 +52,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Post post = mPost.get(position);
 
-        holder.title.setText(post.gettitle());
-        holder.isImagePost = post.getisimagepost();
-        holder.postid = post.getpostid();
-        holder.publisherId = post.getpublisher();
+        holder.title.setText(post.getTitle());
+        holder.isImagePost = post.getIsImagePost();
+        holder.postid = post.getPostId();
+        holder.publisherId = post.getPublisher();
 
         /** Change the visibility of the post (viewholder) based on values **/
-        if(post.getisimagepost() == false){
+        if(post.getIsImagePost() == false){
             holder.post_image.setVisibility(View.GONE);
             holder.bottomDescription.setVisibility(View.GONE);
             holder.mainDescription.setVisibility(View.VISIBLE);
-            holder.mainDescription.setText(post.getdescription());
+            holder.mainDescription.setText(post.getDescription());
 
-        } else if(post.getisimagepost() == true){
+        } else if(post.getIsImagePost() == true){
 
             holder.post_image.setVisibility(View.VISIBLE);
             holder.bottomDescription.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(post.getpostimage()).into(holder.post_image);
-            holder.bottomDescription.setText(post.getdescription());
+            Glide.with(mContext).load(post.getPostImage()).into(holder.post_image);
+            holder.bottomDescription.setText(post.getDescription());
         }
 
         //Get bits of information for the current post (publisher info, likes, etc...)
-        getPublisherInfo(holder.profile_image, holder.fullname, holder.publisher, post.getpublisher());
-        isLiked(post.getpostid(), holder.like);
-        numberOfLikes(holder.likeText, post.getpostid());
-        getComments(post.getpostid(), holder.comments);
-        isBookmarked(post.getpostid(), holder.bookmark);
+        getPublisherInfo(holder.profile_image, holder.fullname, holder.publisher, post.getPublisher());
+        isLiked(post.getPostId(), holder.like);
+        numberOfLikes(holder.likeText, post.getPostId());
+        getComments(post.getPostId(), holder.comments);
+        isBookmarked(post.getPostId(), holder.bookmark);
     }
 
     @Override
@@ -142,9 +141,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getimageurl()).into(profile_image);
-                fullname.setText(user.getfullname());
-                publisher.setText(user.getusername());
+                Glide.with(mContext).load(user.getImageurl()).into(profile_image);
+                fullname.setText(user.getFullname());
+                publisher.setText(user.getUsername());
             }
 
             @Override

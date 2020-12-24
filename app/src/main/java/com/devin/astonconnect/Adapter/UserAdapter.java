@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.devin.astonconnect.ProfileFragment;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,17 +53,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         final User user = mUsers.get(position);
 
         holder.btn_follow.setVisibility(View.VISIBLE);
-        holder.username.setText(user.getusername());
-        holder.fullname.setText(user.getfullname());
-        holder.bio.setText(user.getbio());
-        Glide.with(mContext).load(user.getimageurl()).into(holder.image_profile);
+        holder.username.setText(user.getUsername());
+        holder.fullname.setText(user.getFullname());
+        holder.bio.setText(user.getBio());
+        Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
 
         //Check to see if the user is being followed by the logged in user (currentUser) and if so, set the button text accordingly
-        isFollowing(user.getid(), holder.btn_follow);
+        isFollowing(user.getId(), holder.btn_follow);
 
         //set the follow button to be invisible if the selected user is the same as the logged in user.
         //could remove form the list in the future?
-        if(user.getid().equals(currentUser.getUid())){
+        if(user.getId().equals(currentUser.getUid())){
             holder.btn_follow.setVisibility(View.GONE);
         }
 
@@ -73,7 +71,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                editor.putString("profileid", user.getid());
+                editor.putString("profileid", user.getId());
                 editor.apply();
 
                 Navigation.findNavController(view).navigate(R.id.action_searchFragment_to_profileFragment);
@@ -88,16 +86,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             public void onClick(View view) {
                 if (holder.btn_follow.getText().toString().equals("follow")){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(currentUser.getUid())
-                            .child("following").child(user.getid()).setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getid())
+                            .child("following").child(user.getId()).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(currentUser.getUid()).setValue(true);
 
                     //Triggers activity overview item
-                    addActivityItem( user.getid());
+                    addActivityItem( user.getId());
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(currentUser.getUid())
-                            .child("following").child(user.getid()).removeValue();
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getid())
+                            .child("following").child(user.getId()).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(currentUser.getUid()).removeValue();
                 }
             }

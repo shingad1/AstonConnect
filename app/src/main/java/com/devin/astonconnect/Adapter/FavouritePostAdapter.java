@@ -2,7 +2,6 @@ package com.devin.astonconnect.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,16 +38,16 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = mFavouritePosts.get(position);
-        if(post.getisimagepost()){
+        if(post.getIsImagePost()){
             holder.postImage.setVisibility(View.VISIBLE);
-            holder.postTitle.setText(post.gettitle());
-            holder.postid = post.getpostid();
-            Glide.with(mContext).load(post.getpostimage()).into(holder.postImage);
+            holder.postTitle.setText(post.getTitle());
+            holder.postid = post.getPostId();
+            Glide.with(mContext).load(post.getPostImage()).into(holder.postImage);
         } else { //then it is a textual post
             holder.postTitle.setVisibility(View.VISIBLE);
             holder.postImage.setVisibility(View.GONE);
-            holder.postTitle.setText(post.gettitle());
-            holder.postid = post.getpostid();
+            holder.postTitle.setText(post.getTitle());
+            holder.postid = post.getPostId();
         }
     }
 

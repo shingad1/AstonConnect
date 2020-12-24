@@ -20,18 +20,18 @@ public class Post {
 
     public Post() {}
 
-    public String  getdescription() { return description; }
-    public Boolean getisimagepost() { return isimagepost; }
-    public String  gettitle()       { return title; }
-    public String  getpostid()      { return postid; }
-    public String  getpostimage()   { return postimage; }
-    public String  getpublisher()   { return publisher; }
+    public String  getDescription() { return description; }
+    public Boolean getIsImagePost() { return isimagepost; }
+    public String  getTitle()       { return title; }
+    public String  getPostId()      { return postid; }
+    public String  getPostImage()   { return postimage; }
+    public String  getPublisher()   { return publisher; }
 
 
-    public void setpublisher(String publisher)      { this.publisher = publisher; }
-    public void setpostimage(String postimage)      { this.postimage = postimage; }
-    public void setisimagepost(Boolean isimagepost) { this.isimagepost = isimagepost; }
-    public void settitle(String title)              { this.title = title; }
-    public void setdescription(String description)  { this.description = description; }
-    public void setpostid(String postid)            { this.postid = postid; }
+    public void setPublisher(String publisher)      { this.publisher = publisher; }
+    public void setPostImage(String postimage)      { this.postimage = postimage; }
+    public void setIsImagePost(Boolean isimagepost) { this.isimagepost = isimagepost; }
+    public void setTitle(String title)              { this.title = title; }
+    public void setDescription(String description)  { this.description = description; }
+    public void setPostId(String postid)            { this.postid = postid; }
 }

@@ -14,13 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Adapter.CommentAdapter;
-import com.devin.astonconnect.LoginRegister.StartActivity;
-import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.Model.Comment;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
@@ -128,7 +125,7 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(getApplicationContext()).load(user.getimageurl()).into(profileImage);
+                Glide.with(getApplicationContext()).load(user.getImageurl()).into(profileImage);
             }
 
             @Override
@@ -147,7 +144,7 @@ public class CommentsActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Comment comment = snapshot.getValue(Comment.class);
                     mComments.add(comment);
-                    Log.w("Comment", comment.getcomment());
+                    Log.w("Comment", comment.getComment());
                 }
                 commentAdapter.notifyDataSetChanged();
                 System.out.println("Number of comments" + String.valueOf(mComments.size()));

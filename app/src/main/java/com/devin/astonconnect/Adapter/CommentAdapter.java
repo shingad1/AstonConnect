@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -48,9 +47,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Comment comment = mComments.get(position);
 
-        holder.comment.setText(comment.getcomment());
+        holder.comment.setText(comment.getComment());
         //Retrieves the user details based on the comment.getpublisher() value.
-        getUserDetails(holder.profile_image, holder.fullname, comment.getpublisher());
+        getUserDetails(holder.profile_image, holder.fullname, comment.getPublisher());
 
        /**
         holder.comment.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +65,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("publisherid", comment.getpublisher());
+                intent.putExtra("publisherid", comment.getPublisher());
                 mContext.startActivity(intent);
             }
         });
@@ -83,8 +82,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getimageurl()).into(imageView);
-                fullname.setText(user.getfullname());
+                Glide.with(mContext).load(user.getImageurl()).into(imageView);
+                fullname.setText(user.getFullname());
             }
 
             @Override

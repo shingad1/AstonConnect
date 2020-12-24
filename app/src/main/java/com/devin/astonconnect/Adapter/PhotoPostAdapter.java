@@ -34,8 +34,8 @@ public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = mPosts.get(position);
-        holder.postid = post.getpostid();
-        Glide.with(mContext).load(post.getpostimage()).into(holder.postImage);
+        holder.postid = post.getPostId();
+        Glide.with(mContext).load(post.getPostImage()).into(holder.postImage);
 
     }
 

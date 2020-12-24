@@ -17,13 +17,13 @@ public class ActivityItem {
 
     public ActivityItem(){ }
 
-    public String getuserid  () { return userid;  }
-    public String getpostid  () { return postid;  }
-    public String getdetails () { return details; }
-    public boolean getispost () { return ispost;  }
+    public String  getUserId()  { return userid;  }
+    public String  getPostId()  { return postid;  }
+    public String  getDetails() { return details; }
+    public boolean getIsPost()  { return ispost;  }
 
-    public void setuserid  (String userid)    { this.userid = userid;    }
-    public void setdetails (String details)   { this.details = details;  }
-    public void setpostid  (String postid)    { this.postid = postid;    }
-    public void setispost  (boolean ispost)   { this.ispost = ispost;    }
+    public void setUserId  (String userid)    { this.userid = userid;    }
+    public void setDetails (String details)   { this.details = details;  }
+    public void setPostId  (String postid)    { this.postid = postid;    }
+    public void setIsPost  (boolean ispost)   { this.ispost = ispost;    }
 }

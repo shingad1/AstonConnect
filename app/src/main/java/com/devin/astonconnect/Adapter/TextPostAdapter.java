@@ -36,8 +36,8 @@ public class TextPostAdapter extends RecyclerView.Adapter<TextPostAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = mTextPosts.get(position);
-        holder.postTitle.setText(post.gettitle());
-        holder.postid = post.getpostid();
+        holder.postTitle.setText(post.getTitle());
+        holder.postid = post.getPostId();
     }
 
     @Override
