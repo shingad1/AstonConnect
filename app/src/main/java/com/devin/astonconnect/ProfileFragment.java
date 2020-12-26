@@ -163,8 +163,9 @@ public class ProfileFragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                getActivity().finish();
+                getActivity().onBackPressed();
+                //startActivity(new Intent(getActivity(), MainActivity.class));
+                //getActivity().finish();
             }
         });
 

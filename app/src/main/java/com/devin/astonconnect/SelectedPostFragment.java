@@ -44,7 +44,8 @@ public class SelectedPostFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack(); //Pops the last fragment transaction which would be set in PhotoPostAdapter (Line 63)
+                getActivity().onBackPressed();
+                //Navigation.findNavController(view).popBackStack(); //Pops the last fragment transaction which would be set in PhotoPostAdapter (Line 63)
             }
         });
 
