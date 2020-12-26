@@ -15,33 +15,34 @@ import java.util.List;
 
 public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.ViewHolder>{
 
-    private Context mContext;
-    private List<Post> mPosts;
+    /** Used in ProfileFragment **/
+    private Context context;
+    private List<Post> postList;
 
-    public PhotoPostAdapter(Context mContext, List<Post> mPosts){
-        this.mContext = mContext;
-        this.mPosts   = mPosts;
+    public PhotoPostAdapter(Context context, List<Post> postList){
+        this.context = context;
+        this.postList = postList;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.post_photo_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.post_photo_item, parent, false);
         return new PhotoPostAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = mPosts.get(position);
+        Post post = postList.get(position);
         holder.postid = post.getPostId();
-        Glide.with(mContext).load(post.getPostImage()).into(holder.postImage);
+        Glide.with(context).load(post.getPostImage()).into(holder.postImage);
 
     }
 
     @Override
     public int getItemCount() {
-        return mPosts.size();
+        return postList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,7 +58,7 @@ public class PhotoPostAdapter extends RecyclerView.Adapter<PhotoPostAdapter.View
             postImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("postid", postid); //gets passed to selectedpostfragment which populates the adapter (mPosts list) accordingly based on postid
                     editor.apply();
                     Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_selectedPostFragment);

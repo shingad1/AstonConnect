@@ -47,15 +47,15 @@ public class ProfileFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private String profileId;
     private PhotoPostAdapter photoPostAdapter;
-    private List<Post> mPosts;
+    private List<Post> imagePostList;
 
     //text post  stuff
     private TextPostAdapter textPostAdapter;
-    private List<Post> textPosts;
+    private List<Post> textPostList;
 
     //favourited posts stuff
     private FavouritePostAdapter favouritePostAdapter;
-    private List<Post> favouritedPosts;
+    private List<Post> favouritePostList;
     private List<String> savedPostList; //temporarily holds the keys of the saved posts, retrieves them using this list and then populates adapter
 
 
@@ -80,8 +80,8 @@ public class ProfileFragment extends Fragment {
         recyclerViewFavourites.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager3 = new GridLayoutManager(getContext(), 3);
         recyclerViewFavourites.setLayoutManager(linearLayoutManager3);
-        favouritedPosts = new ArrayList<>();
-        favouritePostAdapter = new FavouritePostAdapter(getContext(), favouritedPosts);
+        favouritePostList = new ArrayList<>();
+        favouritePostAdapter = new FavouritePostAdapter(getContext(), favouritePostList);
         recyclerViewFavourites.setAdapter(favouritePostAdapter);
 
 
@@ -90,8 +90,8 @@ public class ProfileFragment extends Fragment {
         recyclerViewPost.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewPost.setLayoutManager(linearLayoutManager);
-        mPosts = new ArrayList<>();
-        photoPostAdapter = new PhotoPostAdapter(getContext(), mPosts);
+        imagePostList = new ArrayList<>();
+        photoPostAdapter = new PhotoPostAdapter(getContext(), imagePostList);
         recyclerViewPost.setAdapter(photoPostAdapter);
 
 
@@ -100,8 +100,8 @@ public class ProfileFragment extends Fragment {
         recyclerViewText.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
         recyclerViewText.setLayoutManager(linearLayoutManager1);
-        textPosts = new ArrayList<>();
-        textPostAdapter = new TextPostAdapter(getContext(), textPosts);
+        textPostList = new ArrayList<>();
+        textPostAdapter = new TextPostAdapter(getContext(), textPostList);
         recyclerViewText.setAdapter(textPostAdapter);
 
 
@@ -247,23 +247,23 @@ public class ProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mPosts.clear();
+                imagePostList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     if(post.getIsImagePost() == true){
                         if (post.getPublisher().equals(profileId)) {
-                            mPosts.add(post);
+                            imagePostList.add(post);
                         }
                     } else if (post.getIsImagePost() == false){
                         if (post.getPublisher().equals(profileId)){
-                            textPosts.add(post);
+                            textPostList.add(post);
                         }
                     }
                 }
-                Collections.reverse(mPosts); //show the latest first
+                Collections.reverse(imagePostList); //show the latest first
                 photoPostAdapter.notifyDataSetChanged();
 
-                Collections.reverse(textPosts); //show the latest first
+                Collections.reverse(textPostList); //show the latest first
                 textPostAdapter.notifyDataSetChanged();
             }
 
@@ -299,12 +299,12 @@ public class ProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                favouritedPosts.clear();
+                favouritePostList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     for(String id :savedPostList){
                         if (post.getPostId().equals(id)) {
-                            favouritedPosts.add(post);
+                            favouritePostList.add(post);
                         }
                     }
                 }

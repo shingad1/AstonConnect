@@ -39,7 +39,7 @@ public class NewsfeedFragment extends Fragment {
     //Posts stuff
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
-    private List<Post> mPosts;
+    private List<Post> postList;
     private List<String> followingList;
     private ImageView logOutBtn, profile;
 
@@ -61,9 +61,9 @@ public class NewsfeedFragment extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mPosts = new ArrayList<>();
+        postList = new ArrayList<>();
         followingList = new ArrayList<>();
-        postAdapter = new PostAdapter(getContext(), mPosts);
+        postAdapter = new PostAdapter(getContext(), postList);
         recyclerView.setAdapter(postAdapter);
 
         /** Floating action button stuff **/
@@ -159,12 +159,12 @@ public class NewsfeedFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mPosts.clear();
+                postList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     for(String id : followingList){
                         if(post.getPublisher().equals(id)){
-                            mPosts.add(post);
+                            postList.add(post);
                         }
                     }
                 }

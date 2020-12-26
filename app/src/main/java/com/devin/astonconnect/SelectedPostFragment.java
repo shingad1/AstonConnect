@@ -31,7 +31,7 @@ public class SelectedPostFragment extends Fragment {
     private ImageView backButton;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
-    private List<Post> mPosts;
+    private List<Post> postList;
     private String postid;
 
     @Override
@@ -57,8 +57,8 @@ public class SelectedPostFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mPosts     = new ArrayList<>();
-        postAdapter = new PostAdapter(getContext(), mPosts);
+        postList = new ArrayList<>();
+        postAdapter = new PostAdapter(getContext(), postList);
         recyclerView.setAdapter(postAdapter);
 
         getPostInformation();
@@ -71,9 +71,9 @@ public class SelectedPostFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mPosts.clear();
+                postList.clear();
                 Post post = snapshot.getValue(Post.class);
-                mPosts.add(post);
+                postList.add(post);
                 postAdapter.notifyDataSetChanged();
             }
 

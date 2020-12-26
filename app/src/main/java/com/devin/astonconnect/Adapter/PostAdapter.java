@@ -27,22 +27,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.List;
 
-/** Used to display favourited posts **/
+/** Used to display posts in the newsfeed and selectedPostFragment**/
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
-    public  Context mContext;
-    public  List<Post> mPost;
+    public  Context context;
+    public  List<Post> postList;
     private FirebaseUser firebaseUser;
 
-    public PostAdapter(Context mContext, List<Post> mPost) {
-        this.mContext = mContext;
-        this.mPost = mPost;
+    public PostAdapter(Context context, List<Post> postList) {
+        this.context = context;
+        this.postList = postList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.post_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.post_item, parent, false);
         return new PostAdapter.ViewHolder(view);
 
     }
@@ -50,7 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Post post = mPost.get(position);
+        Post post = postList.get(position);
 
         holder.title.setText(post.getTitle());
         holder.isImagePost = post.getIsImagePost();
@@ -68,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
             holder.post_image.setVisibility(View.VISIBLE);
             holder.bottomDescription.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(post.getPostImage()).into(holder.post_image);
+            Glide.with(context).load(post.getPostImage()).into(holder.post_image);
             holder.bottomDescription.setText(post.getDescription());
         }
 
@@ -82,7 +82,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return mPost.size();
+        return postList.size();
     }
 
 
@@ -141,7 +141,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(profile_image);
+                Glide.with(context).load(user.getImageurl()).into(profile_image);
                 fullname.setText(user.getFullname());
                 publisher.setText(user.getUsername());
             }
@@ -262,27 +262,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, CommentsActivity.class);
+                    Intent intent = new Intent(context, CommentsActivity.class);
                     intent.putExtra("postid", postid);
                     intent.putExtra("publisherid", publisherId);
-                    mContext.startActivity(intent);
+                    context.startActivity(intent);
                 }
             });
 
             comments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, CommentsActivity.class);
+                    Intent intent = new Intent(context, CommentsActivity.class);
                     intent.putExtra("postid", postid);
                     intent.putExtra("publisherid", publisherId);
-                    mContext.startActivity(intent);
+                    context.startActivity(intent);
                 }
             });
 
             fullname.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", publisherId);
                     editor.apply();
 
@@ -295,7 +295,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             profile_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", publisherId);
                     editor.apply();
 

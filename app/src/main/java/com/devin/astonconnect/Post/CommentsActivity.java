@@ -73,10 +73,13 @@ public class CommentsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(view);
+                onBackPressed();
 
-                navController.navigateUp();
-                navController.navigate(R.id.newsfeedFragment);
+
+                //NavController navController = Navigation.findNavController(view);
+
+                //navController.navigateUp();
+                //navController.navigate(R.id.newsfeedFragment);
 
                 /**
                 startActivity(new Intent(CommentsActivity.this, MainActivity.class));

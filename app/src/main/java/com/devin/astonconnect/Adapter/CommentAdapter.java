@@ -26,26 +26,26 @@ import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
 
-    private Context mContext;
-    private List<Comment> mComments;
+    private Context context;
+    private List<Comment> commentsList;
     private FirebaseUser firebaseUser;
 
-    public CommentAdapter(Context mContext, List<Comment> mComments){
-        this.mContext = mContext;
-        this.mComments = mComments;
+    public CommentAdapter(Context context, List<Comment> commentsList){
+        this.context = context;
+        this.commentsList = commentsList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.comment_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.comment_item, parent, false);
         return new CommentAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Comment comment = mComments.get(position);
+        Comment comment = commentsList.get(position);
 
         holder.comment.setText(comment.getComment());
         //Retrieves the user details based on the comment.getpublisher() value.
@@ -64,16 +64,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, MainActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("publisherid", comment.getPublisher());
-                mContext.startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mComments.size();
+        return commentsList.size();
     }
 
     private void getUserDetails(ImageView imageView, TextView fullname, String publisherid){
@@ -82,7 +82,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageurl()).into(imageView);
+                Glide.with(context).load(user.getImageurl()).into(imageView);
                 fullname.setText(user.getFullname());
             }
 

@@ -30,33 +30,33 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
-    private Context mContext;
-    private List<User> mUsers;
+    private Context context;
+    private List<User> userList;
     private FirebaseUser currentUser;
 
-    public UserAdapter(Context mContext, List<User> mUsers){
-        this.mContext = mContext;
-        this.mUsers = mUsers;
+    public UserAdapter(Context context, List<User> userList){
+        this.context = context;
+        this.userList = userList;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false);
         return new UserAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        final User user = mUsers.get(position);
+        final User user = userList.get(position);
 
         holder.btn_follow.setVisibility(View.VISIBLE);
         holder.username.setText(user.getUsername());
         holder.fullname.setText(user.getFullname());
         holder.bio.setText(user.getBio());
-        Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
+        Glide.with(context).load(user.getImageurl()).into(holder.image_profile);
 
         //Check to see if the user is being followed by the logged in user (currentUser) and if so, set the button text accordingly
         isFollowing(user.getId(), holder.btn_follow);
@@ -70,7 +70,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", user.getId());
                 editor.apply();
 
@@ -116,7 +116,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return mUsers.size();
+        return userList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
