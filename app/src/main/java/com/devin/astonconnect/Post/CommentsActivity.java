@@ -2,8 +2,6 @@ package com.devin.astonconnect.Post;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +45,7 @@ public class CommentsActivity extends AppCompatActivity {
     //Recyclerview stuff
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
-    private List<Comment> mComments;
+    private List<Comment> commentsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,8 @@ public class CommentsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mComments = new ArrayList<>();
-        commentAdapter = new CommentAdapter(this, mComments);
+        commentsList = new ArrayList<>();
+        commentAdapter = new CommentAdapter(this, commentsList);
         recyclerView.setAdapter(commentAdapter);
 
         //Displaying comment
@@ -143,14 +141,14 @@ public class CommentsActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mComments.clear();
+                commentsList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Comment comment = snapshot.getValue(Comment.class);
-                    mComments.add(comment);
+                    commentsList.add(comment);
                     Log.w("Comment", comment.getComment());
                 }
                 commentAdapter.notifyDataSetChanged();
-                System.out.println("Number of comments" + String.valueOf(mComments.size()));
+                System.out.println("Number of comments" + String.valueOf(commentsList.size()));
             }
 
             @Override
