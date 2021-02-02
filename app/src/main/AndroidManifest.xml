@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstonConnect">
-        <activity android:name=".Chat.MessageActivity"></activity>
+        <activity android:name=".Chat.MessagingActivity"></activity>
         <activity android:name=".ProfileEditActivity" />
         <activity android:name=".Post.CommentsActivity" />
         <activity android:name=".Post.ReviewTextPostActivity" />

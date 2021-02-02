@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Adapter.FavouritePostAdapter;
 import com.devin.astonconnect.Adapter.PhotoPostAdapter;
 import com.devin.astonconnect.Adapter.TextPostAdapter;
+import com.devin.astonconnect.Chat.MessagingActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -125,7 +126,9 @@ public class ProfileFragment extends Fragment {
                 if(btnText.equals("Edit Profile")){
                     startActivity(new Intent(getContext(), ProfileEditActivity.class));
                 } else if (btnText.equals("Chat")){
-                    //go to chat..
+                    Intent intent = new Intent(getContext(), MessagingActivity.class);
+                    intent.putExtra("userid", profileId);
+                    startActivity(intent);
                 }
             }
         });
