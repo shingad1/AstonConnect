@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.devin.astonconnect.MainActivity;
@@ -27,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText username, fullname, email, password, confirm_password;
     private Button register_btn, login_btn;
+    private Switch userTypeToggle;
+    private Boolean isStaff;
 
     //Firebase stuff
     private FirebaseAuth fAuth;
@@ -43,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         email    = findViewById(R.id.email);
         password = findViewById(R.id.password);
         confirm_password = findViewById(R.id.confirm_password);
+        userTypeToggle   = findViewById(R.id.userTypeToggle);
+        isStaff = false;
 
         //buttons
         register_btn = findViewById(R.id.register_btn);
@@ -60,6 +66,17 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //switch controls to get the 'isStaff' value from the switch
+        userTypeToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isStaff = userTypeToggle.isChecked();
+                Log.w("CS Staff?: ", String.valueOf(isStaff));
+                System.out.println(isStaff);
+            }
+        });
+
 
         //register btn
         //Can add regex here to check if the user belongs to aston university
@@ -80,14 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (!TextUtils.equals(str_password, str_password_confirm)) {
                     Toast.makeText(RegisterActivity.this, "Please make sure passwords match.", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(str_username, str_fullname, str_email, str_password);
+                    register(str_username, str_fullname, str_email, str_password, isStaff);
                 }
             }
         });
 
     }
 
-    private void register(String username, String fullname, String email, String password){
+    private void register(String username, String fullname, String email, String password, Boolean isStaff){
         fAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -103,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("email", email);
                             hashMap.put("username", username.toLowerCase());
                             hashMap.put("fullname", fullname);
+                            hashMap.put("isStaff", isStaff);
                             hashMap.put("modules", "");
                             hashMap.put("bio", "");
                             hashMap.put("imageurl", "https://firebasestorage.googleapis.com/v0/b/astonconnect-8c8f6.appspot.com/o/placeholder.png?alt=media&token=4354b93d-b968-4eff-8dee-0b28be3e505b");

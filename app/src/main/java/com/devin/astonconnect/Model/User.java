@@ -9,6 +9,7 @@ public class User {
     private String bio;
     private String modules;
     private String email;
+    private Boolean isstaff;
 
     public User(String id, String username, String fullname, String imageurl, String bio) {
         this.id = id;
@@ -29,8 +30,10 @@ public class User {
     public String getBio()                      { return bio; }
     public String getModules()                  { return modules; }
     public String getEmail()                    { return email; }
+    public Boolean getisStaff()                 { return isstaff; }
 
     public void setId(String id)                { this.id = id; }
+    public void setisStaff(Boolean isstaff)     { this.isstaff = isstaff; }
     public void setUsername(String username)    { this.username = username; }
     public void setFullname(String fullname)    { this.fullname = fullname; }
     public void setImageurl(String imageurl)    { this.imageurl = imageurl; }
