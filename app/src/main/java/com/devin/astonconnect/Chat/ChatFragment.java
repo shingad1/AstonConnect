@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.devin.astonconnect.R;
 
-
+//holds the active chats that the user can click on and open 
 public class ChatFragment extends Fragment {
 
     @Override

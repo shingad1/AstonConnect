@@ -153,6 +153,7 @@ public class MessagingActivity extends AppCompatActivity {
                     Chat chat = snapshot.getValue(Chat.class);
 
                     /**Covers if you're sender, and the other guy reciever, and if they're sender, and you're the reciever **/
+                    /** Gets ALL messages sent between you and them **/
                     if(chat.getRecieverid().equals(currentuserId) && chat.getSenderid().equals(otherUserId) ||
                         chat.getRecieverid().equals(otherUserId) && chat.getSenderid().equals(currentuserId)){
                         userChats.add(chat);
