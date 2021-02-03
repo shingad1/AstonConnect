@@ -7,19 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.devin.astonconnect.Adapter.MessageAdapter;
-import com.devin.astonconnect.Model.Chat;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.devin.astonconnect.Model;
+package com.devin.astonconnect.Chat;
 
 public class Chat {
 
