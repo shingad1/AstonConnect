@@ -115,12 +115,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                             reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
 
+                            if(isStaff == false){
+
+                            }
+
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
                             hashMap.put("email", email);
                             hashMap.put("username", username.toLowerCase());
                             hashMap.put("fullname", fullname);
                             hashMap.put("isStaff", isStaff);
+                            hashMap.put("userstatus", "offline");
                             hashMap.put("modules", "");
                             hashMap.put("bio", "");
                             hashMap.put("imageurl", "https://firebasestorage.googleapis.com/v0/b/astonconnect-8c8f6.appspot.com/o/placeholder.png?alt=media&token=4354b93d-b968-4eff-8dee-0b28be3e505b");
