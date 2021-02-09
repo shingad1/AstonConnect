@@ -126,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("fullname", fullname);
                             hashMap.put("isStaff", isStaff);
                             hashMap.put("userstatus", "offline");
+                            hashMap.put("customuserstatus", "");
                             hashMap.put("modules", "");
                             hashMap.put("bio", "");
                             hashMap.put("imageurl", "https://firebasestorage.googleapis.com/v0/b/astonconnect-8c8f6.appspot.com/o/placeholder.png?alt=media&token=4354b93d-b968-4eff-8dee-0b28be3e505b");

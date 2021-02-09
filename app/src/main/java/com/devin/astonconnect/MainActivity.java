@@ -8,6 +8,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +16,10 @@ import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     //Firebase Authentication and user
@@ -34,13 +39,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,  R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-
         Bundle intent = getIntent().getExtras();
         if (intent != null) {
             String publisher = intent.getString("publisherid");
             SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
             editor.putString("profileid", publisher);
         }
+    }
+
+    /** User Status - There is no status set online here, as I've decided that the user status should be set to online, etc when the user enters the chatfragment **/
+    private void setUserStatus(String userStatus){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userstatus", userStatus);
+        reference.updateChildren(hashMap);
+    }
+
+    //When the user pauses the app set their status to be offline
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setUserStatus("offline");
+        Log.w("status", "Setting user status to offline in the MainActivity");
     }
 
     /**
