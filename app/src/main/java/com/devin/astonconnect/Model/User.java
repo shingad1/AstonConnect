@@ -11,6 +11,7 @@ public class User {
     private String email;
     private Boolean isstaff;
     private String userstatus;
+    private String customuserstatus;
 
 
     //staff members will not have userstatus parameter (so need two constructors)
@@ -45,6 +46,8 @@ public class User {
     public String getEmail()                     { return email;      }
     public Boolean getisStaff()                  { return isstaff;    }
     public String getUserstatus()                { return userstatus; }
+    public String getCustomuserstatus()          { return customuserstatus; }
+
 
     public void setId(String id)                 { this.id = id;                 }
     public void setisStaff(Boolean isstaff)      { this.isstaff = isstaff;       }
@@ -55,5 +58,6 @@ public class User {
     public void setModules(String modules)       { this.modules = modules;       }
     public void setEmail(String email)           { this.email = email;           }
     public void setUserstatus(String userstatus) { this.userstatus = userstatus; }
+    public void setCustomuserstatus(String customuserstatus) { this.customuserstatus = customuserstatus; }
 
 }
