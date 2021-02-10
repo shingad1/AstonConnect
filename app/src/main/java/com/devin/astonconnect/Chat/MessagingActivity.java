@@ -89,7 +89,7 @@ public class MessagingActivity extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 userName.setText(user.getFullname());
                 if(user.getImageurl() != null){
-                    Glide.with(MessagingActivity.this).load(user.getImageurl()).into(userImage);
+                    Glide.with(getApplicationContext()).load(user.getImageurl()).into(userImage);
                 }
                // recieveMessages(firebaseUser.getUid(), userid, user.getImageurl()); //get the chats based on ID information passed
                 recieveMessages(firebaseUser.getUid(), userid); //get the chats based on ID information passed
