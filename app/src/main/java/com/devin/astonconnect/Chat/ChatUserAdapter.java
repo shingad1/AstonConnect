@@ -46,6 +46,23 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         User user = userList.get(position);
 
+        //Add more status colours here...
+        //Sets the visibility based on the user's status (online or not)
+        switch(user.getUserstatus()){
+            case "online": //if the other user is online
+                holder.statusImageOnline.setVisibility(View.VISIBLE);
+                holder.statusImageOffline.setVisibility(View.GONE);
+                break;
+            case "offline": //if the other user is offline
+                holder.statusImageOffline.setVisibility(View.VISIBLE);
+                holder.statusImageOnline.setVisibility(View.GONE);
+                break;
+            case"nostatus": //if the other user set their preferences to have 'no status'
+                holder.statusImageOnline.setVisibility(View.GONE);
+                holder.statusImageOffline.setVisibility(View.GONE);
+        }
+
+
         //binding data to viewholder
         Glide.with(context).load(user.getImageurl()).into(holder.profile_image);
         holder.fullname.setText(user.getFullname());
@@ -76,10 +93,14 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
         public ImageView profile_image;
         public TextView fullname;
         public TextView latestMessage;
+        private ImageView statusImageOnline;
+        private ImageView statusImageOffline;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            statusImageOffline  = itemView.findViewById(R.id.status_image_offline);
+            statusImageOnline   = itemView.findViewById(R.id.status_image_online);
             profile_image = itemView.findViewById(R.id.profile_image);
             fullname      = itemView.findViewById(R.id.fullname);
             latestMessage = itemView.findViewById(R.id.latestMessage);

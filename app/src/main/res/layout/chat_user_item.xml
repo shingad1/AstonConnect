@@ -18,11 +18,22 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:id="@+id/status_image"
-        android:visibility="visible"
+        android:id="@+id/status_image_online"
         android:src="#05df29"
         android:layout_below="@id/profile_image"
         android:layout_marginTop="-20dp"
+        android:visibility="gone"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginLeft="-25dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/status_image_offline"
+        android:src="#717171"
+        android:layout_below="@id/profile_image"
+        android:layout_marginTop="-20dp"
+        android:visibility="visible"
         android:layout_toEndOf="@id/profile_image"
         android:layout_marginLeft="-25dp" />
 
@@ -49,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/sf_font"
             android:id="@+id/latestMessage"
             android:text="Last message"
             android:maxLines="1" />
