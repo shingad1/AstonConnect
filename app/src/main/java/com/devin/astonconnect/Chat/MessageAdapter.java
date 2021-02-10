@@ -51,6 +51,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat chat = userChats.get(position);
         holder.userMessage.setText(chat.getMessage());
+
+        //Set the seen/sent message
+        if(position == userChats.size() - 1){ //Locates the last message in the list of messages.
+            if(chat.getMessageseen()){ //if the chat message is seen...(has been set to true)
+                holder.messageSeen.setText("Seen");
+            } else {                   //if the chat message is not seen (has been set to false)
+                holder.messageSeen.setText("Sent");
+            }
+        } else {
+            holder.messageSeen.setVisibility(View.GONE);
+        }
+
+
+
        /**
         if(imageurl.equals(null)){
             holder.userImage.setImageResource(R.mipmap.ic_launcher);
@@ -82,12 +96,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView userMessage;
         public ImageView userImage;
+        public TextView messageSeen;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userMessage = itemView.findViewById(R.id.userMessage);
             userImage   = itemView.findViewById(R.id.userImage);
+            messageSeen = itemView.findViewById(R.id.messageSeen);
         }
     }
 }

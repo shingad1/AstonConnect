@@ -47,6 +47,11 @@ public class MessagingActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private Intent intent;
 
+    //Message seen stuff
+    private ValueEventListener messageSeenListener;
+    private DatabaseReference reference;
+
+
     //MessageAdapter stuff
     private MessageAdapter messageAdapter;
     private List<Chat> userChats;
@@ -67,7 +72,7 @@ public class MessagingActivity extends AppCompatActivity {
 
         //Recieving the user id from the profilefragment
         intent     = getIntent();
-        String userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked
+        String userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked (this is the other guy's ID)
 
         //Recyclerview stuff
         recyclerView = findViewById(R.id.recyclerView);
@@ -123,6 +128,8 @@ public class MessagingActivity extends AppCompatActivity {
                 userMessage.setText(""); //reset
             }
         });
+
+        seenMessage(userid);
     }
 
     /** COULD further optimise the messaging process through storing it inside of another collection? **/
@@ -132,6 +139,7 @@ public class MessagingActivity extends AppCompatActivity {
         hashMap.put("senderid", senderid);
         hashMap.put("recieverid", recieverid);
         hashMap.put("message", message);
+        hashMap.put("messageseen", false);
 
         reference.child("Chats").push().setValue(hashMap);
     }
@@ -188,7 +196,32 @@ public class MessagingActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        reference.removeEventListener(messageSeenListener); /**Remove the listener when the user exits the messaging activity **/
         setUserStatus("offline");
         Log.w("status", "Setting the user status to be offline from the MessagingActivity");
+    }
+
+    /** Set the message seen functionality - set it to true here **/
+    /** This is the messaging activity. If the user has this activity opened and the message is retrieved then it is seen by them...and therefore 'messageseen' set to true **/
+    private void seenMessage(String userid){
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        messageSeenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if(chat.getRecieverid().equals(firebaseUser.getUid()) && chat.getSenderid().equals(userid)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("messageseen",true);
+                        snapshot.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
