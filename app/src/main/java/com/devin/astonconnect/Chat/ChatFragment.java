@@ -123,21 +123,4 @@ public class ChatFragment extends Fragment {
             }
         });
     }
-
-    /** User status **/
-    private void setUserStatus(String userStatus){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("userstatus", userStatus);
-        reference.updateChildren(hashMap);
-    }
-
-    /** Set it to be online just as a precaution if it isn't set online properly from the mainactivity **/
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.w("status", "The chat fragment is now visible and the onResume has been called. Setting userStatus to online");
-        setUserStatus("online");
-    }
-
 }

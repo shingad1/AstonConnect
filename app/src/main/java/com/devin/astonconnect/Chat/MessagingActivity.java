@@ -177,7 +177,7 @@ public class MessagingActivity extends AppCompatActivity {
         hashMap.put("userstatus", userStatus);
         reference.updateChildren(hashMap);
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
