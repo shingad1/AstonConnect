@@ -184,4 +184,11 @@ public class MessagingActivity extends AppCompatActivity {
         setUserStatus("online");
         Log.w("status", "Setting the user status to online in the MessagingActivity");
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setUserStatus("offline");
+        Log.w("status", "Setting the user status to be offline from the MessagingActivity");
+    }
 }
