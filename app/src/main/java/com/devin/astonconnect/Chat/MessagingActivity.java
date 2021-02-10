@@ -165,4 +165,23 @@ public class MessagingActivity extends AppCompatActivity {
             }
         });
     }
+
+    /** User Status  - We need this here because it gets reset when you go from the chatsFragment to the messaging activity**/
+    /**
+     * ChatsFragment (Online) -> Chat clicked -> MainActivity OnPause Run, setting it offline -> MessagingActivity Set to online -> When app exit, set to offline from main activity
+     *
+     */
+    private void setUserStatus(String userStatus){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userstatus", userStatus);
+        reference.updateChildren(hashMap);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUserStatus("online");
+        Log.w("status", "Setting the user status to online in the MessagingActivity");
+    }
 }

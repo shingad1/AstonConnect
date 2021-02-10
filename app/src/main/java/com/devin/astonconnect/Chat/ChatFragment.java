@@ -124,7 +124,7 @@ public class ChatFragment extends Fragment {
         });
     }
 
-    /** User Status - There is no status set online here, as I've decided that the user status should be set to online, etc when the user enters the chatfragment **/
+    /** User status **/
     private void setUserStatus(String userStatus){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -132,7 +132,7 @@ public class ChatFragment extends Fragment {
         reference.updateChildren(hashMap);
     }
 
-
+    /** Set it to be online just as a precaution if it isn't set online properly from the mainactivity **/
     @Override
     public void onResume() {
         super.onResume();
@@ -140,11 +140,4 @@ public class ChatFragment extends Fragment {
         setUserStatus("online");
     }
 
-    //Need a condition to say that if the user is navigating to messaging activity then do not set their status to offline
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.w("status", "The chat fragment is no longer visible and the onStop has been called. Setting userStatus to offline");
-        setUserStatus("offline");
-    }
 }

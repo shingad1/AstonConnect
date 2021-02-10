@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** User Status - There is no status set online here, as I've decided that the user status should be set to online, etc when the user enters the chatfragment **/
+    /** User Status **/
     private void setUserStatus(String userStatus){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         setUserStatus("offline");
         Log.w("status", "Setting user status to offline in the MainActivity");
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUserStatus("online");
+        Log.w("status", "Setting the user status to online in the MainActvity");
     }
 
     /**
