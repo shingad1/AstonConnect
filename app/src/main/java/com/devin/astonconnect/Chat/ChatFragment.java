@@ -4,9 +4,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //holds the active chats that the user can click on and open
@@ -119,6 +122,29 @@ public class ChatFragment extends Fragment {
 
             }
         });
+    }
 
+    /** User Status - There is no status set online here, as I've decided that the user status should be set to online, etc when the user enters the chatfragment **/
+    private void setUserStatus(String userStatus){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userstatus", userStatus);
+        reference.updateChildren(hashMap);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.w("status", "The chat fragment is now visible and the onResume has been called. Setting userStatus to online");
+        setUserStatus("online");
+    }
+
+    //Need a condition to say that if the user is navigating to messaging activity then do not set their status to offline
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.w("status", "The chat fragment is no longer visible and the onStop has been called. Setting userStatus to offline");
+        setUserStatus("offline");
     }
 }
