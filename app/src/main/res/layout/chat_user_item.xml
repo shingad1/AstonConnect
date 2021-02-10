@@ -15,22 +15,30 @@
         android:id="@+id/profile_image"
         android:src="@mipmap/ic_launcher" />
 
-    <LinearLayout
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/status_image"
+        android:visibility="visible"
+        android:src="#05df29"
+        android:layout_below="@id/profile_image"
+        android:layout_marginTop="-20dp"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginLeft="-25dp" />
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/profile_image"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:layout_centerVertical="true">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fullname"
             android:fontFamily="@font/sf_font"
-            android:layout_gravity="center_vertical"
             android:textSize="20sp"
             android:text="Fullname"
             android:maxLines="1"
@@ -40,12 +48,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/latestMessage"
-            android:text=""
+            android:text="Last message"
             android:maxLines="1" />
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
