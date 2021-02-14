@@ -145,6 +145,26 @@ public class MessagingActivity extends AppCompatActivity {
         hashMap.put("messageseen", false);
 
         reference.child("Chats").push().setValue(hashMap);
+
+        //Send a ChatList Reference -> Keep Reference of who has talked to who
+        //So that we now do not have to iterate through every chat message in order to determine who has talked to who
+        DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(firebaseUser.getUid())
+                .child(userid);
+
+        chatReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    chatReference.child("id").setValue(userid); //set the value of the other person that the user is talking to
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     /** Could further optimise this through reading it from modified, more optimised collection??**/
