@@ -57,6 +57,9 @@ public class MessagingActivity extends AppCompatActivity {
     private List<Chat> userChats;
     private RecyclerView recyclerView;
 
+    //UserId of the other person you are talking to
+    private String userid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,7 @@ public class MessagingActivity extends AppCompatActivity {
 
         //Recieving the user id from the profilefragment
         intent     = getIntent();
-        String userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked (this is the other guy's ID)
+        userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked (this is the other guy's ID)
 
         //Recyclerview stuff
         recyclerView = findViewById(R.id.recyclerView);
