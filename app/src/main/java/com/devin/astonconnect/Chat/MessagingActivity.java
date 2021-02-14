@@ -165,6 +165,26 @@ public class MessagingActivity extends AppCompatActivity {
 
             }
         });
+
+
+        //Set the ChatList reference for the other user too (so that they can open the chat)
+        DatabaseReference chatReference2 = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(userid)
+                .child(firebaseUser.getUid());
+
+        chatReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    chatReference2.child("id").setValue(firebaseUser.getUid());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     /** Could further optimise this through reading it from modified, more optimised collection??**/
