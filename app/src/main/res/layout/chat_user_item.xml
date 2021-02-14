@@ -62,7 +62,6 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/sf_font"
             android:id="@+id/latestMessage"
-            android:text="Last message"
             android:maxLines="1" />
 
     </RelativeLayout>

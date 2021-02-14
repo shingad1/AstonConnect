@@ -16,6 +16,11 @@ import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -27,6 +32,7 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
     private Context context;
     private List<User> userList; //list of users to present
     private FirebaseUser currentUser;
+    private String latestMessageString;
 
 
     public ChatUserAdapter(Context context, List<User> userList){
@@ -45,6 +51,8 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         User user = userList.get(position);
+        //Gets and sets the latest message string
+        getLatestMessage(user.getId(), holder.latestMessage);
 
         //Add more status colours here...
         //Sets the visibility based on the user's status (online or not)
@@ -66,9 +74,6 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
         //binding data to viewholder
         Glide.with(context).load(user.getImageurl()).into(holder.profile_image);
         holder.fullname.setText(user.getFullname());
-
-        //hardcoded for now...
-        holder.latestMessage.setText("hardcoded");
 
         /** Other functionality can be added here - check the UserAdapter for more **/
 
@@ -105,5 +110,43 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
             fullname      = itemView.findViewById(R.id.fullname);
             latestMessage = itemView.findViewById(R.id.latestMessage);
         }
+    }
+
+    /**
+     * Check for the latest message and set it (from the bindviewholder)
+     * By default, the latest message is the last one in the firebase colelction out of a given list of chats
+     * Just display that one
+     */
+    private void getLatestMessage(String userid, TextView latestMessage){
+        latestMessageString = "default";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chats");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if(chat.getRecieverid().equals(firebaseUser.getUid()) && chat.getSenderid().equals(userid) ||
+                       chat.getRecieverid().equals(userid) && chat.getSenderid().equals(firebaseUser.getUid())) {
+                            latestMessageString = chat.getMessage();
+                    }
+                }
+                switch(latestMessageString){
+                    case "default":
+                        latestMessage.setText("No Message");
+                        break;
+                    default:
+                        latestMessage.setText(latestMessageString);
+                }
+                latestMessageString = "default";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }
