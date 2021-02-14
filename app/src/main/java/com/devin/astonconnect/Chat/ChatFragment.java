@@ -74,37 +74,6 @@ public class ChatFragment extends Fragment {
                     ChatList chatList = snapshot.getValue(ChatList.class); //get the id of the other user that you have talked to
                     userIdList.add(chatList);
                 }
-                readChats(); //or called chatlist
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-        /**
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userIdList.clear(); //id's of the users to display
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-
-                    //Add the reciever to the list if you are the sender (other person in conversation)
-                    if(chat.getSenderid().equals(firebaseUser.getUid())){
-                        userIdList.add(chat.getRecieverid());
-                    }
-
-                    //Add the sender to the list if you are the receiver (other person in conversation)
-                    if(chat.getRecieverid().equals(firebaseUser.getUid())){
-                        userIdList.add(chat.getSenderid());
-                    }
-                }
                 readChats();
             }
 
@@ -113,7 +82,7 @@ public class ChatFragment extends Fragment {
 
             }
         });
-        **/
+
         return view;
     }
 
@@ -146,48 +115,4 @@ public class ChatFragment extends Fragment {
         });
 
     }
-
-
-
-     /**
-    //Make sure to only add users who are non-staff members
-    public void readChats(){
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        userReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userlist.clear();
-
-                //Adding a user to be displayed. Staff cannot be shown.
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
-
-                    for(String id : userIdList){
-                        if (user.getId().equals(id)) {
-                            if(user.getisStaff() == false){
-                                if(userlist.size() != 0){
-                                    for(User user1 : userlist){ //make sure they are not already listed
-                                        if(!user.getId().equals(user1.getId())){
-                                            userlist.add(user);
-                                        }
-                                    }
-                                } else {
-                                    userlist.add(user);
-                                }
-                            }
-                        }
-                    }
-                }
-                chatUserAdapter = new ChatUserAdapter(getContext(), userlist);
-                recyclerView.setAdapter(chatUserAdapter);
-                chatUserAdapter.notifyDataSetChanged(); //possibly remove?...
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }**/
 }
