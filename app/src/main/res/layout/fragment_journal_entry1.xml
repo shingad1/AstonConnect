@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:layout_height="match_parent"
+    tools:context=".Journal.JournalEntry1Fragment">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_back"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        app:tint="#000000" />
+
+    <TextView
+        android:id="@+id/newJournalEntryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Journal Entry"
+        android:layout_toRightOf="@id/backButton"
+        android:textSize="24sp"
+        android:fontFamily="@font/sf_font"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/backButton"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newJournalEntryText"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Record your mood"
+            android:fontFamily="@font/sf_font"
+            android:textStyle="bold"
+            android:textColor="#C1007AAA"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please note down the mood you experienced"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:id="@+id/moodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/customMood"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:hint="Specify a mood here..."
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="50dp" />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

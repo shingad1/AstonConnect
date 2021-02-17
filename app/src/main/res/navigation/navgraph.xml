@@ -44,9 +44,13 @@
     </fragment>
     <fragment
         android:id="@+id/journalFragment"
-        android:name="com.devin.astonconnect.JournalFragment"
+        android:name="com.devin.astonconnect.Journal.JournalFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_journal" />
+        tools:layout="@layout/fragment_journal" >
+        <action
+            android:id="@+id/action_journalFragment_to_journalEntry1Fragment"
+            app:destination="@id/journalEntry1Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.devin.astonconnect.ProfileFragment"
@@ -61,4 +65,9 @@
         android:name="com.devin.astonconnect.SelectedPostFragment"
         android:label="fragment_selected_post"
         tools:layout="@layout/fragment_selected_post" />
+    <fragment
+        android:id="@+id/journalEntry1Fragment"
+        android:name="com.devin.astonconnect.Journal.JournalEntry1Fragment"
+        android:label="fragment_journal_entry1"
+        tools:layout="@layout/fragment_journal_entry1" />
 </navigation>

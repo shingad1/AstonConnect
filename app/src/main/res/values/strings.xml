@@ -2,4 +2,33 @@
     <string name="app_name">AstonConnect</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="mood_options">
+        <item>Anxiety</item>
+        <item>Depression</item>
+        <item>Anger</item>
+        <item>Happiness</item>
+        <item>Relaxation</item>
+        <item>Confusion</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="mood_strength">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="mood_location">
+        <item>Socialising</item>
+        <item>At Home</item>
+        <item>Work</item>
+        <item>Shopping</item>
+        <item>Other</item>
+    </string-array>
+
+
 </resources>
