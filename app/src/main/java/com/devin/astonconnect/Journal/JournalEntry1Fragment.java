@@ -1,5 +1,6 @@
 package com.devin.astonconnect.Journal;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class JournalEntry1Fragment extends Fragment {
     private Spinner moodSpinner, moodLocationSpinner, moodIntensitySpinner;
     private EditText customMood, customMoodLocation;
     private Button selectDateButton, selectTimeButton;
+    private TextView summary;
+
 
     //final set of values from user's input
     private String entryMood, entryLocation, entryIntensity, entryTime;
@@ -40,10 +44,13 @@ public class JournalEntry1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal_entry1, container, false);
-        //custommood
+        summary = view.findViewById(R.id.summary);
 
         //Mood Spinner
         moodSpinner = view.findViewById(R.id.moodSpinner);
+        moodSpinner.setAdapter(null);
+
+
         customMood = view.findViewById(R.id.customMood);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -53,7 +60,11 @@ public class JournalEntry1Fragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedMood = adapterView.getItemAtPosition(i).toString();
 
-                if(selectedMood.equals("Other")){
+                if (selectedMood.equals("Select Mood")) {
+                     entryMood = null;
+                     customMood.setVisibility(View.GONE);
+
+                } else if (selectedMood.equals("Other")){
                     customMood.setVisibility(View.VISIBLE);
 
                     customMood.addTextChangedListener(new TextWatcher() {
@@ -67,8 +78,6 @@ public class JournalEntry1Fragment extends Fragment {
                             Toast.makeText(getActivity(), entryMood, Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
                 } else {
                     customMood.setVisibility(View.GONE);
                     entryMood = selectedMood;
@@ -83,8 +92,11 @@ public class JournalEntry1Fragment extends Fragment {
             }
         });
 
-        //Mood Location
+        //Mood Location - don't know if this works..
         moodLocationSpinner = view.findViewById(R.id.moodLocationSpinner);
+        moodLocationSpinner.setAdapter(null);
+
+
         customMoodLocation = view.findViewById(R.id.customMoodLocation);
         ArrayAdapter<CharSequence> locationAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_location, android.R.layout.simple_spinner_item);
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,9 +106,13 @@ public class JournalEntry1Fragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedMoodLocation = adapterView.getItemAtPosition(i).toString();
 
-                if(selectedMoodLocation.equals("Other")){
-                    customMoodLocation.setVisibility(View.VISIBLE);
+                if (selectedMoodLocation.equals("Select Location")) {
+                    entryLocation = null;
+                    customMoodLocation.setVisibility(View.GONE);
 
+                } else if (selectedMoodLocation.equals("Other")){
+
+                    customMoodLocation.setVisibility(View.VISIBLE);
                     customMoodLocation.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -108,8 +124,6 @@ public class JournalEntry1Fragment extends Fragment {
                             Toast.makeText(getActivity(), entryLocation, Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
                 } else {
                     customMoodLocation.setVisibility(View.GONE);
                     entryLocation = selectedMoodLocation;
@@ -134,8 +148,13 @@ public class JournalEntry1Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedIntensity = adapterView.getItemAtPosition(i).toString();
-                entryIntensity = selectedIntensity;
-                Toast.makeText(getActivity(), entryIntensity, Toast.LENGTH_SHORT).show();
+
+                if(selectedIntensity.equals("Select Intensity")){
+                    entryIntensity = null;
+                } else {
+                    entryIntensity = selectedIntensity;
+                    Toast.makeText(getActivity(), entryIntensity, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -162,9 +181,9 @@ public class JournalEntry1Fragment extends Fragment {
                                 calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                                 calendar.set(Calendar.MINUTE,minute);
 
-                                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
-
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
                                 Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                                entryTime = simpleDateFormat.format(calendar.getTime());
                             }
                         };
                         new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
@@ -173,10 +192,6 @@ public class JournalEntry1Fragment extends Fragment {
                 new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
         return view;
     }
-
-    //Date time
-
 }

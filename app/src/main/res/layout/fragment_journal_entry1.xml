@@ -113,6 +113,7 @@
             android:textStyle="bold"/>
 
         <Spinner
+            android:autofillHints="hint"
             android:layout_marginTop="10dp"
             android:id="@+id/moodIntensitySpinner"
             android:layout_width="match_parent"
@@ -131,8 +132,9 @@
             android:textStyle="bold"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -141,36 +143,18 @@
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Date"
+                android:text="Select Date/Time"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:layout_marginLeft="30dp"
                 android:fontFamily="@font/sf_font"
                 android:textColor="#FFFFFF"
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/selectTimebutton"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Time"
-                android:layout_marginLeft="70dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:fontFamily="@font/sf_font"
-                android:textColor="#FFFFFF"
-                android:textAllCaps="false"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
         </LinearLayout>
-
-
-
-
     </LinearLayout>
+    
 
     <Button
         android:id="@+id/nextButton"
@@ -184,5 +168,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_margin="20dp"/>
+
+
 
 </RelativeLayout>
