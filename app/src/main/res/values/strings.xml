@@ -14,14 +14,6 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="mood_strength">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
     <string-array name="mood_location">
         <item>Socialising</item>
         <item>At Home</item>
@@ -30,5 +22,12 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="mood_intensity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 
 </resources>

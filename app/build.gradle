@@ -55,4 +55,7 @@ dependencies {
 
     //Image cropping library
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+    //Material Date Time picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 }
