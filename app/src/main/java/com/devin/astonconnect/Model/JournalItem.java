@@ -8,6 +8,8 @@ public class JournalItem implements Parcelable {
     private String entryLocation;
     private String entryIntensity;
     private String entryTime;
+    private String entryWhatHappened;
+    private String entryThoughts;
 
     public JournalItem() {
 
@@ -18,6 +20,8 @@ public class JournalItem implements Parcelable {
         entryLocation = in.readString();
         entryIntensity = in.readString();
         entryTime = in.readString();
+        entryWhatHappened = in.readString();
+        entryThoughts  = in.readString();
     }
 
     @Override
@@ -26,6 +30,8 @@ public class JournalItem implements Parcelable {
         dest.writeString(entryLocation);
         dest.writeString(entryIntensity);
         dest.writeString(entryTime);
+        dest.writeString(entryWhatHappened);
+        dest.writeString(entryThoughts);
     }
 
     @Override
@@ -44,6 +50,22 @@ public class JournalItem implements Parcelable {
             return new JournalItem[size];
         }
     };
+
+    public String getEntryWhatHappened() {
+        return entryWhatHappened;
+    }
+
+    public void setEntryWhatHappened(String entryWhatHappened) {
+        this.entryWhatHappened = entryWhatHappened;
+    }
+
+    public String getEntryThoughts() {
+        return entryThoughts;
+    }
+
+    public void setEntryThoughts(String entryThoughts) {
+        this.entryThoughts = entryThoughts;
+    }
 
     public String getEntryMood() { return entryMood; }
 

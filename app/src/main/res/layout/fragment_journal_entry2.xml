@@ -1,21 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Journal.JournalEntry2Fragment">
 
-
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_back"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        app:tint="#000000" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/newJournalEntryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:text="Journal entry fragment 2 "
+        android:text="New Journal Entry"
+        android:layout_toRightOf="@id/backButton"
+        android:textSize="24sp"
         android:fontFamily="@font/sf_font"
-        android:textSize="24sp"/>
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/backButton"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"/>
 
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newJournalEntryText"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Record your thoughts"
+            android:fontFamily="@font/sf_font"
+            android:textStyle="bold"
+            android:textColor="#C1007AAA"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What happened at the time?"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/moodWhatHappened"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="What happened before and after you felt this mood?"
+            android:textColorHint="#333333"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:fontFamily="@font/sf_font"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What were your thoughts at the time?"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/moodThoughts"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="What was going through your mind?"
+            android:textColorHint="#333333"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:fontFamily="@font/sf_font"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp" />
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:backgroundTint="#01A4AA"/>
+
+</RelativeLayout>

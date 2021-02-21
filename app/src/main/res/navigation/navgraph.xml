@@ -82,5 +82,13 @@
         <argument
             android:name="journalItemArg"
             app:argType="com.devin.astonconnect.Model.JournalItem" />
+        <action
+            android:id="@+id/action_journalEntry2Fragment_to_journalEntry3Fragment"
+            app:destination="@id/journalEntry3Fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/journalEntry3Fragment"
+        android:name="com.devin.astonconnect.Journal.JournalEntry3Fragment"
+        android:label="fragment_journal_entry3"
+        tools:layout="@layout/fragment_journal_entry3" />
 </navigation>
