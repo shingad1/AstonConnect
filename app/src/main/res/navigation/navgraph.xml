@@ -78,5 +78,9 @@
         android:id="@+id/journalEntry2Fragment"
         android:name="com.devin.astonconnect.Journal.JournalEntry2Fragment"
         android:label="fragment_journal_entry2"
-        tools:layout="@layout/fragment_journal_entry2" />
+        tools:layout="@layout/fragment_journal_entry2" >
+        <argument
+            android:name="journalItemArg"
+            app:argType="com.devin.astonconnect.Model.JournalItem" />
+    </fragment>
 </navigation>

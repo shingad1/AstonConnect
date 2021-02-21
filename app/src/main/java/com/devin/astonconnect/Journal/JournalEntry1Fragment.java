@@ -211,7 +211,7 @@ public class JournalEntry1Fragment extends Fragment {
                     fragment.setArguments(bundle);
 
                     //navigate!
-                    Navigation.findNavController(view).navigate(R.id.action_journalFragment_to_journalEntry1Fragment);
+                    Navigation.findNavController(view).navigate(R.id.action_journalEntry1Fragment_to_journalEntry2Fragment, bundle);
 
                 } else {
                     Toast.makeText(getActivity(), "Please ensure all fields are completed", Toast.LENGTH_SHORT).show();
