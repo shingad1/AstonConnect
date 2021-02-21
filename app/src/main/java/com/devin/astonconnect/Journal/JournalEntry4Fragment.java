@@ -2,6 +2,7 @@ package com.devin.astonconnect.Journal;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -18,8 +19,16 @@ import android.widget.Toast;
 
 import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
 
 public class JournalEntry4Fragment extends Fragment {
 
@@ -31,6 +40,12 @@ public class JournalEntry4Fragment extends Fragment {
     //Values to push to DB
     private String  entrychangedIntensity;
     private String  entryOutlookChangedText;
+
+    //Firebase
+    private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,7 +118,31 @@ public class JournalEntry4Fragment extends Fragment {
                     item.setOutlookChanged(entryOutlookChangedText);
                     item.setChangedEntryIntensity(entrychangedIntensity);
 
-                    Toast.makeText(getActivity(), "Fields not null. Would submit now ", Toast.LENGTH_SHORT).show();
+                    firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Journal").child(firebaseUser.getUid());
+                    String entryId = databaseReference.push().getKey();
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("entryMood", item.getEntryMood());
+                    hashMap.put("entryLocation", item.getEntryLocation());
+                    hashMap.put("entryIntensity", item.getEntryIntensity());
+                    hashMap.put("entryTime", item.getEntryTime());
+                    hashMap.put("entryWhatHappened", item.getEntryWhatHappened());
+                    hashMap.put("entryThoughts", item.getEntryThoughts());
+                    hashMap.put("outlookChanged", item.getOutlookChanged());
+                    hashMap.put("changedEntryIntensity", item.getChangedEntryIntensity());
+
+                    databaseReference.child(entryId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getActivity(), "Journal Entry submitted", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                 } else {
                     Toast.makeText(getActivity(), "Please ensure all fields are completed", Toast.LENGTH_SHORT).show();
                 }
