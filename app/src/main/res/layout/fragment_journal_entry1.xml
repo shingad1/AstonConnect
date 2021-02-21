@@ -154,21 +154,18 @@
 
         </LinearLayout>
     </LinearLayout>
-    
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#C1007AAA"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="Next"
         android:textAllCaps="false"
-        android:fontFamily="@font/sf_font"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="20dp"/>
-
+        android:backgroundTint="#01A4AA"/>
 
 
 </RelativeLayout>

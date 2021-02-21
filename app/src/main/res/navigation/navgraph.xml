@@ -69,5 +69,14 @@
         android:id="@+id/journalEntry1Fragment"
         android:name="com.devin.astonconnect.Journal.JournalEntry1Fragment"
         android:label="fragment_journal_entry1"
-        tools:layout="@layout/fragment_journal_entry1" />
+        tools:layout="@layout/fragment_journal_entry1" >
+        <action
+            android:id="@+id/action_journalEntry1Fragment_to_journalEntry2Fragment"
+            app:destination="@id/journalEntry2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/journalEntry2Fragment"
+        android:name="com.devin.astonconnect.Journal.JournalEntry2Fragment"
+        android:label="fragment_journal_entry2"
+        tools:layout="@layout/fragment_journal_entry2" />
 </navigation>

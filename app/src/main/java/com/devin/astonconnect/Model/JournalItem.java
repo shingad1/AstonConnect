@@ -1,4 +1,63 @@
 package com.devin.astonconnect.Model;
 
-public class JournalItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class JournalItem implements Parcelable {
+    private String entryMood;
+    private String entryLocation;
+    private String entryIntensity;
+    private String entryTime;
+
+    public JournalItem() {
+
+    }
+
+    protected JournalItem(Parcel in) {
+        entryMood = in.readString();
+        entryLocation = in.readString();
+        entryIntensity = in.readString();
+        entryTime = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(entryMood);
+        dest.writeString(entryLocation);
+        dest.writeString(entryIntensity);
+        dest.writeString(entryTime);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<JournalItem> CREATOR = new Creator<JournalItem>() {
+        @Override
+        public JournalItem createFromParcel(Parcel in) {
+            return new JournalItem(in);
+        }
+
+        @Override
+        public JournalItem[] newArray(int size) {
+            return new JournalItem[size];
+        }
+    };
+
+    public String getEntryMood() { return entryMood; }
+
+    public void setEntryMood(String entryMood) { this.entryMood = entryMood; }
+
+    public String getEntryLocation() { return entryLocation; }
+
+    public void setEntryLocation(String entryLocation) { this.entryLocation = entryLocation; }
+
+    public String getEntryIntensity() { return entryIntensity; }
+
+    public void setEntryIntensity(String entryIntensity) { this.entryIntensity = entryIntensity; }
+
+    public String getEntryTime() { return entryTime; }
+
+    public void setEntryTime(String entryTime) { this.entryTime = entryTime; }
 }

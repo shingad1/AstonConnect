@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
 
 import java.text.SimpleDateFormat;
@@ -33,9 +35,8 @@ import java.util.Date;
 public class JournalEntry1Fragment extends Fragment {
     private Spinner moodSpinner, moodLocationSpinner, moodIntensitySpinner;
     private EditText customMood, customMoodLocation;
-    private Button selectDateButton, selectTimeButton;
-    private TextView summary;
-
+    private Button selectDateButton;
+    private Button nextButton;
 
     //final set of values from user's input
     private String entryMood, entryLocation, entryIntensity, entryTime;
@@ -44,7 +45,6 @@ public class JournalEntry1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal_entry1, container, false);
-        summary = view.findViewById(R.id.summary);
 
         //Mood Spinner
         moodSpinner = view.findViewById(R.id.moodSpinner);
@@ -192,6 +192,35 @@ public class JournalEntry1Fragment extends Fragment {
                 new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        /**Pass data to the next fragment...**/
+        nextButton = view.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((entryMood != null && entryLocation != null && entryIntensity != null && entryTime !=null)){
+                    JournalItem item = new JournalItem();
+                    item.setEntryMood(entryMood);
+                    item.setEntryLocation(entryLocation);
+                    item.setEntryIntensity(entryIntensity);
+                    item.setEntryTime(entryTime);
+
+                    Fragment fragment = new JournalEntry2Fragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("JournalItem", item);
+                    fragment.setArguments(bundle);
+
+                    //navigate!
+                    Navigation.findNavController(view).navigate(R.id.action_journalFragment_to_journalEntry1Fragment);
+
+                } else {
+                    Toast.makeText(getActivity(), "Please ensure all fields are completed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return view;
     }
+
+
 }
