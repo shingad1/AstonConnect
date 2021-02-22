@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -147,7 +148,8 @@ public class JournalEntry4Fragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(getActivity(), "Journal Entry submitted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Journal entry saved! " + ("\ud83d\ude01"), Toast.LENGTH_SHORT).show();
+                                Navigation.findNavController(view).navigate(R.id.action_journalEntry4Fragment_to_newsfeedFragment);
                             } else {
                                 Toast.makeText(getActivity(), "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
                             }

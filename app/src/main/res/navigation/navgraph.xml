@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_journalFragment_to_journalEntry1Fragment"
             app:destination="@id/journalEntry1Fragment" />
+        <action
+            android:id="@+id/action_journalFragment_to_viewJournalEntryFragment"
+            app:destination="@id/viewJournalEntryFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -99,5 +102,14 @@
         android:id="@+id/journalEntry4Fragment"
         android:name="com.devin.astonconnect.Journal.JournalEntry4Fragment"
         android:label="fragment_journal_entry4"
-        tools:layout="@layout/fragment_journal_entry4" />
+        tools:layout="@layout/fragment_journal_entry4" >
+        <action
+            android:id="@+id/action_journalEntry4Fragment_to_newsfeedFragment"
+            app:destination="@id/newsfeedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewJournalEntryFragment"
+        android:name="com.devin.astonconnect.Journal.ViewJournalEntryFragment"
+        android:label="fragment_view_journal_entry"
+        tools:layout="@layout/fragment_view_journal_entry" />
 </navigation>

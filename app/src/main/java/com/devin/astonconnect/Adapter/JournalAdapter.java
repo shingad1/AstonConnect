@@ -1,13 +1,19 @@
 package com.devin.astonconnect.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.devin.astonconnect.Journal.JournalEntry2Fragment;
+import com.devin.astonconnect.Journal.ViewJournalEntryFragment;
 import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +51,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         holder.dayText.setText("day");
         holder.moodText.setText(item.getEntryMood());
         holder.descriptionText.setText(item.getEntryTime() + " - " + item.getEntryLocation());
+        holder.item = item;
     }
 
     @Override
@@ -58,6 +65,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         public TextView dayText;
         public TextView moodText;
         public TextView descriptionText;
+        public JournalItem item;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,6 +75,17 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             dayText   = itemView.findViewById(R.id.dayText);
             moodText  = itemView.findViewById(R.id.moodText);
             descriptionText = itemView.findViewById(R.id.descriptionText);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("JournalItem", item);
+
+                    Navigation.findNavController(view).navigate(R.id.action_journalFragment_to_viewJournalEntryFragment, bundle);
+                }
+            });
         }
     }
 }

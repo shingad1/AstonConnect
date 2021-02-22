@@ -53,10 +53,10 @@ public class JournalEntry2Fragment extends Fragment {
                     item.setEntryWhatHappened(moodWhatHappened.getText().toString());
 
 
-                    Fragment fragment = new JournalEntry3Fragment();
+                    //Fragment fragment = new JournalEntry3Fragment();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("JournalItem", item);
-                    fragment.setArguments(bundle);
+                    //fragment.setArguments(bundle);
 
                     //navigate!
                     Navigation.findNavController(view).navigate(R.id.action_journalEntry2Fragment_to_journalEntry3Fragment, bundle);

@@ -214,10 +214,10 @@ public class JournalEntry1Fragment extends Fragment {
                     item.setEntryIntensity(entryIntensity);
                     item.setEntryTime(entryTime);
 
-                    Fragment fragment = new JournalEntry2Fragment();
+                    //Fragment fragment = new JournalEntry2Fragment();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("JournalItem", item);
-                    fragment.setArguments(bundle);
+                    //fragment.setArguments(bundle);
 
                     //navigate!
                     Navigation.findNavController(view).navigate(R.id.action_journalEntry1Fragment_to_journalEntry2Fragment, bundle);

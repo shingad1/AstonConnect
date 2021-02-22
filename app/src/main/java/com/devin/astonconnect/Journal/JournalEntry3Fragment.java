@@ -49,10 +49,10 @@ public class JournalEntry3Fragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new JournalEntry3Fragment();
+                //Fragment fragment = new JournalEntry3Fragment();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("JournalItem", item);
-                fragment.setArguments(bundle);
+                //fragment.setArguments(bundle);
 
                 Navigation.findNavController(view).navigate(R.id.action_journalEntry3Fragment_to_journalEntry4Fragment, bundle);
             }
