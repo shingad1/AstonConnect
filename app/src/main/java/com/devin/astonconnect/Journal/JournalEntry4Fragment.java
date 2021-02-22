@@ -1,5 +1,6 @@
 package com.devin.astonconnect.Journal;
 
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +47,8 @@ public class JournalEntry4Fragment extends Fragment {
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
 
-
+    //back btn
+    private ImageView backBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +78,13 @@ public class JournalEntry4Fragment extends Fragment {
             }
         });
 
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
         //Set mood text
         moodText.setText("Your mood was: " + item.getEntryMood() + ", Strength " + item.getEntryIntensity());
@@ -123,6 +133,7 @@ public class JournalEntry4Fragment extends Fragment {
                     String entryId = databaseReference.push().getKey();
 
                     HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("journalEntrySubmitted", String.valueOf(System.currentTimeMillis()));
                     hashMap.put("entryMood", item.getEntryMood());
                     hashMap.put("entryLocation", item.getEntryLocation());
                     hashMap.put("entryIntensity", item.getEntryIntensity());

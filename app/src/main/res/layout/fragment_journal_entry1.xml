@@ -8,7 +8,7 @@
     tools:context=".Journal.JournalEntry1Fragment">
 
     <ImageView
-        android:id="@+id/backButton"
+        android:id="@+id/backBtn"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_back"
@@ -22,12 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Journal Entry"
-        android:layout_toRightOf="@id/backButton"
+        android:layout_toRightOf="@id/backBtn"
         android:textSize="24sp"
         android:fontFamily="@font/sf_font"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_toEndOf="@id/backButton"
+        android:layout_toEndOf="@id/backBtn"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"/>
 

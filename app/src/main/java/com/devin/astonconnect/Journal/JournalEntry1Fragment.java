@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -37,6 +38,7 @@ public class JournalEntry1Fragment extends Fragment {
     private EditText customMood, customMoodLocation;
     private Button selectDateButton;
     private Button nextButton;
+    private ImageView backBtn;
 
     //final set of values from user's input
     private String entryMood, entryLocation, entryIntensity, entryTime;
@@ -50,6 +52,13 @@ public class JournalEntry1Fragment extends Fragment {
         moodSpinner = view.findViewById(R.id.moodSpinner);
         moodSpinner.setAdapter(null);
 
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
         customMood = view.findViewById(R.id.customMood);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_options, android.R.layout.simple_spinner_item);

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class JournalEntry3Fragment extends Fragment {
 
     private TextView thoughtsTextView;
     private Button nextButton;
+    private ImageView backBtn;
 
 
     @Override
@@ -35,6 +37,14 @@ public class JournalEntry3Fragment extends Fragment {
         thoughtsTextView = view.findViewById(R.id.thoughtsTextView);
         thoughtsTextView.setText(item.getEntryThoughts());
 
+
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override

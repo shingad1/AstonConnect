@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.devin.astonconnect.Model.JournalItem;
@@ -19,6 +20,7 @@ public class JournalEntry2Fragment extends Fragment {
 
     private EditText moodWhatHappened, moodThoughts;
     private Button nextButton;
+    private ImageView backBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class JournalEntry2Fragment extends Fragment {
         moodWhatHappened = view.findViewById(R.id.moodWhatHappened);
         moodThoughts     = view.findViewById(R.id.moodThoughts);
         nextButton       = view.findViewById(R.id.nextButton);
+
+        backBtn = view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
 
         nextButton.setOnClickListener(new View.OnClickListener() {
