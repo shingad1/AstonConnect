@@ -20,7 +20,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -28,20 +27,19 @@ import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class JournalEntry1Fragment extends Fragment {
     private Spinner moodSpinner, moodLocationSpinner, moodIntensitySpinner;
-    private EditText customMood, customMoodLocation;
+    private EditText customMood, customMoodLocation, entryNameTv;
     private Button selectDateButton;
     private Button nextButton;
     private ImageView backBtn;
 
+
     //final set of values from user's input
-    private String entryMood, entryLocation, entryIntensity, entryTime;
+    private String entryMood, entryLocation, entryIntensity, entryTime, entryName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -202,17 +200,34 @@ public class JournalEntry1Fragment extends Fragment {
             }
         });
 
+        //Entry name
+        entryNameTv = view.findViewById(R.id.entryName);
+        entryNameTv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                entryName = entryNameTv.getText().toString();
+            }
+        });
+
+
         /**Pass data to the next fragment...**/
         nextButton = view.findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((entryMood != null && entryLocation != null && entryIntensity != null && entryTime !=null)){
+                if((entryMood != null && entryLocation != null && entryIntensity != null && entryTime !=null && entryName != null)){
                     JournalItem item = new JournalItem();
                     item.setEntryMood(entryMood);
                     item.setEntryLocation(entryLocation);
                     item.setEntryIntensity(entryIntensity);
                     item.setEntryTime(entryTime);
+                    item.setEntryName(entryName);
 
                     //Fragment fragment = new JournalEntry2Fragment();
                     Bundle bundle = new Bundle();

@@ -13,6 +13,7 @@ public class JournalItem implements Parcelable {
     private String outlookChanged;
     private String changedEntryIntensity;
     private String journalEntrySubmitted; //the time the journal entry was submitted
+    private String entryName;
 
     public JournalItem() {
 
@@ -28,6 +29,7 @@ public class JournalItem implements Parcelable {
         outlookChanged = in.readString();
         changedEntryIntensity = in.readString();
         journalEntrySubmitted = in.readString();
+        entryName      = in.readString();
     }
 
     @Override
@@ -41,6 +43,7 @@ public class JournalItem implements Parcelable {
         dest.writeString(outlookChanged);
         dest.writeString(changedEntryIntensity);
         dest.writeString(journalEntrySubmitted);
+        dest.writeString(entryName);
     }
 
     @Override
@@ -59,6 +62,11 @@ public class JournalItem implements Parcelable {
             return new JournalItem[size];
         }
     };
+
+
+    public String getEntryName() { return entryName; }
+
+    public void setEntryName(String entryName) { this.entryName = entryName; }
 
     public String getJournalEntrySubmitted() { return journalEntrySubmitted; }
 

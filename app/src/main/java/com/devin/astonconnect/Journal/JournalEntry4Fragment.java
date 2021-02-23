@@ -143,6 +143,7 @@ public class JournalEntry4Fragment extends Fragment {
                     hashMap.put("entryThoughts", item.getEntryThoughts());
                     hashMap.put("outlookChanged", item.getOutlookChanged());
                     hashMap.put("changedEntryIntensity", item.getChangedEntryIntensity());
+                    hashMap.put("entryName", item.getEntryName());
 
                     databaseReference.child(entryId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
