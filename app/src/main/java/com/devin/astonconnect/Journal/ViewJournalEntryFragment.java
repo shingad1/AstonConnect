@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class ViewJournalEntryFragment extends Fragment {
     private TextView thoughtsBeforeReflecting;
     private TextView thoughtsAfterReflecting;
     private TextView moodChangedText;
-    private Button goBackBtn;
+    private ImageView goBackBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +38,7 @@ public class ViewJournalEntryFragment extends Fragment {
         thoughtsBeforeReflecting = view.findViewById(R.id.thoughtsBeforeReflecting);
         thoughtsAfterReflecting = view.findViewById(R.id.thoughtsAfterReflecting);
         moodChangedText = view.findViewById(R.id.moodChangedText);
-        goBackBtn = view.findViewById(R.id.goBackBtn);
+        goBackBtn = view.findViewById(R.id.backBtn);
 
         entryOverViewText.setText("You felt " + item.getEntryMood() + ", " + "Strength " + item.getEntryIntensity() + " on " +
                                   item.getEntryTime() + " at " + item.getEntryLocation());
