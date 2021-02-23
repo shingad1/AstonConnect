@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,10 +48,8 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
         //holder.monthText.setText(DateFormatSymbols.getInstance().getMonths()[submittedDate.getMonth() - 1]);
         //holder.dayText.setText(submittedDate.getDay());
-        holder.monthText.setText("month");
-        holder.dayText.setText("day");
-        holder.moodText.setText(item.getEntryMood());
-        holder.descriptionText.setText(item.getEntryTime() + " - " + item.getEntryLocation());
+        holder.entryName.setText(item.getEntryName());
+        holder.descriptionText.setText(item.getEntryTime() + " at " + item.getEntryLocation());
         holder.item = item;
     }
 
@@ -61,19 +60,16 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView monthText;
-        public TextView dayText;
-        public TextView moodText;
+        public TextView entryName;
         public TextView descriptionText;
+        public ImageView trashCan;
         public JournalItem item;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            monthText = itemView.findViewById(R.id.monthText);
-            dayText   = itemView.findViewById(R.id.dayText);
-            moodText  = itemView.findViewById(R.id.moodText);
+            entryName = itemView.findViewById(R.id.entryName);
             descriptionText = itemView.findViewById(R.id.descriptionText);
 
             itemView.setOnClickListener(new View.OnClickListener() {

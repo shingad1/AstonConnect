@@ -12,69 +12,34 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center_vertical"
+        android:layout_height="100dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dateLayout"
-            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/monthText"
+                android:id="@+id/entryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Lorem Ipsum dolor sit amet"
                 android:fontFamily="@font/sf_font"
                 android:textSize="24sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:text="August"/>
-
-            <TextView
-                android:id="@+id/dayText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="22nd"
-                android:textSize="20sp"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/sf_font"
                 android:textColor="#000000"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="wrap_content"
-            android:layout_toRightOf="@id/dateLayout"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/moodText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_font"
-                android:textSize="24sp"
-                android:textColor="#000000"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:text="Happiness"/>
-
 
             <TextView
                 android:id="@+id/descriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="At 20:15 - Home"
-                android:layout_gravity="center_horizontal"
+                android:text="27/12/2020 at 21/26 at Home"
                 android:fontFamily="@font/sf_font"
+                android:textSize="17sp"
+                android:layout_marginTop="5dp"
                 android:textColor="#000000"/>
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/viewSignpost"
@@ -82,12 +47,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_send"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:id="@+id/trashCan"
+            android:src="@drawable/ic_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewSignpost"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
 
     </RelativeLayout>
-
-
-
 
 </androidx.cardview.widget.CardView>
