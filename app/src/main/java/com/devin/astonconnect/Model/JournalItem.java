@@ -17,7 +17,6 @@ public class JournalItem implements Parcelable {
     private String entryId;
 
     public JournalItem() {
-
     }
 
     protected JournalItem(Parcel in) {

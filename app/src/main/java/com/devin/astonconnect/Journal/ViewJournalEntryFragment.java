@@ -53,6 +53,11 @@ public class ViewJournalEntryFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+
+        if(item.getOutlookReflection() != null){
+            addReflectionBtn.setText("Update/View Reflection");
+        }
+
         addReflectionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

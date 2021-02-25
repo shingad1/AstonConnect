@@ -67,6 +67,12 @@ public class addReflectionFragment extends Fragment {
         moodText            = view.findViewById(R.id.moodText);
         submitButton        = view.findViewById(R.id.submitButton);
 
+        if(item.getOutlookReflection() != null){
+            entryOutlookChanged.setText(item.getOutlookReflection());
+            entryOutlookChangedText = item.getOutlookReflection();
+        }
+
+
         entryOutlookChanged.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
