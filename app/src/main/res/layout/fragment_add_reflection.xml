@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Journal.JournalEntry3Fragment">
+    tools:context=".Journal.addReflectionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +22,7 @@
             android:layout_marginLeft="20dp"
             app:tint="#000000" />
 
+
         <TextView
             android:id="@+id/newJournalEntryText"
             android:layout_width="wrap_content"
@@ -37,13 +38,12 @@
             android:layout_marginLeft="40dp"/>
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/newJournalEntryText"
         android:orientation="vertical"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         tools:ignore="NotSibling">
@@ -51,50 +51,58 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reflect on your thoughts"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/sf_font"
+            android:text="Reflect on this event"
+            android:textColor="#C1007AAA"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/outlookChanged"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="Has your outlook changed for this event? If so, why?"
+            android:textColorHint="#333333"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:fontFamily="@font/sf_font"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/moodText"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Your mood was: Anxiety, Strength 1"
             android:fontFamily="@font/sf_font"
             android:textStyle="bold"
-            android:textColor="#C1007AAA"
+            android:textColor="#000000"
             android:textSize="20sp" />
 
         <TextView
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your thoughts at the time:"
+            android:layout_gravity="left"
+            android:text="Has your mood changed about this event?"
             android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/thoughtsTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/sf_font"
-            android:gravity="left"
+            android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="15sp" />
+
+        <Spinner
+            android:id="@+id/changedMoodIntensity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_above="@id/nextButton"
-            android:layout_marginBottom="100dp"
-            android:text="How would you advise a friend to think about it?"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/sf_font"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold"/>
-
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/submitButton"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
@@ -102,7 +110,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="#01A4AA"
-        android:text="Next"
+        android:text="Submit Entry"
         android:textAllCaps="false" />
 
-    </RelativeLayout>
+</RelativeLayout>

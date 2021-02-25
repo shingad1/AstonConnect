@@ -46,8 +46,6 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         String submittedEpoch = item.getJournalEntrySubmitted();
         Date submittedDate = new Date(Long.parseLong(submittedEpoch) * 1000);
 
-        //holder.monthText.setText(DateFormatSymbols.getInstance().getMonths()[submittedDate.getMonth() - 1]);
-        //holder.dayText.setText(submittedDate.getDay());
         holder.entryName.setText(item.getEntryName());
         holder.descriptionText.setText(item.getEntryTime() + " at " + item.getEntryLocation());
         holder.item = item;

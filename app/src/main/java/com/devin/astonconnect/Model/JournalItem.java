@@ -10,10 +10,11 @@ public class JournalItem implements Parcelable {
     private String entryTime;
     private String entryWhatHappened;
     private String entryThoughts;
-    private String outlookChanged;
+    private String outlookReflection;
     private String changedEntryIntensity;
     private String journalEntrySubmitted; //the time the journal entry was submitted
     private String entryName;
+    private String entryId;
 
     public JournalItem() {
 
@@ -26,10 +27,11 @@ public class JournalItem implements Parcelable {
         entryTime = in.readString();
         entryWhatHappened = in.readString();
         entryThoughts  = in.readString();
-        outlookChanged = in.readString();
+        outlookReflection = in.readString();
         changedEntryIntensity = in.readString();
         journalEntrySubmitted = in.readString();
         entryName      = in.readString();
+        entryId        = in.readString();
     }
 
     @Override
@@ -40,10 +42,11 @@ public class JournalItem implements Parcelable {
         dest.writeString(entryTime);
         dest.writeString(entryWhatHappened);
         dest.writeString(entryThoughts);
-        dest.writeString(outlookChanged);
+        dest.writeString(outlookReflection);
         dest.writeString(changedEntryIntensity);
         dest.writeString(journalEntrySubmitted);
         dest.writeString(entryName);
+        dest.writeString(entryId);
     }
 
     @Override
@@ -63,6 +66,9 @@ public class JournalItem implements Parcelable {
         }
     };
 
+    public String getEntryId() { return entryId; }
+
+    public void setEntryId(String entryId) { this.entryId = entryId; }
 
     public String getEntryName() { return entryName; }
 
@@ -72,12 +78,12 @@ public class JournalItem implements Parcelable {
 
     public void setJournalEntrySubmitted(String journalEntrySubmitted) { this.journalEntrySubmitted = journalEntrySubmitted; }
 
-    public String getOutlookChanged() {
-        return outlookChanged;
+    public String getOutlookReflection() {
+        return outlookReflection;
     }
 
-    public void setOutlookChanged(String outlookChanged) {
-        this.outlookChanged = outlookChanged;
+    public void setOutlookReflection(String outlookReflection) {
+        this.outlookReflection = outlookReflection;
     }
 
     public String getChangedEntryIntensity() {

@@ -109,12 +109,12 @@
 
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:backgroundTint="#01A4AA"
-        android:text="Next"
+        android:text="Submit"
         android:textAllCaps="false" />
 
 </LinearLayout>
