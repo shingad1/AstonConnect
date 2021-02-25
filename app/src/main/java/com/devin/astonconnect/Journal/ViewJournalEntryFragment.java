@@ -19,7 +19,7 @@ import com.devin.astonconnect.R;
 
 public class ViewJournalEntryFragment extends Fragment {
     private JournalItem item;
-    private TextView entryOverViewText;
+    private TextView entryOverViewText, whatHappenedText, thoughtsText;
     private ImageView goBackImageView;
     private Button goBackBtn;
     private Button addReflectionBtn;
@@ -36,11 +36,15 @@ public class ViewJournalEntryFragment extends Fragment {
         Toast.makeText(getActivity(), item.getEntryMood(), Toast.LENGTH_SHORT).show();
 
         //Set data.
+        whatHappenedText = view.findViewById(R.id.whatHappenedText);
+        thoughtsText     = view.findViewById(R.id.thoughtsText);
         entryOverViewText = view.findViewById(R.id.entryOverViewText);
         goBackImageView = view.findViewById(R.id.backImageView);
         goBackBtn = view.findViewById(R.id.goBackBtn);
         addReflectionBtn = view.findViewById(R.id.addReflectionButton);
         entryOverViewText.setText("You felt " + item.getEntryMood() + ", " + "Strength " + item.getEntryIntensity() + " on " + item.getEntryTime() + " at " + item.getEntryLocation());
+        whatHappenedText.setText(item.getEntryWhatHappened());
+        thoughtsText.setText(item.getEntryThoughts());
         goBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
