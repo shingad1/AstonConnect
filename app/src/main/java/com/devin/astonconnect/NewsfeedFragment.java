@@ -175,7 +175,7 @@ public class NewsfeedFragment extends Fragment {
                                 Post post = snapshot.getValue(Post.class);
                                 for(String id : followingList){
                                     if(post.getPublisher().equals(id)){
-                                        if(post.getPostType().equals("staff")){
+                                        if(post.getPosttype().equals("staff")){
                                             postList.add(post);
                                         }
                                     }
@@ -199,7 +199,7 @@ public class NewsfeedFragment extends Fragment {
                                 Post post = snapshot.getValue(Post.class);
                                 for(String id : followingList){
                                     if(post.getPublisher().equals(id)){
-                                        if(post.getPostType().equals("student")){
+                                        if(post.getPosttype().equals("student")){
                                             postList.add(post);
                                         }
                                     }
