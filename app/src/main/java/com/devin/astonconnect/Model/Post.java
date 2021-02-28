@@ -7,7 +7,7 @@ public class Post {
     private String  postimage;
     private String  publisher;
     private String  title;
-    private String posttype;
+    private String  postType;
 
 
     public Post(String description, Boolean isimagepost, String postid, String postimage, String publisher, String title) {
@@ -27,9 +27,9 @@ public class Post {
     public String  getPostId()      { return postid; }
     public String  getPostImage()   { return postimage; }
     public String  getPublisher()   { return publisher; }
-    public String getPosttype()     { return posttype; }
+    public String getPostType()     { return postType; }
 
-    public void setPosttype(String posttype)        { this.posttype = posttype; }
+    public void setPostType(String postType)        { this.postType = postType; }
     public void setPublisher(String publisher)      { this.publisher = publisher; }
     public void setPostImage(String postimage)      { this.postimage = postimage; }
     public void setIsImagePost(Boolean isimagepost) { this.isimagepost = isimagepost; }

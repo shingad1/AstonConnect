@@ -17,18 +17,14 @@ import android.widget.Toast;
 
 import com.devin.astonconnect.Loading.LoadingDialog;
 import com.devin.astonconnect.MainActivity;
-import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -47,8 +43,6 @@ public class ReviewImagePostActivity extends AppCompatActivity {
     private Button postBtn, cancelBtn;
     private EditText description, title;
     private LoadingDialog loadingDialog;
-
-    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +83,6 @@ public class ReviewImagePostActivity extends AppCompatActivity {
             }
         });
 
-        getUserDetails();
-
         //Setting up the crop image activity
         CropImage.activity()
                 .setAspectRatio(1, 1)
@@ -102,23 +94,6 @@ public class ReviewImagePostActivity extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-
-    private void getUserDetails() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                currentUser = snapshot.getValue(User.class);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
 
     private void uploadImage(){
         //Progressbar stuff goes here
@@ -155,12 +130,6 @@ public class ReviewImagePostActivity extends AppCompatActivity {
                         hashMap.put("description", description.getText().toString());
                         hashMap.put("publisher", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("isimagepost", true);
-
-                        if(currentUser.getisStaff() == false){
-                            hashMap.put("posttype", "student");
-                        } else {
-                            hashMap.put("posttype", "staff");
-                        }
 
                         reference.child(postid).setValue(hashMap);
 
