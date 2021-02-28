@@ -185,7 +185,9 @@ public class NewsfeedFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     followingList.add(snapshot.getKey());
                 }
-                readPosts();
+                //Read posts to populate recyclerviews
+                readStudentPosts();
+                readStaffPosts();
             }
 
             @Override
@@ -196,7 +198,7 @@ public class NewsfeedFragment extends Fragment {
     }
 
 
-    private void readPosts(){
+    private void readStudentPosts(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -207,13 +209,13 @@ public class NewsfeedFragment extends Fragment {
                     Post post = snapshot.getValue(Post.class);
                     for(String id : followingList){
                         if(post.getPublisher().equals(id)){
-                            studentPostList.add(post);
-                            staffPostList.add(post); //temporary
+                            if(post.getPosttype().equals("student")){
+                                studentPostList.add(post);
+                            }
                         }
                     }
                 }
                 studentPostAdapter.notifyDataSetChanged();
-                staffPostAdapter.notifyDataSetChanged(); //temporary
             }
 
             @Override
@@ -222,6 +224,35 @@ public class NewsfeedFragment extends Fragment {
             }
         });
     }
+
+    private void readStaffPosts(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                staffPostList.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Post post = snapshot.getValue(Post.class);
+                    for(String id : followingList){
+                        if(post.getPublisher().equals(id)){
+                            if(post.getPosttype().equals("staff")){
+                                staffPostList.add(post);
+                            }
+                        }
+                    }
+                }
+                staffPostAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
     private void onAddButtonClicked() {
         setVisibility(clicked);
