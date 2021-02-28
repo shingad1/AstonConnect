@@ -28,9 +28,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/astonConnectText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/sf_font"
                     android:text="Aston Connect"
                     android:textColor="@color/black"
@@ -65,6 +67,27 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="12dp" />
+
+
+                <TextView
+                    android:id="@+id/displayPostText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/astonConnectText"
+                    android:textColor="#000000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Display CS Department Posts"/>
+
+                <Switch
+                    android:id="@+id/changePostSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/displayPostText"
+                    android:layout_below="@id/astonConnectText"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"/>
 
             </RelativeLayout>
         </com.google.android.material.appbar.MaterialToolbar>
