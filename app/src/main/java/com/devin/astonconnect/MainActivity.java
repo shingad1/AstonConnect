@@ -49,10 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
     /** User Status **/
     private void setUserStatus(String userStatus){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("userstatus", userStatus);
-        reference.updateChildren(hashMap);
+        if(fAuth.getCurrentUser() != null){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("userstatus", userStatus);
+            reference.updateChildren(hashMap);
+        } else {
+            Log.i("status", "fAuth is null. Cannot update user status");
+        }
     }
 
     //When the user pauses the app set their status to be offline
