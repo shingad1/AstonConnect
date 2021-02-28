@@ -59,7 +59,7 @@ public class CommentsActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //Recyclerview stuff
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.studentPostRecyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

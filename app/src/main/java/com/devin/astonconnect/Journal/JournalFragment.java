@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.devin.astonconnect.Adapter.JournalAdapter;
 import com.devin.astonconnect.Model.JournalItem;
@@ -46,7 +45,7 @@ public class JournalFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_journal, container, false);
 
         //recyclerView
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.studentPostRecyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);

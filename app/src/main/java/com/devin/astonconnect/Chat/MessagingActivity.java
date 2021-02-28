@@ -78,7 +78,7 @@ public class MessagingActivity extends AppCompatActivity {
         userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked (this is the other guy's ID)
 
         //Recyclerview stuff
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.studentPostRecyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);

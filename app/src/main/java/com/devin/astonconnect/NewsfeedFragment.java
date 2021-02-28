@@ -16,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.devin.astonconnect.Adapter.PostAdapter;
 import com.devin.astonconnect.LoginRegister.StartActivity;
@@ -36,10 +39,18 @@ import java.util.List;
 
 public class NewsfeedFragment extends Fragment {
 
-    //Posts stuff
-    private RecyclerView recyclerView;
-    private PostAdapter postAdapter;
-    private List<Post> postList;
+    //Switch to toggle between showing of both recyclerviews
+    private Switch changePostSwitch;
+
+    //Staff post stuff
+    private RecyclerView studentPostRecyclerView;
+    private List<Post> staffPostList;
+    private PostAdapter staffPostAdapter;
+
+    //Student post stuff
+    private RecyclerView staffPostRecyclerView;
+    private PostAdapter studentPostAdapter;
+    private List<Post> studentPostList;
     private List<String> followingList;
     private ImageView logOutBtn, profile;
 
@@ -54,17 +65,49 @@ public class NewsfeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 
+        /** Staff post recyclerview **/
+        staffPostRecyclerView = view.findViewById(R.id.staffPostRecyclerView);
+        staffPostRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setReverseLayout(true);
+        manager.setStackFromEnd(true);
+        staffPostRecyclerView.setLayoutManager(manager);
+        staffPostList = new ArrayList<>();
+        staffPostAdapter = new PostAdapter(getContext(), staffPostList);
+        staffPostRecyclerView.setAdapter(staffPostAdapter);
+
         /** Displaying posts stuff **/
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
+        studentPostRecyclerView = view.findViewById(R.id.studentPostRecyclerView);
+        studentPostRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        postList = new ArrayList<>();
+        studentPostRecyclerView.setLayoutManager(linearLayoutManager);
+        studentPostList = new ArrayList<>();
         followingList = new ArrayList<>();
-        postAdapter = new PostAdapter(getContext(), postList);
-        recyclerView.setAdapter(postAdapter);
+        studentPostAdapter = new PostAdapter(getContext(), studentPostList);
+        studentPostRecyclerView.setAdapter(studentPostAdapter);
+
+
+        /** Toggle button for showing one recyclerview over another **/
+        changePostSwitch = view.findViewById(R.id.changePostSwitch);
+        changePostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                Toast.makeText(getActivity(), "Toggle changed to: " + isChecked, Toast.LENGTH_SHORT).show();
+                if(isChecked){
+                    staffPostRecyclerView.setVisibility(View.VISIBLE);
+                    studentPostRecyclerView.setVisibility(View.GONE);
+                }
+
+                if(!isChecked){
+                    studentPostRecyclerView.setVisibility(View.VISIBLE);
+                    staffPostRecyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+
 
         /** Floating action button stuff **/
         add_btn            = view.findViewById(R.id.add_btn);
@@ -159,16 +202,18 @@ public class NewsfeedFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
+                studentPostList.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
                     for(String id : followingList){
                         if(post.getPublisher().equals(id)){
-                            postList.add(post);
+                            studentPostList.add(post);
+                            staffPostList.add(post); //temporary
                         }
                     }
                 }
-                postAdapter.notifyDataSetChanged();
+                studentPostAdapter.notifyDataSetChanged();
+                staffPostAdapter.notifyDataSetChanged(); //temporary
             }
 
             @Override
