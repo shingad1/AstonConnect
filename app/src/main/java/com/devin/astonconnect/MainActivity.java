@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** User Status **/
     private void setUserStatus(String userStatus){
+       /**
         if(fAuth.getCurrentUser() != null){
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
             HashMap<String, Object> hashMap = new HashMap<>();
@@ -57,13 +58,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.i("status", "fAuth is null. Cannot update user status");
         }
+        **/
     }
 
     //When the user pauses the app set their status to be offline
     @Override
     protected void onPause() {
         super.onPause();
-        setUserStatus("offline");
+       // setUserStatus("offline");
         Log.w("status", "Setting user status to offline in the MainActivity");
     }
 
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setUserStatus("online");
+       // setUserStatus("online");
         Log.w("status", "Setting the user status to online in the MainActvity");
     }
 
