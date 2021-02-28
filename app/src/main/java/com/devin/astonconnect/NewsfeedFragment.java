@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import com.devin.astonconnect.Adapter.PostAdapter;
 import com.devin.astonconnect.LoginRegister.StartActivity;
@@ -42,6 +44,7 @@ public class NewsfeedFragment extends Fragment {
     private List<Post> postList;
     private List<String> followingList;
     private ImageView logOutBtn, profile;
+    private Switch changePostSwitch;
 
     //Floating Action button stuff
     private Animation rotateOpen, rotateClose, fromBottom, toBottom;
@@ -55,6 +58,7 @@ public class NewsfeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 
         /** Displaying posts stuff **/
+        changePostSwitch = view.findViewById(R.id.changePostSwitch);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -125,6 +129,7 @@ public class NewsfeedFragment extends Fragment {
         });
 
         checkFollowing();
+        readPosts();
         return view;
     }
 
@@ -142,7 +147,6 @@ public class NewsfeedFragment extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     followingList.add(snapshot.getKey());
                 }
-                readPosts();
             }
 
             @Override
@@ -156,24 +160,60 @@ public class NewsfeedFragment extends Fragment {
     private void readPosts(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
-        reference.addValueEventListener(new ValueEventListener() {
+
+        changePostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Post post = snapshot.getValue(Post.class);
-                    for(String id : followingList){
-                        if(post.getPublisher().equals(id)){
-                            postList.add(post);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+
+                    postList.clear();
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            postList.clear();
+                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                Post post = snapshot.getValue(Post.class);
+                                for(String id : followingList){
+                                    if(post.getPublisher().equals(id)){
+                                        if(post.getPostType().equals("staff")){
+                                            postList.add(post);
+                                        }
+                                    }
+                                }
+                            }
+                            postAdapter.notifyDataSetChanged();
                         }
-                    }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } else {
+                    postList.clear();
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            postList.clear();
+                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                Post post = snapshot.getValue(Post.class);
+                                for(String id : followingList){
+                                    if(post.getPublisher().equals(id)){
+                                        if(post.getPostType().equals("student")){
+                                            postList.add(post);
+                                        }
+                                    }
+                                }
+                            }
+                            postAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-                postAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
