@@ -115,9 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                             reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
 
-                            if(isStaff == false){
-
-                            }
 
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
@@ -135,7 +132,19 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Intent intent = new Intent (RegisterActivity.this, MainActivity.class);
+                                        //Send the user to the register activity so that they can verify their email and then log in later
+                                        Intent intent = new Intent (RegisterActivity.this, StartActivity.class);
+                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(RegisterActivity.this, "Please check your email for verification", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(RegisterActivity.this, "An error has occurred. Please try again later", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                        FirebaseAuth.getInstance().signOut();
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }

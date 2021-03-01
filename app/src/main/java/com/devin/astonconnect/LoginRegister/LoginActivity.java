@@ -67,23 +67,32 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
-                                                .child(fAuth.getUid());
+                                        /** If the user's email is verified, then sign them in normally, direct them to the main activity **/
+                                        if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
 
-                                        reference.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                                finish();
-                                            }
+                                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
+                                                    .child(fAuth.getUid());
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                            reference.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
 
-                                            }
-                                        });
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+                                        } else {
+                                            /** If the user has not verified their email**/
+                                            Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                                            FirebaseAuth.getInstance().signOut();
+                                        }
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Authentication failed. Please try again later.", Toast.LENGTH_SHORT).show();
                                     }
