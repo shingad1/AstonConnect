@@ -85,8 +85,7 @@ public class addReflectionFragment extends Fragment {
             }
 
         } else {
-            reflectedMoodText.setVisibility(View.VISIBLE);
-            reflectedMoodText.setText("This is null for some reason");
+            reflectedMoodText.setVisibility(View.GONE);
         }
 
         if(item.getOutlookReflection() != null){
