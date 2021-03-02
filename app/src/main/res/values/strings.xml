@@ -6,12 +6,12 @@
 
     <string-array name="mood_options">
         <item>Select Mood</item>
-        <item>Anxiety</item>
-        <item>Depression</item>
-        <item>Anger</item>
-        <item>Happiness</item>
-        <item>Relaxation</item>
-        <item>Confusion</item>
+        <item>Anxious</item>
+        <item>Depressed</item>
+        <item>Angry</item>
+        <item>Happy</item>
+        <item>Relaxed</item>
+        <item>Confused</item>
         <item>Other</item>
     </string-array>
 
