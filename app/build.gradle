@@ -58,4 +58,7 @@ dependencies {
 
     //Material Date Time picker
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+
+    //Lottie Library for animations
+    implementation "com.airbnb.android:lottie:3.6.1"
 }

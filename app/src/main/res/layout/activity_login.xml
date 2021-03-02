@@ -1,73 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#E8E8E8"
     android:layout_height="match_parent"
     tools:context=".LoginRegister.LoginActivity">
 
+
+    <View
+        android:id="@+id/topView"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:background="#0099ff"/>
+
+    <View
+        android:id="@+id/waves"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/topView"
+        android:background="@drawable/ic_waves"/>
+
     <TextView
-        android:id="@+id/loginHeader"
+        android:id="@+id/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login."
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
+        android:text="Already have an account? \nSign in here."
+        android:textColor="#FFFFFF"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/sf_font"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_below="@id/headerText"
+            android:id="@+id/lottieAnimation"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            app:lottie_rawRes="@raw/student"
+            app:lottie_speed="0.5"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <RelativeLayout
+            android:id="@+id/emailLayout"
+            android:layout_marginTop="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="100dp"
+            android:layout_below="@id/waves"
+            android:elevation="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_blue_border">
+
+            <EditText
+                android:id="@+id/email_text"
+                android:hint="Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:layout_toRightOf="@id/email_icon"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="15dp"/>
 
 
-    <EditText
-        android:id="@+id/email_text"
-        android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_icon"
+                android:layout_marginLeft="17dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_email_24" />
+
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/passwordLayout"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_below="@id/emailLayout"
+        android:layout_width="wrap_content"
+        android:elevation="10dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        app:layout_constraintBottom_toTopOf="@+id/login_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginHeader" />
+        android:background="@drawable/background_blue_border">
 
-    <EditText
-        android:id="@+id/password_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/login_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginHeader"
-        app:layout_constraintVertical_bias="0.727" />
+        <EditText
+            android:id="@+id/password_text"
+            android:hint="Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:layout_toRightOf="@id/password_icon"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="15dp"/>
 
-    <Button
+
+        <ImageView
+            android:id="@+id/password_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_password" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/passwordLayout"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checked"
+            android:layout_toRightOf="@id/loginText"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_check" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
 
     <TextView
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_btn"
         android:id="@+id/register_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Register here."
+        android:textColor="#2E2E2E"
+        android:fontFamily="@font/sf_font"
+        android:textStyle="bold"
+        android:text="Don't have an account? \nRegister here."
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
