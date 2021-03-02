@@ -5,27 +5,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.devin.astonconnect.Journal.JournalEntry2Fragment;
-import com.devin.astonconnect.Journal.ViewJournalEntryFragment;
 import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormatSymbols;
 import java.util.Date;
 import java.util.List;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder>{
     private Context context;
     private List<JournalItem> journalItems;
+    private RecyclerView recyclerView; //the recyclerview that the adapter is attached to
 
     public JournalAdapter(Context context, List<JournalItem> journalItems){
         this.context = context;
@@ -49,6 +47,23 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         holder.entryName.setText(item.getEntryName());
         holder.descriptionText.setText(item.getEntryTime() + " at " + item.getEntryLocation());
         holder.item = item;
+        holder.entryId = item.getEntryId();
+    }
+
+    public void updateList(JournalItem removedItem){
+        for(int i = 0; i < journalItems.size(); i++){
+            if(journalItems.get(i).getEntryId().equals(removedItem.getEntryId())){
+                journalItems.remove(i);
+                this.notifyDataSetChanged();
+                recyclerView.invalidate();
+            }
+        }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
     }
 
     @Override
@@ -60,8 +75,9 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView entryName;
         public TextView descriptionText;
-        public ImageView trashCan;
+        public TextView deleteEntry;
         public JournalItem item;
+        public String entryId;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -69,6 +85,20 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
             entryName = itemView.findViewById(R.id.entryName);
             descriptionText = itemView.findViewById(R.id.descriptionText);
+            deleteEntry     = itemView.findViewById(R.id.deleteEntry);
+
+
+
+            deleteEntry.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Journal").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .child(entryId);
+                    reference.removeValue();
+                    updateList(item);
+
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

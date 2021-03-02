@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center_vertical"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,15 +49,22 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"/>
 
-        <ImageView
-            android:id="@+id/trashCan"
-            android:src="@drawable/ic_delete"
+        <TextView
+            android:id="@+id/deleteEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/viewSignpost"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="21dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"/>
+            android:background="@drawable/edit_text_bg"
+            android:drawableRight="@drawable/ic_delete"
+            android:fontFamily="@font/sf_font"
+            android:gravity="center_vertical"
+            android:text="Delete entry"
+            android:textColor="#000000" />
+
 
     </RelativeLayout>
 
