@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class JournalEntry1Fragment extends Fragment {
     private Button selectDateButton;
     private Button nextButton;
     private ImageView backBtn;
+    private TextView dateTimeText;
 
 
     //final set of values from user's input
@@ -99,7 +101,8 @@ public class JournalEntry1Fragment extends Fragment {
             }
         });
 
-        //Mood Location - don't know if this works..
+
+        dateTimeText = view.findViewById(R.id.dateTimeText);
         moodLocationSpinner = view.findViewById(R.id.moodLocationSpinner);
         moodLocationSpinner.setAdapter(null);
 
@@ -191,6 +194,7 @@ public class JournalEntry1Fragment extends Fragment {
                                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
                                 Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
                                 entryTime = simpleDateFormat.format(calendar.getTime());
+                                dateTimeText.setText(entryTime);
                             }
                         };
                         new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();

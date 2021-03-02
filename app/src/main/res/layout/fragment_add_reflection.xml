@@ -27,7 +27,7 @@
             android:id="@+id/newJournalEntryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Journal Entry"
+            android:text="Update Journal Entry"
             android:layout_toRightOf="@id/backButton"
             android:textSize="24sp"
             android:fontFamily="@font/sf_font"
@@ -101,16 +101,20 @@
 
     </LinearLayout>
 
+
+
     <Button
         android:id="@+id/submitButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="#01A4AA"
-        android:text="Submit Entry"
+        android:drawablePadding="30dp"
+        android:drawableRight="@drawable/ic_check"
+        android:text="Update Entry"
         android:textAllCaps="false" />
 
 </RelativeLayout>

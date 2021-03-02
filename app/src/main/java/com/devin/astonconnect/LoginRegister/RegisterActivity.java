@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     //Firebase stuff
     private FirebaseAuth fAuth;
     private DatabaseReference reference;
-
+    Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@aston.ac.uk");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String str_password = password.getText().toString();
                 String str_password_confirm = confirm_password.getText().toString();
 
+                
+                Matcher matcher = pattern.matcher(str_email);
+
                 if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_fullname)|| TextUtils.isEmpty(str_email) ||
                         TextUtils.isEmpty(str_password) || TextUtils.isEmpty(str_password_confirm)){
                     Toast.makeText(RegisterActivity.this, "All fields are required.", Toast.LENGTH_SHORT).show();
@@ -96,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Password should have atleast 6 characters.", Toast.LENGTH_SHORT).show();
                 } else if (!TextUtils.equals(str_password, str_password_confirm)) {
                     Toast.makeText(RegisterActivity.this, "Please make sure passwords match.", Toast.LENGTH_SHORT).show();
+                } else if (!matcher.matches()) {
+                    Toast.makeText(RegisterActivity.this, "Enter an aston mail", Toast.LENGTH_SHORT).show();
                 } else {
                     register(str_username, str_fullname, str_email, str_password, isStaff);
                 }

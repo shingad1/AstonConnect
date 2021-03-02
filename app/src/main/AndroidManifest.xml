@@ -17,7 +17,8 @@
         <activity android:name=".Post.CommentsActivity" />
         <activity android:name=".Post.ReviewTextPostActivity" />
         <activity android:name=".Post.ReviewImagePostActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".LoginRegister.RegisterActivity" />
         <activity android:name=".LoginRegister.LoginActivity" />
         <activity android:name=".LoginRegister.StartActivity">
