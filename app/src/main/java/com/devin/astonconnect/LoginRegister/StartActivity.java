@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.R;
+import com.devin.astonconnect.Register.RegisterActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
