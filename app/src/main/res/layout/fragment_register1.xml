@@ -1,14 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Register.RegisterFragment1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Register fragment 1" />
+    <View
+        android:id="@+id/topView"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="#0099ff"/>
 
-</FrameLayout>
+
+    <View
+        android:id="@+id/waves"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/topView"
+        android:background="@drawable/ic_waves2"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+    <TextView
+        android:id="@+id/createAccountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account"
+        android:fontFamily="@font/sf_font"
+        android:layout_alignParentLeft="true"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_below="@id/createAccountText"
+        android:id="@+id/lottieAnimation"
+        android:layout_width="280dp"
+        android:layout_height="170dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_rawRes="@raw/register"
+        app:lottie_speed="0.5"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/usernameLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/waves"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue_border">
+
+        <EditText
+            android:id="@+id/username_text"
+            android:hint="Username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:layout_toRightOf="@id/person_icon"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/person_icon"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_person"
+            app:tint="#0099ff" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fullnameLayout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/usernameLayout"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue_border">
+
+        <EditText
+            android:id="@+id/fullnameText"
+            android:hint="Fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:layout_toRightOf="@id/person_icon2"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:id="@+id/person_icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_person"
+            app:tint="#0099ff" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/emailLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="80dp"
+        android:layout_below="@id/fullnameLayout"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue_border">
+
+        <EditText
+            android:id="@+id/emailText"
+            android:hint="Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:layout_toRightOf="@id/email_icon"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/email_icon"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_email_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emailConfirmLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="80dp"
+        android:layout_below="@id/emailLayout"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue_border">
+
+        <EditText
+            android:id="@+id/emailConfirmText"
+            android:hint="Confirm Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:layout_toRightOf="@id/email_icon3"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/email_icon3"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_email_24" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/confirmStaffLayoout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="80dp"
+        android:layout_below="@id/emailConfirmLayout"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blue_border"
+        android:backgroundTint="#F1F1F1">
+
+    <TextView
+        android:id="@+id/displayTextStaff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you a member of \nCS Staff?"
+        android:fontFamily="@font/sf_font"
+        android:layout_toRightOf="@id/presentation"
+        android:textColor="#292929"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"/>
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/displayTextStaff"
+        android:visibility="visible"/>
+
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/presentation"
+            android:layout_marginLeft="17dp"
+            android:layout_centerVertical="true"
+            android:backgroundTint="#011E32"
+            android:src="@drawable/ic_presentation" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/nextButtonLayout"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/confirmStaffLayoout"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextButton"
+            android:layout_toRightOf="@id/nextText"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:scaleX="-1"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/nextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
