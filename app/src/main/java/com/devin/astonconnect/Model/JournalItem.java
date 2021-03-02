@@ -11,7 +11,7 @@ public class JournalItem implements Parcelable {
     private String entryWhatHappened;
     private String entryThoughts;
     private String outlookReflection;
-    private String changedEntryIntensity;
+    private String entrychangedIntensity;
     private String journalEntrySubmitted; //the time the journal entry was submitted
     private String entryName;
     private String entryId;
@@ -27,7 +27,7 @@ public class JournalItem implements Parcelable {
         entryWhatHappened = in.readString();
         entryThoughts  = in.readString();
         outlookReflection = in.readString();
-        changedEntryIntensity = in.readString();
+        entrychangedIntensity = in.readString();
         journalEntrySubmitted = in.readString();
         entryName      = in.readString();
         entryId        = in.readString();
@@ -42,7 +42,7 @@ public class JournalItem implements Parcelable {
         dest.writeString(entryWhatHappened);
         dest.writeString(entryThoughts);
         dest.writeString(outlookReflection);
-        dest.writeString(changedEntryIntensity);
+        dest.writeString(entrychangedIntensity);
         dest.writeString(journalEntrySubmitted);
         dest.writeString(entryName);
         dest.writeString(entryId);
@@ -85,12 +85,12 @@ public class JournalItem implements Parcelable {
         this.outlookReflection = outlookReflection;
     }
 
-    public String getChangedEntryIntensity() {
-        return changedEntryIntensity;
+    public String getEntrychangedIntensity() {
+        return entrychangedIntensity;
     }
 
-    public void setChangedEntryIntensity(String changedEntryIntensity) {
-        this.changedEntryIntensity = changedEntryIntensity;
+    public void setEntrychangedIntensity(String entrychangedIntensity) {
+        this.entrychangedIntensity = entrychangedIntensity;
     }
 
     public String getEntryWhatHappened() {

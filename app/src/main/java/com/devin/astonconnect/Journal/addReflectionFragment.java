@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
@@ -26,11 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -40,6 +36,7 @@ public class addReflectionFragment extends Fragment {
     private TextView moodText;
     private Spinner changedMoodIntensity;
     private Button submitButton;
+    private TextView reflectedMoodText;
 
     //Values to push to DB
     private String  entrychangedIntensity;
@@ -66,6 +63,31 @@ public class addReflectionFragment extends Fragment {
         entryOutlookChanged = view.findViewById(R.id.outlookChanged);
         moodText            = view.findViewById(R.id.moodText);
         submitButton        = view.findViewById(R.id.submitButton);
+        reflectedMoodText   = view.findViewById(R.id.reflectedMoodText);
+
+        if(item.getEntrychangedIntensity() != null){
+            reflectedMoodText.setVisibility(View.VISIBLE);
+           int originalIntensity = Integer.parseInt(item.getEntryIntensity());
+           int changedIntensity = Integer.parseInt(item.getEntrychangedIntensity());
+
+           if(originalIntensity > changedIntensity){
+               int difference = originalIntensity - changedIntensity;
+               reflectedMoodText.setText("After reflecting, your mood decreased by " + String.valueOf(difference) + " strengths");
+           }
+
+            if(originalIntensity < changedIntensity){
+                int difference = changedIntensity - originalIntensity;
+                reflectedMoodText.setText("After reflecting, your mood increased by " + String.valueOf(difference) + " strengths");
+            }
+
+            if(originalIntensity == changedIntensity){
+                reflectedMoodText.setText("After reflecting, your mood intensity stayed the same");
+            }
+
+        } else {
+            reflectedMoodText.setVisibility(View.VISIBLE);
+            reflectedMoodText.setText("This is null for some reason");
+        }
 
         if(item.getOutlookReflection() != null){
             entryOutlookChanged.setText(item.getOutlookReflection());
@@ -130,14 +152,14 @@ public class addReflectionFragment extends Fragment {
 
                 if(entrychangedIntensity != null && entryOutlookChangedText != null){
                     item.setOutlookReflection(entryOutlookChangedText);
-                    item.setChangedEntryIntensity(entrychangedIntensity);
+                    item.setEntrychangedIntensity(entrychangedIntensity);
 
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     databaseReference = FirebaseDatabase.getInstance().getReference("Journal").child(firebaseUser.getUid()).child(item.getEntryId());
 
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("outlookReflection", item.getOutlookReflection());
-                    hashMap.put("entrychangedIntensity", item.getChangedEntryIntensity());
+                    hashMap.put("entrychangedIntensity", item.getEntrychangedIntensity());
 
                     databaseReference.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
