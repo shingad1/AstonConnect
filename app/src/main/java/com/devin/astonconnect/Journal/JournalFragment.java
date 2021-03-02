@@ -48,6 +48,8 @@ public class JournalFragment extends Fragment {
         recyclerView = view.findViewById(R.id.studentPostRecyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         journalItems = new ArrayList<>();
         journalAdapter = new JournalAdapter(getContext(), journalItems);
