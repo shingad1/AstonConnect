@@ -144,6 +144,8 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/interestsSpinner"
             android:text="Chip tag"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            app:closeIcon="@drawable/ic_close"
             android:id="@+id/chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
