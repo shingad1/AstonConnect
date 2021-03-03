@@ -43,8 +43,9 @@
     <com.airbnb.lottie.LottieAnimationView
         android:layout_below="@id/createAccountText"
         android:id="@+id/lottieAnimation"
-        android:layout_width="280dp"
-        android:layout_height="170dp"
+        android:layout_marginTop="-30dp"
+        android:layout_width="350dp"
+        android:layout_height="240dp"
         android:layout_centerHorizontal="true"
         app:lottie_rawRes="@raw/register"
         app:lottie_speed="0.5"
