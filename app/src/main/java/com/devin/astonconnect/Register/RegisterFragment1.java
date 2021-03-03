@@ -3,7 +3,6 @@ package com.devin.astonconnect.Register;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.devin.astonconnect.R;
@@ -62,7 +60,7 @@ public class RegisterFragment1 extends Fragment {
         });
 
 
-        nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
+        nextButtonLayout = view.findViewById(R.id.finishButtonLayout);
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -10,14 +10,12 @@ import androidx.navigation.Navigation;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -61,7 +59,7 @@ public class RegisterFragment3 extends Fragment {
 
         bundle = getArguments();
 
-        nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
+        nextButtonLayout = view.findViewById(R.id.finishButtonLayout);
         interestsSpinner = view.findViewById(R.id.interestsSpinner);
         aboutMeText      = view.findViewById(R.id.aboutMe_text);
         customInterests  = view.findViewById(R.id.customInterestsEditText);

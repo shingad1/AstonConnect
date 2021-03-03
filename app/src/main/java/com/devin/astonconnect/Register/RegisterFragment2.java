@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Loading.LoadingDialog;
-import com.devin.astonconnect.ProfileEditActivity;
 import com.devin.astonconnect.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,15 +30,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -111,7 +106,7 @@ public class RegisterFragment2 extends Fragment {
         //Gets the bundle from the previous fragment
         Bundle bundle = getArguments();
 
-        nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
+        nextButtonLayout = view.findViewById(R.id.finishButtonLayout);
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
