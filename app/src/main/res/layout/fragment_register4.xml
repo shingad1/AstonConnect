@@ -1,14 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registerFragment4">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Register.RegisterFragment4">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:tint="@color/black" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/createAccountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account"
+        android:fontFamily="@font/sf_font"
+        android:layout_alignParentLeft="true"
+        android:textSize="25sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"/>
 
-</FrameLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimation"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_rawRes="@raw/email"
+        app:lottie_speed="1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <TextView
+        android:id="@+id/pleaseCheckText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please check your email"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/sf_font"
+        android:textSize="24sp"
+        android:layout_below="@id/lottieAnimation"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You will be able to login after verifying your email address"
+        android:fontFamily="@font/sf_font"
+        android:textSize="15sp"
+        android:layout_below="@id/pleaseCheckText"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000"/>
+
+
+    <RelativeLayout
+        android:id="@+id/nextButtonLayout"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextButton"
+            android:layout_toRightOf="@id/nextText"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_check" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/nextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finish"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+</RelativeLayout>

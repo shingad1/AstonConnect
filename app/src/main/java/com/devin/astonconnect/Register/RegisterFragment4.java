@@ -1,4 +1,4 @@
-package com.devin.astonconnect;
+package com.devin.astonconnect.Register;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.devin.astonconnect.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link registerFragment4#newInstance} factory method to
+ * Use the {@link RegisterFragment4#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class registerFragment4 extends Fragment {
+public class RegisterFragment4 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class registerFragment4 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public registerFragment4() {
+    public RegisterFragment4() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class registerFragment4 extends Fragment {
      * @return A new instance of fragment registerFragment4.
      */
     // TODO: Rename and change types and number of parameters
-    public static registerFragment4 newInstance(String param1, String param2) {
-        registerFragment4 fragment = new registerFragment4();
+    public static RegisterFragment4 newInstance(String param1, String param2) {
+        RegisterFragment4 fragment = new RegisterFragment4();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
