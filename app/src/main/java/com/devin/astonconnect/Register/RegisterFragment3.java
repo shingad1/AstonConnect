@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,8 @@ import com.devin.astonconnect.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
+
 
 public class RegisterFragment3 extends Fragment {
 
@@ -35,6 +38,8 @@ public class RegisterFragment3 extends Fragment {
     private LinearLayout customInterestLayout;
     private ChipGroup chipGroup;
     private String userInterest;
+    private ArrayList<String> interestsList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +107,17 @@ public class RegisterFragment3 extends Fragment {
         nextButtonLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
+                String str_aboutme = aboutMeText.getText().toString();
+                if(TextUtils.isEmpty(str_aboutme)){
+                    Toast.makeText(getActivity(), "Please add some text about yourself", Toast.LENGTH_SHORT).show();
+                } else if (chipGroup.getChildCount() != 0){
+                    bundle.putString("about_me", str_aboutme);
+                    bundle.putStringArrayList("interest_list", interestsList);
+                    Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4, bundle);
+                } else {
+                    bundle.putString("about_me", str_aboutme);
+                    Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4, bundle);
+                }
             }
         });
 
@@ -113,11 +128,13 @@ public class RegisterFragment3 extends Fragment {
     public void addChip(){
         Chip chip_item = (Chip) LayoutInflater.from(getActivity()).inflate(R.layout.chip_item, null, false);
         chip_item.setText(userInterest);
+        interestsList.add(userInterest);
 
         chip_item.setOnCloseIconClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 chipGroup.removeView(view);
+                interestsList.remove(userInterest);
             }
         });
 
@@ -127,22 +144,4 @@ public class RegisterFragment3 extends Fragment {
         userInterest = null;
     }
 
-    /**
-    public void addChip(){
-        for(int j = 0; j < chipGroup.getChildCount(); j++) {
-            String currentChipText = ((Chip) chipGroup.getChildAt(j)).getText().toString();
-            if(userInterest != currentChipText){
-                Chip chip_item = (Chip) LayoutInflater.from(getActivity()).inflate(R.layout.chip_item, null, false);
-                chip_item.setText(userInterest);
-                chip_item.setOnCloseIconClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        chipGroup.removeView(view);
-                    }
-                });
-                chipGroup.addView(chip_item);
-            }
-        }
-    }
-     **/
 }
