@@ -43,4 +43,16 @@
         <item>5</item>
     </string-array>
 
+
+    <string-array name="interests">
+        <item>Select Interest</item>
+        <item>Formula One</item>
+        <item>Dogs</item>
+        <item>Travelling</item>
+        <item>Gaming</item>
+        <item>Cars</item>
+        <item>Animals</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
