@@ -68,7 +68,7 @@
             android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:background="@android:color/transparent"
             android:maxLines="1"
             android:layout_toRightOf="@id/password_icon"
@@ -103,7 +103,7 @@
             android:hint="Confirm Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:background="@android:color/transparent"
             android:maxLines="1"
             android:layout_toRightOf="@id/password_icon2"
@@ -192,12 +192,12 @@
                 android:id="@+id/doLaterText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:fontFamily="@font/sf_font"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/sf_font"
                 android:text="I'll do this later"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <CheckBox
                 android:layout_width="33dp"

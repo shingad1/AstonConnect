@@ -35,4 +35,9 @@
             android:id="@+id/action_registerFragment3_to_registerFragment2"
             app:destination="@id/registerFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/registerFragment4"
+        android:name="com.devin.astonconnect.registerFragment4"
+        android:label="fragment_register4"
+        tools:layout="@layout/fragment_register4" />
 </navigation>

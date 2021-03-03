@@ -1,14 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Register.RegisterFragment3">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <View
+        android:id="@+id/topView"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="#0099ff"/>
 
-</FrameLayout>
+
+    <View
+        android:id="@+id/waves"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/topView"
+        android:background="@drawable/ic_waves2"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+    <TextView
+        android:id="@+id/createAccountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account"
+        android:fontFamily="@font/sf_font"
+        android:layout_alignParentLeft="true"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_below="@id/createAccountText"
+        android:id="@+id/lottieAnimation"
+        android:layout_marginTop="-30dp"
+        android:layout_width="350dp"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_rawRes="@raw/register"
+        app:lottie_speed="0.5"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/aboutMeLayout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/waves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Me"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"/>
+
+
+        <EditText
+            android:id="@+id/password_text"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F1F1F1"
+            android:elevation="2dp"
+            android:hint="About Me"
+            android:textColorHint="#2E2E2E"
+            android:gravity="left"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/aboutMeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/interestsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interests"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/maxText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/interestsText"
+            android:text="Maxiumum of 8."
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+        <Spinner
+            android:layout_below="@id/maxText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/interestsSpinner"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/interestsSpinner"
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <RelativeLayout
+            android:id="@+id/checkBoxLayout"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="40dp"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F1F1F1"
+            android:layout_below="@id/chipGroup">
+
+        <TextView
+            android:id="@+id/doLaterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/sf_font"
+            android:text="I'll do this later"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/doLaterText" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nextButtonLayout"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentBottom="true"
+            android:elevation="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/blue_rounded"
+            android:layout_marginLeft="120dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextButton"
+                android:layout_toRightOf="@id/nextText"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:scaleX="-1"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/nextText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:fontFamily="@font/sf_font"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+
+        </RelativeLayout>
+</RelativeLayout>
