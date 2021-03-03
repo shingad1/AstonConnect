@@ -129,7 +129,7 @@ public class RegisterFragment2 extends Fragment {
                     bundle.putString("password", str_password);
                     bundle.putString("imageUrl", imageUrl);
                     Navigation.findNavController(view).navigate(R.id.action_registerFragment2_to_registerFragment3, bundle);
-                } else {
+                } else { //If the image has not been entered
                     bundle.putString("password", str_password);
                     bundle.putString("imageUrl", "https://firebasestorage.googleapis.com/v0/b/astonconnect-8c8f6.appspot.com/o/placeholder.png?alt=media&token=4354b93d-b968-4eff-8dee-0b28be3e505b");
                     Navigation.findNavController(view).navigate(R.id.action_registerFragment2_to_registerFragment3, bundle);
