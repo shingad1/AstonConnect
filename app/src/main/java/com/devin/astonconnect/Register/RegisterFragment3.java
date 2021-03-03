@@ -76,7 +76,7 @@ public class RegisterFragment3 extends Fragment {
                         }
                     });
 
-                } else if (selectedInterest != "Select Interest"){
+                } else if (!selectedInterest.equals("Select Interest")){
                     customInterestLayout.setVisibility(View.GONE);
                         userInterest = selectedInterest;
                         addChip();
@@ -121,9 +121,8 @@ public class RegisterFragment3 extends Fragment {
             }
         });
 
-        if(userInterest != "Select Interest"){
-            chipGroup.addView(chip_item);
-        }
+        chipGroup.addView(chip_item);
+
         customInterests.getText().clear();
         userInterest = null;
     }
