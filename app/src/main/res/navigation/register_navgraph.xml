@@ -36,15 +36,16 @@
             app:destination="@id/registerFragment2" />
         <action
             android:id="@+id/action_registerFragment3_to_registerFragment4"
-            app:destination="@id/RegisterFragment4" />
+            app:destination="@id/registerFragment4" />
     </fragment>
-    <fragment
-        android:id="@+id/RegisterFragment4"
-        android:name="com.devin.astonconnect.Register.RegisterFragment4"
-        android:label="fragment_register4"
-        tools:layout="@layout/fragment_register4">
-        <action
-            android:id="@+id/action_registerFragment4_to_registerFragment3"
-            app:destination="@id/registerFragment3" />
-    </fragment>
+
+   <fragment
+       android:id="@+id/registerFragment4"
+       android:name="com.devin.astonconnect.Register.RegisterFragment4"
+       android:label="fragment_register4"
+       tools:layout="@layout/fragment_register4" >
+       <action
+           android:id="@+id/action_registerFragment4_to_registerFragment33"
+           app:destination="@id/registerFragment3" />
+   </fragment>
 </navigation>

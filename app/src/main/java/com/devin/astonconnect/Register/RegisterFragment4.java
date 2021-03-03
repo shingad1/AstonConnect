@@ -22,9 +22,6 @@ public class RegisterFragment4 extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_register4, container, false);
 
-        if(bundle.getStringArrayList("interest_list") != null){
-            Toast.makeText(getActivity(), "I can access the arraylist", Toast.LENGTH_SHORT).show();
-        }
         return view;
     }
 }
