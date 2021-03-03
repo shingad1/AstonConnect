@@ -82,7 +82,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:inputType="text"
             android:maxLines="1"
             android:paddingLeft="10dp"
@@ -127,26 +127,51 @@
             android:layout_height="wrap_content"
             android:id="@+id/interestsSpinner"/>
 
-        <EditText
+        <LinearLayout
+            android:id="@+id/customInterestsLayout"
             android:visibility="gone"
-            android:id="@+id/customInterests"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter interests.."
-            android:drawableLeft="@drawable/ic_person"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/custom_input"
-            android:padding="5dp"
-            android:layout_below="@id/interestsSpinner"
-            android:layout_marginTop="15dp"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <com.google.android.material.chip.Chip
+            <EditText
+                android:id="@+id/customInterestsEditText"
+                android:maxLines="1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter interests.."
+                android:drawableLeft="@drawable/ic_person"
+                android:background="@drawable/custom_input"
+                android:padding="5dp"
+                android:layout_marginTop="15dp"/>
+
+            <RelativeLayout
+                android:id="@+id/addBtn"
+                android:layout_gravity="center_vertical"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/sf_font"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.chip.ChipGroup
             android:layout_marginTop="10dp"
             android:layout_below="@id/interestsSpinner"
-            android:text="Chip tag"
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            app:closeIcon="@drawable/ic_close"
-            android:id="@+id/chip"
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
