@@ -219,6 +219,7 @@
 
 
     <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/csStaffSwitch"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
