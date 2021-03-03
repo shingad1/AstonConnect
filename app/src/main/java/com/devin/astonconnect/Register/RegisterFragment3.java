@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.devin.astonconnect.R;
 
@@ -22,6 +23,8 @@ public class RegisterFragment3 extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_register3, container, false);
 
+        Bundle bundle = getArguments();
+        Toast.makeText(getActivity(), bundle.getString("imageUrl"), Toast.LENGTH_SHORT).show();
 
         nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {

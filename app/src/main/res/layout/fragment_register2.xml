@@ -200,6 +200,7 @@
                 android:textStyle="bold" />
 
             <CheckBox
+                android:id="@+id/checkBoxLater"
                 android:layout_width="33dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
