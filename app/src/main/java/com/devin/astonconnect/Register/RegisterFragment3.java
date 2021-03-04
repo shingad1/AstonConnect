@@ -194,8 +194,12 @@ public class RegisterFragment3 extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Navigation.findNavController(nextButtonLayout).navigate(R.id.action_registerFragment3_to_registerFragment4);
-                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        if(interests.isEmpty()){
+                                            Navigation.findNavController(nextButtonLayout).navigate(R.id.action_registerFragment3_to_registerFragment4);
+                                        } else {
+                                            pushInterests(interests);
+                                        }
+                                       FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
@@ -214,5 +218,15 @@ public class RegisterFragment3 extends Fragment {
                         }
                     }
                 });
+    }
+
+    public void pushInterests(ArrayList<String> interests){
+        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userid = fUser.getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid).child("interests");
+        for(String item : interests){
+            reference.push().setValue(item);
+        }
+        Navigation.findNavController(nextButtonLayout).navigate(R.id.action_registerFragment3_to_registerFragment4);
     }
 }
