@@ -50,12 +50,13 @@ public class RegisterFragment3 extends Fragment {
     private ArrayList<String> interestsList = new ArrayList<>();
     private Bundle bundle;
     private NavController navController;
-
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_register3, container, false);
+        this.view = view;
 
         bundle = getArguments();
 
@@ -227,6 +228,6 @@ public class RegisterFragment3 extends Fragment {
         for(String item : interests){
             reference.push().setValue(item);
         }
-        Navigation.findNavController(nextButtonLayout).navigate(R.id.action_registerFragment3_to_registerFragment4);
+        Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
     }
 }
