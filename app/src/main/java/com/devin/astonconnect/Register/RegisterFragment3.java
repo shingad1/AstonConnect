@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.Editable;
 import android.text.TextUtils;
@@ -195,8 +196,8 @@ public class RegisterFragment3 extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        if(interests.isEmpty()){
-                                            Navigation.findNavController(nextButtonLayout).navigate(R.id.action_registerFragment3_to_registerFragment4);
+                                        if(interests.isEmpty() || interests == null){
+
                                         } else {
                                             pushInterests(interests);
                                         }
@@ -205,6 +206,11 @@ public class RegisterFragment3 extends Fragment {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
                                                     Toast.makeText(getActivity(), "Please check your email for verification.", Toast.LENGTH_SHORT).show();
+                                                    //Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
+                                                    navController.navigateUp();
+                                                    NavController navController = NavHostFragment.findNavController(RegisterFragment3.this);
+                                                    navController.navigate(R.id.action_registerFragment3_to_registerFragment4);
+
                                                 } else {
                                                     Toast.makeText(getActivity(), "An error has occured. Please try again later..", Toast.LENGTH_SHORT).show();
                                                 }
@@ -228,6 +234,5 @@ public class RegisterFragment3 extends Fragment {
         for(String item : interests){
             reference.push().setValue(item);
         }
-        Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
     }
 }
