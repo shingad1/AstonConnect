@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
     private RelativeLayout login;
-    private TextView text_signup;
+    private TextView text_signup, reset_password_text;
     private LottieAnimationView emailTickAnimation, passwordTickAnimation;
 
     //Animation
@@ -69,6 +69,15 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        reset_password_text = findViewById(R.id.reset_password_text);
+        reset_password_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
 

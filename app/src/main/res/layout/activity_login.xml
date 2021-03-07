@@ -181,7 +181,7 @@
 
     <TextView
         android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/login_btn"
         android:id="@+id/register_text"
@@ -191,6 +191,21 @@
         android:fontFamily="@font/sf_font"
         android:textStyle="bold"
         android:text="Don't have an account? \nRegister here."
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/register_text"
+        android:id="@+id/reset_password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2E2E2E"
+        android:fontFamily="@font/sf_font"
+        android:textStyle="bold"
+        android:text="Forgot Password?"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
