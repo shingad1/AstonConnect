@@ -3,6 +3,7 @@ package com.devin.astonconnect.LoginRegister;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -59,6 +60,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(ForgotPasswordActivity.this, "Please check your email to reset your password", Toast.LENGTH_SHORT).show();
+                                
+                                Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(ForgotPasswordActivity.this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show();
                             }

@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                             FirebaseAuth.getInstance().signOut();
                                         }
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Account not found. Please try again later.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Details not found. Please try again later.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
