@@ -32,7 +32,8 @@ public class RegisterFragment1 extends Fragment {
     private Boolean isStaff;
 
     //Pattern checking
-    Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@aston.ac.uk");
+    //Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@aston.ac.uk");
+    private Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+.+"); //FOR TESTING PURPOSES
 
 
 
