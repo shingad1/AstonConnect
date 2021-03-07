@@ -59,11 +59,17 @@ public class NewsfeedFragment extends Fragment {
     private FloatingActionButton add_btn, createTextPostBtn, createImagePostBtn;
     private Boolean clicked = false; //for animation purposes
 
+    private SharedPreferencesManager sharedPreferencesManager;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newsfeed, container, false);
+
+        /**Get local user details (shared preferences) **/
+        sharedPreferencesManager = new SharedPreferencesManager(getActivity().getApplicationContext());
+        Toast.makeText(getActivity(), sharedPreferencesManager.getString("fullname"), Toast.LENGTH_SHORT).show();
 
         /** Staff post recyclerview **/
         staffPostRecyclerView = view.findViewById(R.id.staffPostRecyclerView);
@@ -131,6 +137,7 @@ public class NewsfeedFragment extends Fragment {
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sharedPreferencesManager.clearPrefs(); //clear the locally stored user data
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(), StartActivity.class);
                 startActivity(intent);

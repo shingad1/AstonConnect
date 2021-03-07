@@ -16,8 +16,10 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.devin.astonconnect.MainActivity;
+import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.devin.astonconnect.Register.RegisterActivity;
+import com.devin.astonconnect.SharedPreferencesManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -104,6 +106,8 @@ public class LoginActivity extends AppCompatActivity {
                                             reference.addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    setSharedPreferences(snapshot.getValue(User.class));
+
                                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(intent);
@@ -185,7 +189,18 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login(String email, String password){
-
+    private void setSharedPreferences(User user){
+        //Set shared preferences values so that they can be retrieved at any time
+        SharedPreferencesManager manager = new SharedPreferencesManager(LoginActivity.this.getApplicationContext());
+        manager.setId(user.getId());
+        manager.setisStaff(user.getisStaff());
+        manager.setUsername(user.getUsername());
+        manager.setFullname(user.getFullname());
+        manager.setImageurl(user.getImageurl());
+        manager.setBio(user.getBio());
+        manager.setModules(user.getModules());
+        manager.setEmail(user.getEmail());
+        manager.setUserstatus(user.getUserstatus());
+        manager.setCustomuserstatus(user.getCustomuserstatus());
     }
 }
