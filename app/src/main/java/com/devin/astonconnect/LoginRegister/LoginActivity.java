@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     //Animation
     private Boolean isAnimationPlayed1, isAnimationPlayed2 = false;
    // private Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@aston.ac.uk");
-    private Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+.+"); //FOR TESTING PURPOSES
+   private Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+.+"); //FOR TESTING PURPOSES
 
 
     private FirebaseAuth fAuth;

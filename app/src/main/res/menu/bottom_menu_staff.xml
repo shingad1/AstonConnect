@@ -2,8 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Activity"  android:icon="@drawable/ic_heart"  android:id="@+id/activityOverviewFragment"/>
-    <item android:title="Search"   android:icon="@drawable/ic_search"   android:id="@+id/searchFragment"/>
     <item android:title="Newsfeed" android:icon="@drawable/ic_home"     android:id="@+id/newsfeedFragment"/>
-    <item android:title="Journal" android:icon="@drawable/ic_journal" android:id="@+id/journalFragment"/>
-    <item android:title="Chat"     android:icon="@drawable/ic_chat"     android:id="@+id/chatFragment"/>
+    <item android:title="Search"   android:icon="@drawable/ic_search"   android:id="@+id/searchFragment"/>
 </menu>

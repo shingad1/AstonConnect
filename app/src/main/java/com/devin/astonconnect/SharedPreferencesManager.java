@@ -76,6 +76,7 @@ public class SharedPreferencesManager {
         return preferences.getBoolean("isStaff", false);
     }
 
+    //Called when the user leaves the app (In Newsfeed Fragment)
     public void clearPrefs(){
         editor.clear();
         editor.commit();
