@@ -103,12 +103,21 @@ public class RegisterFragment1 extends Fragment {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                                 String staff_mail = snapshot.getValue().toString();
                                 Log.w("staff_mail", staff_mail);
+
+                                //If their staff mail is verified
                                 if (staff_mail.equals(str_email)) {
-                                    Toast.makeText(getActivity(), "Staff mail validated.", Toast.LENGTH_SHORT).show();
                                     Log.w("valid_match", "yourmail: " + str_email + "staff_mail: " + staff_mail);
-                                    return;
+
+                                    //this code could be potentially put into a method?
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("username", str_username);
+                                    bundle.putString("fullname", str_fullname);
+                                    bundle.putString("email", str_email);
+                                    bundle.putBoolean("isStaff", isStaff);
+                                    Navigation.findNavController(view).navigate(R.id.action_registerFragment1_to_registerFragment2, bundle);
+
                                 } else {
-                                    Toast.makeText(getActivity(), "Staff mail not found. Please try again later.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Staff mail not found. Please check the mail or try again later.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
