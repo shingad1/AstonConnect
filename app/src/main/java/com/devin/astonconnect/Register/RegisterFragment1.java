@@ -2,10 +2,12 @@ package com.devin.astonconnect.Register;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,11 @@ import android.widget.Toast;
 
 import com.devin.astonconnect.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -61,7 +68,7 @@ public class RegisterFragment1 extends Fragment {
         });
 
 
-        nextButtonLayout = view.findViewById(R.id.finishButtonLayout);
+        nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,8 +91,31 @@ public class RegisterFragment1 extends Fragment {
                     Toast.makeText(getActivity(), "Please enter an aston email", Toast.LENGTH_SHORT).show();
                 } else if (!matcher2.matches()){
                     Toast.makeText(getActivity(), "Please enter an aston email for 'confirmed mail", Toast.LENGTH_SHORT).show();
-                } else if (!str_email.equals(str_email_confirm)){
+                } else if (!str_email.equals(str_email_confirm)) {
                     Toast.makeText(getActivity(), "Please make sure both emails are matching", Toast.LENGTH_SHORT).show();
+                } else if (isStaff){
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("cs_staff");
+
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                String staff_mail = snapshot.getValue().toString();
+                                Log.w("staff_mail", staff_mail);
+                                if (staff_mail.equals(str_email)) {
+                                    Toast.makeText(getActivity(), "Staff mail validated.", Toast.LENGTH_SHORT).show();
+                                    Log.w("valid_match", "yourmail: " + str_email + "staff_mail: " + staff_mail);
+                                    return;
+                                } else {
+                                    Toast.makeText(getActivity(), "Staff mail not found. Please try again later.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) { }
+                    });
+
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString("username", str_username);
