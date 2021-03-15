@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.devin.astonconnect.Adapter.PostAdapter;
 import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
@@ -37,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class NewsfeedFragment extends Fragment {
 
@@ -64,6 +66,10 @@ public class NewsfeedFragment extends Fragment {
 
     //LinearLayouts for no posts animation
     private LinearLayout noPostsLayout1;
+    private LottieAnimationView searchingAnimation;
+    private LinearLayout noPostsLayout2;
+    private LottieAnimationView searchingAnimation2;
+    private Boolean switchChecked = false;
 
 
 
@@ -99,7 +105,11 @@ public class NewsfeedFragment extends Fragment {
         studentPostAdapter = new PostAdapter(getContext(), studentPostList);
         studentPostRecyclerView.setAdapter(studentPostAdapter);
 
+        //Animations and no post stuff
         noPostsLayout1 = view.findViewById(R.id.noPostsLayout1);
+        noPostsLayout2 = view.findViewById(R.id.noPostsLayout2);
+        searchingAnimation = view.findViewById(R.id.searchingAnimation);
+        searchingAnimation2 = view.findViewById(R.id.searchingAnimation2);
 
 
         /** Toggle button for showing one recyclerview over another **/
@@ -112,11 +122,13 @@ public class NewsfeedFragment extends Fragment {
                 if(isChecked){
                     staffPostRecyclerView.setVisibility(View.VISIBLE);
                     studentPostRecyclerView.setVisibility(View.GONE);
+                    switchChecked = isChecked;
                 }
 
                 if(!isChecked){
                     studentPostRecyclerView.setVisibility(View.VISIBLE);
                     staffPostRecyclerView.setVisibility(View.GONE);
+                    switchChecked = !isChecked;
                 }
             }
         });
@@ -232,13 +244,14 @@ public class NewsfeedFragment extends Fragment {
                 }
                 studentPostAdapter.notifyDataSetChanged();
 
+                //Show a message if there are no posts to show
                 if(!changePostSwitch.isChecked()){
                     if(studentPostAdapter.getItemCount() == 0){
                         noPostsLayout1.setVisibility(View.VISIBLE);
-                    } else {
-                        noPostsLayout1.setVisibility(View.GONE);
+                        searchingAnimation.setAnimation(getRandomAnimationFile());
                     }
                 }
+
             }
 
             @Override
@@ -247,6 +260,7 @@ public class NewsfeedFragment extends Fragment {
             }
         });
     }
+
 
     private void readStaffPosts(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
@@ -275,7 +289,26 @@ public class NewsfeedFragment extends Fragment {
         });
     }
 
-
+    private int getRandomAnimationFile() {
+        Random random = new Random();
+        int randomInt = random.nextInt(4);
+        int id;
+        switch(randomInt){
+            case 0:
+                id = R.raw.searching_1;
+                break;
+            case 1:
+                id = R.raw.searching_2;
+            case 2:
+                id = R.raw.searching_3;
+                break;
+            case 3:
+                id = R.raw.searching_4;
+            default:
+                id = R.raw.searching_1;
+        }
+        return id;
+    }
 
     private void onAddButtonClicked() {
         setVisibility(clicked);
