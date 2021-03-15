@@ -47,6 +47,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -193,6 +195,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             }
         });
     }
+
+    //Needed to have the 'no item' animation, we need to know if the adapter is empty or not
+
 
     /**
      * Contains the onclick functionality

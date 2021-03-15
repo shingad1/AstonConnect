@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -61,6 +62,10 @@ public class NewsfeedFragment extends Fragment {
 
     private SharedPreferencesManager sharedPreferencesManager;
 
+    //LinearLayouts for no posts animation
+    private LinearLayout noPostsLayout1;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +98,8 @@ public class NewsfeedFragment extends Fragment {
         followingList = new ArrayList<>();
         studentPostAdapter = new PostAdapter(getContext(), studentPostList);
         studentPostRecyclerView.setAdapter(studentPostAdapter);
+
+        noPostsLayout1 = view.findViewById(R.id.noPostsLayout1);
 
 
         /** Toggle button for showing one recyclerview over another **/
@@ -195,6 +202,7 @@ public class NewsfeedFragment extends Fragment {
                 //Read posts to populate recyclerviews
                 readStudentPosts();
                 readStaffPosts();
+
             }
 
             @Override
@@ -223,6 +231,14 @@ public class NewsfeedFragment extends Fragment {
                     }
                 }
                 studentPostAdapter.notifyDataSetChanged();
+
+                if(!changePostSwitch.isChecked()){
+                    if(studentPostAdapter.getItemCount() == 0){
+                        noPostsLayout1.setVisibility(View.VISIBLE);
+                    } else {
+                        noPostsLayout1.setVisibility(View.GONE);
+                    }
+                }
             }
 
             @Override
