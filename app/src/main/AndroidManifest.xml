@@ -13,27 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AstonConnect">
-        <activity android:name=".LoginRegister.ForgotPasswordActivity"></activity>
-        <activity android:name=".Chat.MessagingActivity" />
-        <activity android:name=".ProfileEditActivity" />
-        <activity android:name=".Post.CommentsActivity" />
-        <activity android:name=".Post.ReviewTextPostActivity" />
-        <activity android:name=".Post.ReviewImagePostActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Register.RegisterActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity android:name=".LoginRegister.LoginActivity" />
-        <activity android:name=".LoginRegister.StartActivity">
+        <activity android:name=".LoginRegister.ForgotPasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Chat.MessagingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ProfileEditActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Post.CommentsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Post.ReviewTextPostActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Post.ReviewImagePostActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustNothing" android:screenOrientation="portrait"/>
+        <activity android:name=".Register.RegisterActivity" android:windowSoftInputMode="adjustPan|adjustResize" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginRegister.LoginActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".LoginRegister.StartActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents" />
     </application>
 
