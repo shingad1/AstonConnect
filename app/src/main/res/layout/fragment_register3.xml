@@ -100,7 +100,7 @@
         android:layout_centerHorizontal="true"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/interestsText"
@@ -186,7 +186,46 @@
             android:layout_height="wrap_content"/>
         </ScrollView>
 
+
+        <RelativeLayout
+            android:id="@+id/checkBoxLayout"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="40dp"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F1F1F1">
+
+            <TextView
+                android:id="@+id/doLaterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/sf_font"
+                android:text="I'll do this later"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkBoxLater"
+                android:layout_width="33dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/doLaterText" />
+
+        </RelativeLayout>
+
     </LinearLayout>
+
+
+
+
 
         <RelativeLayout
             android:id="@+id/finishButtonLayout"

@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -52,6 +53,7 @@ public class RegisterFragment3 extends Fragment {
     private Bundle bundle;
     private NavController navController;
     private View view;
+    private CheckBox checkBoxLater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class RegisterFragment3 extends Fragment {
         addBtn           = view.findViewById(R.id.addBtn);
         chipGroup        = view.findViewById(R.id.chipGroup);
         navController    = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        checkBoxLater    = view.findViewById(R.id.checkBoxLater);
 
         //Spinner selection
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.interests, android.R.layout.simple_spinner_item);
@@ -117,24 +120,68 @@ public class RegisterFragment3 extends Fragment {
                 }
         });
 
+
         nextButtonLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 String str_aboutme = aboutMeText.getText().toString();
-                if(TextUtils.isEmpty(str_aboutme)){
+
+                if(TextUtils.isEmpty(str_aboutme) && (chipGroup.getChildCount() == 0 && checkBoxLater.isChecked() == false)){
+                    Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+
+                } else if(TextUtils.isEmpty(str_aboutme)) {
                     Toast.makeText(getActivity(), "Please add some text about yourself", Toast.LENGTH_SHORT).show();
-                    register();
-                } else if (chipGroup.getChildCount() != 0){
+
+                } else if (checkBoxLater.isChecked()){
+                    interestsList.clear();
+                    chipGroup.removeAllViews();
+                    bundle.putString("about_me", str_aboutme);
+                    register(view);
+
+                }  else if (chipGroup.getChildCount() != 0){
+                    checkBoxLater.setChecked(false);
                     bundle.putString("about_me", str_aboutme);
                     bundle.putStringArrayList("interest_list", interestsList);
-                    Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4, bundle);
-                    register();
+                    register(view);
+
                 } else {
                     bundle.putString("about_me", str_aboutme);
-                    register();
+                    register(view);
                 }
             }
         });
+
+/**
+        nextButtonLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String str_aboutme = aboutMeText.getText().toString();
+
+                if(TextUtils.isEmpty(str_aboutme)) {
+                    Toast.makeText(getActivity(), "Please add some text about yourself", Toast.LENGTH_SHORT).show();
+
+                } else if (interestsList.isEmpty() && !checkBoxLater.isChecked()) {
+                        Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+
+                } else if (chipGroup.getChildCount() != 0) {
+                    checkBoxLater.setChecked(false); //If the chipgroup is not empty, then clearly the user has entered in items and the checkboxlater should be unchecked
+
+                    bundle.putString("about_me", str_aboutme);
+                    bundle.putStringArrayList("interest_list", interestsList);
+                    register(view);
+
+                } else if (checkBoxLater.isChecked()){
+                    interestsList.clear();
+                    bundle.putString("about_me", str_aboutme);
+                    register(view);
+
+                } else {
+                    bundle.putString("about_me", str_aboutme);
+                    register(view);
+                }
+            }
+        });
+ **/
         return view;
     }
 
@@ -143,6 +190,10 @@ public class RegisterFragment3 extends Fragment {
         Chip chip_item = (Chip) LayoutInflater.from(getActivity()).inflate(R.layout.chip_item, null, false);
         chip_item.setText(userInterest);
         interestsList.add(userInterest);
+
+        if(checkBoxLater.isChecked()){
+            checkBoxLater.setChecked(false);
+        }
 
         chip_item.setOnCloseIconClickListener(new OnClickListener() {
             @Override
@@ -159,7 +210,7 @@ public class RegisterFragment3 extends Fragment {
     }
 
 
-    public void register(){
+    public void register(View view){
         String email = bundle.getString("email");
         String password = bundle.getString("password");
         String username = bundle.getString("username");
@@ -196,23 +247,24 @@ public class RegisterFragment3 extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        if(interests.isEmpty() || interests == null){
-
-                                        } else {
+                                        if(interests != null){
                                             pushInterests(interests);
                                         }
+
                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
                                                     Toast.makeText(getActivity(), "Please check your email for verification.", Toast.LENGTH_SHORT).show();
+                                                    Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4, bundle);
                                                     //Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
-                                                    navController.navigateUp();
-                                                    NavController navController = NavHostFragment.findNavController(RegisterFragment3.this);
-                                                    navController.navigate(R.id.action_registerFragment3_to_registerFragment4);
+                                                    //navController.navigateUp();
+                                                    //NavController navController = NavHostFragment.findNavController(RegisterFragment3.this);
+                                                    //navController.navigate(R.id.action_registerFragment3_to_registerFragment4);
 
                                                 } else {
                                                     Toast.makeText(getActivity(), "An error has occured. Please try again later..", Toast.LENGTH_SHORT).show();
+                                                    return;
                                                 }
                                             }
                                         });
@@ -222,6 +274,7 @@ public class RegisterFragment3 extends Fragment {
                             });
                         } else {
                             Toast.makeText(getActivity(), "This email is already in use. You can't register with it.", Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }
                 });
