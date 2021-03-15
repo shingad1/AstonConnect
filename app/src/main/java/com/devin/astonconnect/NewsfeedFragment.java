@@ -123,12 +123,23 @@ public class NewsfeedFragment extends Fragment {
                     staffPostRecyclerView.setVisibility(View.VISIBLE);
                     studentPostRecyclerView.setVisibility(View.GONE);
                     switchChecked = isChecked;
+
+                    if(staffPostAdapter.getItemCount() == 0){
+                        noPostsLayout2.setVisibility(View.VISIBLE);
+                        searchingAnimation2.setAnimation(getRandomAnimationFile());
+                        searchingAnimation2.setSpeed(1);
+                        searchingAnimation2.playAnimation();
+                    } else {
+                        noPostsLayout2.setVisibility(View.GONE);
+                    }
+
                 }
 
                 if(!isChecked){
                     studentPostRecyclerView.setVisibility(View.VISIBLE);
                     staffPostRecyclerView.setVisibility(View.GONE);
                     switchChecked = !isChecked;
+                    noPostsLayout2.setVisibility(View.GONE);
                 }
             }
         });
@@ -244,14 +255,12 @@ public class NewsfeedFragment extends Fragment {
                 }
                 studentPostAdapter.notifyDataSetChanged();
 
-                //Show a message if there are no posts to show
                 if(!changePostSwitch.isChecked()){
                     if(studentPostAdapter.getItemCount() == 0){
                         noPostsLayout1.setVisibility(View.VISIBLE);
                         searchingAnimation.setAnimation(getRandomAnimationFile());
                     }
                 }
-
             }
 
             @Override
@@ -280,7 +289,24 @@ public class NewsfeedFragment extends Fragment {
                     }
                 }
                 staffPostAdapter.notifyDataSetChanged();
+
+                /**
+                changePostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if(b){
+                            if(staffPostAdapter.getItemCount() == 0){
+                                noPostsLayout2.setVisibility(View.VISIBLE);
+                                searchingAnimation2.setAnimation(getRandomAnimationFile());
+                            }
+                        } else {
+                            noPostsLayout2.setVisibility(View.GONE);
+                        }
+                    }
+                });
+                 **/
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -288,6 +314,7 @@ public class NewsfeedFragment extends Fragment {
             }
         });
     }
+
 
     private int getRandomAnimationFile() {
         Random random = new Random();
