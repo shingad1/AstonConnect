@@ -22,7 +22,8 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Register.RegisterActivity" />
+        <activity android:name=".Register.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity android:name=".LoginRegister.LoginActivity" />
         <activity android:name=".LoginRegister.StartActivity">
             <intent-filter>

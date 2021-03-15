@@ -130,6 +130,7 @@
         <LinearLayout
             android:id="@+id/customInterestsLayout"
             android:visibility="gone"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -137,14 +138,16 @@
 
             <EditText
                 android:id="@+id/customInterestsEditText"
-                android:maxLines="1"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:hint="Enter interests.."
-                android:drawableLeft="@drawable/ic_person"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/custom_input"
-                android:padding="5dp"
-                android:layout_marginTop="15dp"/>
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="2dp"
+                android:hint="Enter interests.."
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textSize="15sp" />
 
             <RelativeLayout
                 android:id="@+id/addBtn"
@@ -152,7 +155,6 @@
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
                 android:background="@drawable/rounded_rectangle">
 
                 <TextView
@@ -167,6 +169,15 @@
             </RelativeLayout>
 
         </LinearLayout>
+        <ScrollView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F1F1F1"
+            android:elevation="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
         <com.google.android.material.chip.ChipGroup
             android:layout_marginTop="10dp"
@@ -174,6 +185,7 @@
             android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        </ScrollView>
 
     </LinearLayout>
 
