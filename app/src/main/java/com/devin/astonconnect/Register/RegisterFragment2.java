@@ -41,7 +41,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class RegisterFragment2 extends Fragment {
 
-    private RelativeLayout nextButtonLayout, enterImageLayout;
+    private RelativeLayout nextButtonLayout, addButtonLayout;
     private EditText password_text, confirm_password_text;
     private CheckBox checkBoxLater;
     private Boolean isImageEntered = false;
@@ -89,8 +89,8 @@ public class RegisterFragment2 extends Fragment {
             }
         });
 
-        enterImageLayout = view.findViewById(R.id.enterImageLayout);
-        enterImageLayout.setOnClickListener(new View.OnClickListener() {
+        addButtonLayout = view.findViewById(R.id.addButtonLayout);
+        addButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = CropImage.activity()
