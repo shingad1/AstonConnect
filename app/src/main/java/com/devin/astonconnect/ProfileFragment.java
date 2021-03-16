@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private FavouritePostAdapter favouritePostAdapter;
     private List<Post> favouritePostList;
     private List<String> savedPostList; //temporarily holds the keys of the saved posts, retrieves them using this list and then populates adapter
+    private Boolean isStaff = false;
 
 
     @Override
@@ -117,6 +118,8 @@ public class ProfileFragment extends Fragment {
         } else {
            checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
         }
+
+
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +218,16 @@ public class ProfileFragment extends Fragment {
                 if(user.getImageurl() != null) { Glide.with(getContext()).load(user.getImageurl()).into(profileImage); }
                 fullname.setText(user.getFullname());
                 bioText.setText(user.getBio());
+                isStaff = user.getisStaff();
+
+                //Hide the chat button if the other person is a member of CS Staff and it is someone elses profile
+                //If the member of CS Staff were to view their own profile, it would show 'Edit Profile'
+                if(!profileId.equals(firebaseUser.getUid())){
+                    if(isStaff){
+                        chatBtn.setVisibility(View.GONE);
+                    }
+                }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

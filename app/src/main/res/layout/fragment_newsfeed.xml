@@ -148,8 +148,7 @@
             android:gravity="center"
             android:text="Follow someone to get started."
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
@@ -196,8 +195,7 @@
             android:gravity="center"
             android:text="Follow someone to get started."
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

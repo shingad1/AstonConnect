@@ -96,6 +96,7 @@
                     android:layout_marginRight="20dp"
                     android:backgroundTint="#00E86A"
                     android:text="Chat"
+                    android:visibility="visible"
                     android:textColor="#5E5E5E" />
 
                 <Button

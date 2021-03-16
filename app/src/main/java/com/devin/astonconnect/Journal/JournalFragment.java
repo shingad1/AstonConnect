@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.devin.astonconnect.Adapter.JournalAdapter;
 import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
@@ -26,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class JournalFragment extends Fragment {
 
@@ -39,6 +43,10 @@ public class JournalFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<JournalItem> journalItems;
     private JournalAdapter journalAdapter;
+
+    //LinearLayoutt for no entries animation
+    private LinearLayout noEntriesLayout;
+    private LottieAnimationView searchingAnimation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,8 +73,35 @@ public class JournalFragment extends Fragment {
             }
         });
 
+        //Show 'no journal entries' animation
+        noEntriesLayout = view.findViewById(R.id.noEntriesLayout);
+        searchingAnimation = view.findViewById(R.id.searchingAnimation);
+
         return view;
     }
+
+    private int getRandomAnimationFile() {
+        Random random = new Random();
+        int randomInt = random.nextInt(5);
+        int id = R.raw.searching_3;
+
+        if (randomInt == 0) {
+            id = R.raw.searching_1;
+        } else if (randomInt == 1) {
+            id = R.raw.searching_2;
+
+        } else if (randomInt == 2) {
+            id = R.raw.searching_3;
+
+        } else if (randomInt == 3) {
+            id = R.raw.searching_4;
+
+        } else if (randomInt == 4) {
+            id = R.raw.searching_4;
+        }
+        return  id;
+    }
+
 
     private void getJournalItems(){
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,6 +115,17 @@ public class JournalFragment extends Fragment {
                     journalItems.add(item);
                 }
                 journalAdapter.notifyDataSetChanged();
+
+                if(journalAdapter.getItemCount() == 0){
+                    Toast.makeText(getActivity(), "There are no entries...", Toast.LENGTH_SHORT).show();
+                    noEntriesLayout.setVisibility(View.VISIBLE);
+                    searchingAnimation.setAnimation(getRandomAnimationFile());
+                    searchingAnimation.setSpeed(1);
+                    searchingAnimation.playAnimation();
+
+                } else {
+                    noEntriesLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
