@@ -86,8 +86,8 @@
             android:name="journalItemArg"
             app:argType="com.devin.astonconnect.Model.JournalItem" />
         <action
-            android:id="@+id/action_journalEntry2Fragment_to_newsfeedFragment"
-            app:destination="@id/newsfeedFragment" />
+            android:id="@+id/action_journalEntry2Fragment_to_journalFragment"
+            app:destination="@id/journalFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReflectionFragment"

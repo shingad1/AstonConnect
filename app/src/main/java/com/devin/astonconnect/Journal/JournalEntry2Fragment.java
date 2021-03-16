@@ -81,7 +81,7 @@ public class JournalEntry2Fragment extends Fragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(getActivity(), "Journal entry saved! " + ("\ud83d\ude01"), Toast.LENGTH_SHORT).show();
-                                Navigation.findNavController(view).navigate(R.id.action_journalEntry2Fragment_to_newsfeedFragment);
+                                Navigation.findNavController(view).navigate(R.id.action_journalEntry2Fragment_to_journalFragment);
                             }
                         }
                     });
