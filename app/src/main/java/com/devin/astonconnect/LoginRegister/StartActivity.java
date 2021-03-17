@@ -1,7 +1,9 @@
 package com.devin.astonconnect.LoginRegister;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +53,23 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Shows a dialog box if the user presses back button
+     */
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StartActivity.super.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 
     /**
      * If the user is already logged in(FirebaseAuth is not null), then start the main activity.

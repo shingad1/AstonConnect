@@ -1,5 +1,6 @@
 package com.devin.astonconnect.Register;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +40,7 @@ public class RegisterFragment1 extends Fragment {
     private EditText emailConfirmText;
     private SwitchMaterial csStaffSwitch;
     private Boolean isStaff;
+    private ImageView backBtn;
 
     //Pattern checking
     //Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@aston.ac.uk");
@@ -55,6 +59,7 @@ public class RegisterFragment1 extends Fragment {
         emailConfirmText = view.findViewById(R.id.emailConfirmText);
         csStaffSwitch = view.findViewById(R.id.csStaffSwitch);
         isStaff = false;
+        backBtn = view.findViewById(R.id.backBtn);
 
         csStaffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -66,6 +71,17 @@ public class RegisterFragment1 extends Fragment {
                 }
             }
         });
+
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StartActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
 
 
         nextButtonLayout = view.findViewById(R.id.nextButtonLayout);

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private RelativeLayout login;
     private TextView text_signup, reset_password_text;
     private LottieAnimationView emailTickAnimation, passwordTickAnimation;
+    private ImageView backBtn;
 
     //Animation
     private Boolean isAnimationPlayed1, isAnimationPlayed2 = false;
@@ -58,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         emailTickAnimation = findViewById(R.id.emailTickAnimation);
         passwordTickAnimation = findViewById(R.id.passwordTickAnimation);
 
-
+        backBtn = findViewById(R.id.backBtn);
         email    = findViewById(R.id.email_text);
         password = findViewById(R.id.password_text);
         login    = findViewById(R.id.login_btn);
@@ -81,6 +83,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
