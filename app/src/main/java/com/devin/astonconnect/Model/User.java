@@ -12,6 +12,7 @@ public class User {
     private Boolean isstaff;
     private String userstatus;
     private String customuserstatus;
+    private Boolean loggedInOnce;
 
 
     //staff members will not have userstatus parameter (so need two constructors)
@@ -47,8 +48,9 @@ public class User {
     public Boolean getisStaff()                  { return isstaff;    }
     public String getUserstatus()                { return userstatus; }
     public String getCustomuserstatus()          { return customuserstatus; }
+    public Boolean getLoggedInOnce() { return loggedInOnce; }
 
-
+    public void setLoggedInOnce(Boolean loggedInOnce) { this.loggedInOnce = loggedInOnce; }
     public void setId(String id)                 { this.id = id;                 }
     public void setisStaff(Boolean isstaff)      { this.isstaff = isstaff;       }
     public void setUsername(String username)     { this.username = username;     }

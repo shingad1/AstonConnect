@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.Model.User;
+import com.devin.astonconnect.Onboarding.OnboardingActivity;
 import com.devin.astonconnect.R;
 import com.devin.astonconnect.Register.RegisterActivity;
 import com.devin.astonconnect.SharedPreferencesManager;
@@ -118,14 +119,31 @@ public class LoginActivity extends AppCompatActivity {
                                             reference.addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    setSharedPreferences(snapshot.getValue(User.class));
+                                                    User user = snapshot.getValue(User.class);
+                                                    setSharedPreferences(user);
 
-                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    /**
+                                                     * When the user registers, loggedInOnce is set to false by default
+                                                     *
+                                                     * If the user is logged in, then direct them to the onboarding activity, based on 'loggedInOnce'
+                                                     * The onboarding is three fragments held together using jetpack navigation
+                                                     * On the last onboardingFragment, the user's 'loggedInOnce' parameter is set to true.
+                                                     *
+                                                     * Meaning next time they happen to sign in, they will be redirected to the MainActivity
+                                                     * And not the OnboardingActivity
+                                                     */
+                                                    if(user.getLoggedInOnce() == false){
+                                                        Intent intent = new Intent(LoginActivity.this, OnboardingActivity.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
                                                 }
-
 
                                                 @Override
                                                 public void onCancelled(@NonNull DatabaseError error) {

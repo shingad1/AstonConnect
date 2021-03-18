@@ -242,6 +242,7 @@ public class RegisterFragment3 extends Fragment {
                             hashMap.put("modules", "");
                             hashMap.put("bio", aboutMe);
                             hashMap.put("imageurl", imageUrl);
+                            hashMap.put("loggedInOnce", false);
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
