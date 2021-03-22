@@ -1,11 +1,15 @@
 package com.devin.astonconnect.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,13 +57,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         final User user = userList.get(position);
 
         holder.btn_follow.setVisibility(View.VISIBLE);
-        holder.username.setText(user.getUsername());
+        //holder.username.setText(user.getUsername());
         holder.fullname.setText(user.getFullname());
         holder.bio.setText(user.getBio());
         Glide.with(context).load(user.getImageurl()).into(holder.image_profile);
 
         //Check to see if the user is being followed by the logged in user (currentUser) and if so, set the button text accordingly
-        isFollowing(user.getId(), holder.btn_follow);
+        isFollowing(user.getId(), holder.followText, holder.personIcon, holder.btn_follow);
 
         //set the follow button to be invisible if the selected user is the same as the logged in user.
         //could remove form the list in the future?
@@ -84,14 +88,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         holder.btn_follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.btn_follow.getText().toString().equals("follow")){
+                if (holder.followText.getText().toString().equals("follow")){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(currentUser.getUid())
                             .child("following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("followers").child(currentUser.getUid()).setValue(true);
 
                     //Triggers activity overview item
-                    addActivityItem( user.getId());
+                    addActivityItem(user.getId());
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(currentUser.getUid())
                             .child("following").child(user.getId()).removeValue();
@@ -121,41 +125,45 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView username;
+        //public TextView username;
         public TextView fullname;
         public TextView bio;
         public CircleImageView image_profile;
-        public Button btn_follow;
+        public RelativeLayout btn_follow;
+        private TextView followText;
+        private ImageView personIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            username      = itemView.findViewById(R.id.username);
+           // username      = itemView.findViewById(R.id.username);
             fullname      = itemView.findViewById(R.id.fullname);
             bio           = itemView.findViewById(R.id.bio);
             image_profile = itemView.findViewById(R.id.image_profile);
             btn_follow    = itemView.findViewById(R.id.btn_follow);
-
+            followText    = itemView.findViewById(R.id.followText);
+            personIcon    = itemView.findViewById(R.id.personIcon);
         }
     }
 
-    private void isFollowing(String userid, Button button){
+    private void isFollowing(String userid, TextView followText, ImageView personIcon, RelativeLayout btn_follow){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(currentUser.getUid()).child("following");
 
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(userid).exists()){
-                    button.setText("following");
+                    followText.setText("following");
+                    personIcon.setImageResource(R.drawable.ic_person);
                 } else {
-                    button.setText("follow");
+                    followText.setText("follow");
+                    personIcon.setImageResource(R.drawable.ic_person_add);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

@@ -97,7 +97,7 @@
         <TextView
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:id="@+id/loginText"
+            android:id="@+id/followText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account?"
@@ -108,7 +108,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/loginText"
+            android:layout_toRightOf="@id/followText"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_person"
