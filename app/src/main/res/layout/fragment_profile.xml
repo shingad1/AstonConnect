@@ -97,8 +97,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/bioText"
             android:gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
             android:id="@+id/buttonLayout"
             android:orientation="horizontal">
+
 
             <Button
                 android:id="@+id/chatBtn"
@@ -106,10 +108,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="#00E86A"
+                android:backgroundTint="#00AFDC"
                 android:text="Chat"
+                android:fontFamily="@font/sf_font"
+                android:textSize="16sp"
+                android:textAllCaps="false"
                 android:visibility="visible"
-                android:textColor="#5E5E5E" />
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/followBtn"
@@ -117,9 +122,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="#3BF490"
+                android:backgroundTint="#00AFDC"
                 android:text="Follow"
-                android:textColor="#5E5E5E" />
+                android:fontFamily="@font/sf_font"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:visibility="visible"
+                android:textColor="#FFFFFF" />
+
         </LinearLayout>
 
             <View
