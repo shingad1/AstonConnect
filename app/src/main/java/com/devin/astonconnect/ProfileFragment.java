@@ -3,6 +3,7 @@ package com.devin.astonconnect;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -100,7 +101,7 @@ public class ProfileFragment extends Fragment {
         //RecyclerView stuff showing text posts
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
         recyclerViewText.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         recyclerViewText.setLayoutManager(linearLayoutManager1);
         textPostList = new ArrayList<>();
         textPostAdapter = new TextPostAdapter(getContext(), textPostList);
@@ -118,8 +119,6 @@ public class ProfileFragment extends Fragment {
         } else {
            checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
         }
-
-
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
