@@ -38,6 +38,7 @@ public class TextPostAdapter extends RecyclerView.Adapter<TextPostAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = textPostList.get(position);
         holder.postTitle.setText(post.getTitle());
+        holder.postDescription.setText(post.getDescription());
         holder.postid = post.getPostId();
     }
 
@@ -50,17 +51,19 @@ public class TextPostAdapter extends RecyclerView.Adapter<TextPostAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView postTitle;
+        public TextView postDescription;
         public String postid;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             postTitle = itemView.findViewById(R.id.postTitle);
+            postDescription = itemView.findViewById(R.id.postDescription);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("postid", postid); //gets passed to selectedpostfragment which populates the adapter (mPosts list) accordingly based on postid
                     editor.apply();
