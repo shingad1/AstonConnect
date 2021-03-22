@@ -12,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.devin.astonconnect.LoginRegister.LoginActivity;
 import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
+import com.devin.astonconnect.SharedPreferencesManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,15 +35,31 @@ import java.util.HashMap;
 
 public class OnboardingFragment3 extends Fragment {
 
-    private Button backButton, finishButton;
+    private RelativeLayout backButton, finishButton;
+    private SharedPreferencesManager manager;
+    private Boolean isStaff;
+    private TextView text, subText;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_onboarding3, container, false);
 
+        //get is staff
+        manager = new SharedPreferencesManager(getActivity());
+        isStaff = manager.getisStaff();
+
         finishButton = view.findViewById(R.id.finishButton);
         backButton   = view.findViewById(R.id.backButton);
+        text         = view.findViewById(R.id.text);
+        subText      = view.findViewById(R.id.subText);
+
+        //if(isStaff) to have alternatve text depending on user type
+
+        text.setText("Get Started");
+        subText.setText("get involved by following a user to view their posts");
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
