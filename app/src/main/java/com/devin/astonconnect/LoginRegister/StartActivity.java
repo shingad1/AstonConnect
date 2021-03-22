@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.devin.astonconnect.MainActivity;
 import com.devin.astonconnect.R;
@@ -17,8 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class StartActivity extends AppCompatActivity {
 
-    private Button register_btn;
-    private Button login_btn;
+    private RelativeLayout register_btn;
+    private RelativeLayout login_btn;
 
     //Firebase Authentication and user
     private FirebaseAuth fAuth;

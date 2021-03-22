@@ -1,62 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginRegister.StartActivity">
+    tools:context="com.devin.astonconnect.LoginRegister.StartActivity">
+
+    <View
+        android:id="@+id/topView"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:background="#0099ff"/>
+    <View
+        android:id="@+id/waves"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/topView"
+        android:background="@drawable/ic_waves"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_marginTop="50dp"
+        android:id="@+id/lottieAnimation"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_rawRes="@raw/student2"
+        app:lottie_speed="0.5"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Aston Connect"
-        android:textColor="@color/black"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="Do you have an account?"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <Button
-        android:id="@+id/register_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Need a new account?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Already have an account?"
+        android:text="Welcome to AstonConnect"
+        android:fontFamily="@font/sf_font"
+        android:textColor="#333333"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_btn"
-        app:layout_constraintVertical_bias="0.17000002" />
+        android:layout_below="@id/waves"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:id="@+id/register_btn"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/welcomeText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#025C9A"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checked"
+            android:layout_toRightOf="@id/createAccountText"
+            android:layout_marginLeft="25dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_person_add"
+            app:tint="#ffffff" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/createAccountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create a new account"
+            android:fontFamily="@font/sf_font"
+            android:textColor="#ffffff"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_btn"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/register_btn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#002035"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:fontFamily="@font/sf_font"
+            android:textColor="#ffffff"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/loginText"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_person"
+            app:tint="#ffffff" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_registerFragment1_to_registerFragment2"
             app:destination="@id/registerFragment2" />
+        <action
+            android:id="@+id/action_registerFragment1_to_startActivity"
+            app:destination="@id/startActivity" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment2"
@@ -44,4 +47,11 @@
        android:name="com.devin.astonconnect.Register.RegisterFragment4"
        android:label="fragment_register4"
        tools:layout="@layout/fragment_register4" />
+
+    <activity
+        android:id="@+id/startActivity"
+        android:name="com.devin.astonconnect.LoginRegister.StartActivity"
+        android:label="activity_start"
+        tools:layout="@layout/activity_start" />
+
 </navigation>

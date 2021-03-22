@@ -2,6 +2,7 @@ package com.devin.astonconnect.Register;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -182,6 +183,16 @@ public class RegisterFragment3 extends Fragment {
             }
         });
  **/
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment2);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+
         return view;
     }
 

@@ -164,7 +164,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -217,6 +216,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void setSharedPreferences(User user){
