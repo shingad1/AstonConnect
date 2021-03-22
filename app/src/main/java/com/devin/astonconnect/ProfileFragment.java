@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -42,7 +43,8 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    private ImageView backBtn, profileImage, viewPhotoPostBtn, viewTextPostBtn;
+    private ImageView backBtn, profileImage;
+    private RelativeLayout viewPhotoPostBtn, viewTextPostBtn;
     private TextView fullname,bioText;
     private Button chatBtn, followBtn;
     private RecyclerView recyclerViewPost, recyclerViewText, recyclerViewFavourites;
@@ -61,6 +63,9 @@ public class ProfileFragment extends Fragment {
     private List<String> savedPostList; //temporarily holds the keys of the saved posts, retrieves them using this list and then populates adapter
     private Boolean isStaff = false;
 
+    //Views to show different colours for when a button is clicked / not
+    private View postsBackgroundUnSelected, postsBackgroundSelected, textPostsUnSelected, textPostsSelected;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +82,14 @@ public class ProfileFragment extends Fragment {
         chatBtn          = view.findViewById(R.id.chatBtn);
         followBtn        = view.findViewById(R.id.followBtn);
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
+
+        //Views for changign colour based on click
+        postsBackgroundUnSelected = view.findViewById(R.id.postsBackgroundUnSelected);
+        postsBackgroundSelected = view.findViewById(R.id.postsBackgroundSelected);
+        textPostsUnSelected = view.findViewById(R.id.textPostsUnSelected);
+        textPostsSelected = view.findViewById(R.id.textPostsSelected);
+
+
 
         //Recyclerview stuff showing mixed image and text posts for favourites
         recyclerViewFavourites = view.findViewById(R.id.recycler_view_favourites);
@@ -177,6 +190,12 @@ public class ProfileFragment extends Fragment {
         viewPhotoPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                postsBackgroundUnSelected.setVisibility(View.GONE);
+                textPostsSelected.setVisibility(View.GONE);
+                textPostsUnSelected.setVisibility(View.VISIBLE);
+                postsBackgroundSelected.setVisibility(View.VISIBLE);
+
+
                 recyclerViewPost.setVisibility(View.VISIBLE);
                 recyclerViewText.setVisibility(View.GONE);
                 recyclerViewFavourites.setVisibility(View.GONE);
@@ -186,6 +205,12 @@ public class ProfileFragment extends Fragment {
         viewTextPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                postsBackgroundUnSelected.setVisibility(View.VISIBLE);
+                textPostsSelected.setVisibility(View.VISIBLE);
+                textPostsUnSelected.setVisibility(View.GONE);
+                postsBackgroundSelected.setVisibility(View.GONE);
+
+
                 recyclerViewText.setVisibility(View.VISIBLE);
                 recyclerViewPost.setVisibility(View.GONE);
                 recyclerViewFavourites.setVisibility(View.GONE);
