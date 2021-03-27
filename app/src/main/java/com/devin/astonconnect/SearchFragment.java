@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment {
         userList = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), userList);
 
-        recyclerView = view.findViewById(R.id.studentPostRecyclerView);
+        recyclerView = view.findViewById(R.id.userRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(userAdapter);
