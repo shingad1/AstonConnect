@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -61,7 +63,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         holder.btn_follow.setVisibility(View.VISIBLE);
         //holder.username.setText(user.getUsername());
         holder.fullname.setText(user.getFullname());
-        holder.bio.setText(user.getBio());
+        //holder.bio.setText(user.getBio());
         Glide.with(context).load(user.getImageurl()).into(holder.image_profile);
 
         //Check to see if the user is being followed by the logged in user (currentUser) and if so, set the button text accordingly
@@ -83,6 +85,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                         String interest = snapshot.getValue(String.class);
                         Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
                         holder.interests.add(interest);
+
+                        //Add Chip
+                        Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item, null, false);
+                        chip_item.setText(interest);
+                        holder.chipGroup.addView(chip_item);
                     }
                 }
             }
@@ -127,6 +134,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 }
             }
         });
+
+        //Add interests to chipGroup
+
     }
 
     private void addActivityItem(String userid){
@@ -156,17 +166,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         private TextView followText;
         private ImageView personIcon;
         private List<String> interests = new ArrayList<>();
+        private ChipGroup chipGroup;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
            // username      = itemView.findViewById(R.id.username);
             fullname      = itemView.findViewById(R.id.fullname);
-            bio           = itemView.findViewById(R.id.bio);
+           // bio           = itemView.findViewById(R.id.bio);
             image_profile = itemView.findViewById(R.id.image_profile);
             btn_follow    = itemView.findViewById(R.id.btn_follow);
             followText    = itemView.findViewById(R.id.followText);
             personIcon    = itemView.findViewById(R.id.personIcon);
+            chipGroup     = itemView.findViewById(R.id.chipGroup);
         }
 
     }

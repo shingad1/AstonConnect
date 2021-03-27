@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/rounded_background_white"
     android:elevation="4dp"
     android:layout_margin="10dp">
@@ -12,53 +12,32 @@
         android:id="@+id/image_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:src="@mipmap/ic_launcher_round"/>
 
-    <LinearLayout
-        android:id="@+id/textLayout"
-        android:layout_width="150dp"
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:fontFamily="@font/sf_font"
+        android:textSize="20sp"
+        android:maxLines="1"
         android:layout_toRightOf="@id/image_profile"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fullname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_font"
-            android:textSize="18sp"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:text="Devin Shingadia"/>
-
-        <TextView
-            android:id="@+id/bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:fontFamily="@font/sf_font"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:text="Lorem ipsum lorem isupm" />
-
-    </LinearLayout>
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#2C2C2C"
+        android:text="Devin Shingadia"/>
 
     <RelativeLayout
         android:id="@+id/btn_follow"
-        android:layout_toRightOf="@id/textLayout"
-        android:layout_centerVertical="true"
-        android:elevation="10dp"
+        android:layout_toRightOf="@id/fullname"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"
         android:background="@drawable/blue_rounded"
         android:layout_width="wrap_content"
         android:layout_height="35dp">
@@ -68,21 +47,28 @@
             android:layout_height="wrap_content"
             android:id="@+id/personIcon"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/followText"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/ic_person_add"
             app:tint="@color/white" />
 
         <TextView
-            android:id="@+id/followText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Following"
+            android:id="@+id/followText"
             android:fontFamily="@font/sf_font"
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:text="Following"
-            android:maxLines="1"
-            android:textSize="14sp"/>
-
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_marginLeft="10dp"/>
     </RelativeLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_profile"
+        android:layout_marginTop="25dp"/>
+
 </RelativeLayout>
