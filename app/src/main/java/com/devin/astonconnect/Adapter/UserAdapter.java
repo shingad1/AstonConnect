@@ -87,7 +87,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                         holder.interests.add(interest);
 
                         //Add Chip
-                        Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item, null, false);
+                        Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item2, null, false);
+                        chip_item.setTextSize(15f);
                         chip_item.setText(interest);
                         holder.chipGroup.addView(chip_item);
                     }

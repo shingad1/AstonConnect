@@ -13,7 +13,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:src="@mipmap/ic_launcher_round"/>
 
@@ -25,21 +25,20 @@
         android:textSize="20sp"
         android:maxLines="1"
         android:layout_toRightOf="@id/image_profile"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:textColor="#2C2C2C"
         android:text="Devin Shingadia"/>
 
     <RelativeLayout
         android:id="@+id/btn_follow"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/fullname"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentRight="true"
         android:background="@drawable/blue_rounded"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_height="35dp">
 
         <ImageView
@@ -64,11 +63,23 @@
             android:layout_marginLeft="10dp"/>
     </RelativeLayout>
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_below="@id/image_profile"
-        android:layout_marginTop="25dp"/>
+        app:flexWrap="wrap"
+        app:justifyContent="center">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:foregroundGravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+
 
 </RelativeLayout>

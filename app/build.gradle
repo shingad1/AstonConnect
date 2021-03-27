@@ -61,4 +61,8 @@ dependencies {
 
     //Lottie Library for animations
     implementation "com.airbnb.android:lottie:3.6.1"
+
+    //flexbox for chipgroup (when searching users) this is needed for aligning chipgroup
+    implementation 'com.google.android:flexbox:2.0.1'
+
 }
