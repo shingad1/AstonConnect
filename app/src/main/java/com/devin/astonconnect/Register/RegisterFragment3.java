@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class RegisterFragment3 extends Fragment {
@@ -227,7 +228,7 @@ public class RegisterFragment3 extends Fragment {
         String username = bundle.getString("username");
         String fullname = bundle.getString("fullname");
         Boolean isStaff = bundle.getBoolean("isStaff");
-        ArrayList<String> interests = bundle.getStringArrayList("interest_list");
+        List<String> interests = bundle.getStringArrayList("interest_list");
         String imageUrl = bundle.getString("imageUrl");
         String aboutMe  = aboutMeText.getText().toString();
 
@@ -292,12 +293,10 @@ public class RegisterFragment3 extends Fragment {
                 });
     }
 
-    public void pushInterests(ArrayList<String> interests){
+    public void pushInterests(List<String> interests){
         FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         String userid = fUser.getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid).child("interests");
-        for(String item : interests){
-            reference.push().setValue(item);
-        }
+        reference.setValue(interests);
     }
 }

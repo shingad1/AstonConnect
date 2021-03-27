@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,6 +72,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         if(user.getId().equals(currentUser.getUid())){
             holder.btn_follow.setVisibility(View.GONE);
         }
+
+        //Get the user's interests
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId()).child("interests");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        String interest = snapshot.getValue(String.class);
+                        Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
+                        holder.interests.add(interest);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +155,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         public RelativeLayout btn_follow;
         private TextView followText;
         private ImageView personIcon;
+        private List<String> interests = new ArrayList<>();
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -144,6 +168,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             followText    = itemView.findViewById(R.id.followText);
             personIcon    = itemView.findViewById(R.id.personIcon);
         }
+
     }
 
     private void isFollowing(String userid, TextView followText, ImageView personIcon, RelativeLayout btn_follow){
