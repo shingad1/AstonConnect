@@ -90,7 +90,7 @@
         android:layout_height="50dp"
         android:elevation="10dp"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="#002035"
+        android:backgroundTint="#025C9A"
         android:background="@drawable/blue_rounded"
         android:layout_marginLeft="120dp">
 

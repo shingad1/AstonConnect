@@ -7,73 +7,61 @@
     android:background="#ffffff"
     tools:context=".NewsfeedFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:windowBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/toolbar"
-            android:background="?android:windowBackground"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/bar"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#FFFFFF"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:elevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/astonConnectText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                <ImageView
+                    android:id="@+id/astonConnectLogo"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/sf_font"
-                    android:text="Aston Connect"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_logo"/>
 
-
-                <ImageView
-                    android:id="@+id/logOutBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_logout"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="140dp"
-                    android:layout_marginTop="15dp" />
-
-                <ImageView
-                    android:id="@+id/calendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="80dp"
-                    android:layout_marginTop="15dp" />
 
                 <ImageView
                     android:id="@+id/profile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/ic_person"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="12dp" />
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@id/astonConnectLogo"
+                    android:layout_marginTop="25dp"
+                    app:tint="@color/systemBlue" />
+
+                <ImageView
+                    android:id="@+id/logOutBtn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_logout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/profile"
+                    app:tint="@color/systemBlue"
+                    android:layout_marginTop="25dp"/>
 
 
                 <TextView
                     android:id="@+id/displayPostText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/astonConnectText"
+                    android:layout_below="@id/astonConnectLogo"
                     android:textColor="#000000"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
@@ -85,13 +73,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/displayPostText"
-                    android:layout_below="@id/astonConnectText"
+                    android:layout_below="@id/astonConnectLogo"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="25dp"/>
 
             </RelativeLayout>
         </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -99,12 +86,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="110dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/bar" />
-
 
     <LinearLayout
         android:id="@+id/noPostsLayout1"
@@ -208,6 +194,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="gone"
+        android:layout_marginBottom="?android:attr/actionBarSize"
         app:layout_constraintTop_toBottomOf="@+id/bar" />
 
 

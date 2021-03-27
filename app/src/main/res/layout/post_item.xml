@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rounded_background_white"
     android:elevation="5dp"
     android:layout_margin="15dp"
@@ -59,14 +59,21 @@
             android:textSize="15sp"
             />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:layout_marginTop="5dp"
+        android:elevation="0dp">
 
         <ImageView
             android:id="@+id/post_image"
             android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible" />
+
+    </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:layout_width="match_parent"
