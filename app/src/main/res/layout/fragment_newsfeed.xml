@@ -63,8 +63,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/astonConnectLogo"
                     android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="35dp"
+                    android:fontFamily="@font/sf_font"
                     android:layout_marginTop="15dp"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginBottom="10dp"
                     android:text="Display CS Department Posts"/>
 
@@ -74,8 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/displayPostText"
                     android:layout_below="@id/astonConnectLogo"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="13dp"/>
 
             </RelativeLayout>
         </com.google.android.material.appbar.MaterialToolbar>
