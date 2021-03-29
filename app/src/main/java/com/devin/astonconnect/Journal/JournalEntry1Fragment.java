@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -26,18 +28,25 @@ import android.widget.Toast;
 
 import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
+import com.google.android.material.slider.Slider;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class JournalEntry1Fragment extends Fragment {
-    private Spinner moodSpinner, moodLocationSpinner, moodIntensitySpinner;
+    private Spinner moodSpinner, moodLocationSpinner;
+    private Slider moodIntensitySlider;;
     private EditText customMood, customMoodLocation, entryNameTv;
-    private Button selectDateButton;
-    private Button nextButton;
+    private RelativeLayout selectDateButton;
+    private RelativeLayout nextButton;
     private ImageView backBtn;
     private TextView dateTimeText;
+
+    //Custom spinner list
+    private ArrayList<SpinnerItem> moodList;
+    private SpinnerAdapter moodSpinnerAdapter;
 
 
     //final set of values from user's input
@@ -47,6 +56,7 @@ public class JournalEntry1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal_entry1, container, false);
+        setUpLists();
 
         //Mood Spinner
         moodSpinner = view.findViewById(R.id.moodSpinner);
@@ -60,14 +70,22 @@ public class JournalEntry1Fragment extends Fragment {
             }
         });
 
+
         customMood = view.findViewById(R.id.customMood);
+
+        /**
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         moodSpinner.setAdapter(adapter);
+        **/
+        moodSpinner = view.findViewById(R.id.moodSpinner);
+        moodSpinnerAdapter = new SpinnerAdapter(getActivity(), moodList);
+        moodSpinner.setAdapter(moodSpinnerAdapter);
         moodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedMood = adapterView.getItemAtPosition(i).toString();
+                SpinnerItem selectedItem = (SpinnerItem) adapterView.getItemAtPosition(i);
+                String selectedMood = selectedItem.getSpinnerItemName();
 
                 if (selectedMood.equals("Select Mood")) {
                      entryMood = null;
@@ -102,7 +120,6 @@ public class JournalEntry1Fragment extends Fragment {
         });
 
 
-        dateTimeText = view.findViewById(R.id.dateTimeText);
         moodLocationSpinner = view.findViewById(R.id.moodLocationSpinner);
         moodLocationSpinner.setAdapter(null);
 
@@ -149,16 +166,11 @@ public class JournalEntry1Fragment extends Fragment {
         });
 
         //Mood Intensity
-        moodIntensitySpinner = view.findViewById(R.id.moodIntensitySpinner);
-        ArrayAdapter<CharSequence> intensityAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_intensity, android.R.layout.simple_spinner_item);
-        intensityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        moodIntensitySpinner.setAdapter(intensityAdapter);
-        moodIntensitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        moodIntensitySlider = view.findViewById(R.id.moodIntensitySlider);
+        moodIntensitySlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedIntensity = adapterView.getItemAtPosition(i).toString();
-
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                String selectedIntensity = Float.toString(value);
                 if(selectedIntensity.equals("Select Intensity")){
                     entryIntensity = null;
                 } else {
@@ -166,12 +178,9 @@ public class JournalEntry1Fragment extends Fragment {
                     Toast.makeText(getActivity(), entryIntensity, Toast.LENGTH_SHORT).show();
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
         });
+
+
 
         selectDateButton = view.findViewById(R.id.selectDateButton);
         selectDateButton.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +257,20 @@ public class JournalEntry1Fragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setUpLists(){
+        moodList = new ArrayList<>();
+        moodList.add(new SpinnerItem("Select Mood", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Anxious", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Depressed", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Angry", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Happy", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Relaxed", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Confused", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Other", R.drawable.ic_chat));
+
+
     }
 
 
