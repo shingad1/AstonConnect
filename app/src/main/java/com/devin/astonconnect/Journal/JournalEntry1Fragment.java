@@ -42,11 +42,17 @@ public class JournalEntry1Fragment extends Fragment {
     private RelativeLayout selectDateButton;
     private RelativeLayout nextButton;
     private ImageView backBtn;
-    private TextView dateTimeText;
+    //private TextView dateTimeText;
 
-    //Custom spinner list
+    //Custom spinner lists
+
+    //mood
     private ArrayList<SpinnerItem> moodList;
     private SpinnerAdapter moodSpinnerAdapter;
+
+    //locations
+    private ArrayList<SpinnerItem> locationsList;
+    private SpinnerAdapter moodLocationAdapter;
 
 
     //final set of values from user's input
@@ -72,12 +78,6 @@ public class JournalEntry1Fragment extends Fragment {
 
 
         customMood = view.findViewById(R.id.customMood);
-
-        /**
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_options, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        moodSpinner.setAdapter(adapter);
-        **/
         moodSpinner = view.findViewById(R.id.moodSpinner);
         moodSpinnerAdapter = new SpinnerAdapter(getActivity(), moodList);
         moodSpinner.setAdapter(moodSpinnerAdapter);
@@ -120,14 +120,11 @@ public class JournalEntry1Fragment extends Fragment {
         });
 
 
-        moodLocationSpinner = view.findViewById(R.id.moodLocationSpinner);
-        moodLocationSpinner.setAdapter(null);
-
 
         customMoodLocation = view.findViewById(R.id.customMoodLocation);
-        ArrayAdapter<CharSequence> locationAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.mood_location, android.R.layout.simple_spinner_item);
-        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        moodLocationSpinner.setAdapter(locationAdapter);
+        moodLocationSpinner = view.findViewById(R.id.moodLocationSpinner);
+        moodLocationAdapter = new SpinnerAdapter(getActivity(), locationsList);
+        moodLocationSpinner.setAdapter(moodLocationAdapter);
         moodLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -203,7 +200,7 @@ public class JournalEntry1Fragment extends Fragment {
                                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
                                 Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
                                 entryTime = simpleDateFormat.format(calendar.getTime());
-                                dateTimeText.setText(entryTime);
+                                //dateTimeText.setText(entryTime);
                             }
                         };
                         new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
@@ -261,16 +258,22 @@ public class JournalEntry1Fragment extends Fragment {
 
     private void setUpLists(){
         moodList = new ArrayList<>();
-        moodList.add(new SpinnerItem("Select Mood", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Anxious", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Depressed", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Angry", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Happy", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Relaxed", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Confused", R.drawable.ic_chat));
-        moodList.add(new SpinnerItem("Other", R.drawable.ic_chat));
+        moodList.add(new SpinnerItem("Select Mood", R.drawable.ic_happy));
+        moodList.add(new SpinnerItem("Anxious", R.drawable.ic_anxious));
+        moodList.add(new SpinnerItem("Depressed", R.drawable.ic_depressed));
+        moodList.add(new SpinnerItem("Angry", R.drawable.ic_angry));
+        moodList.add(new SpinnerItem("Happy", R.drawable.ic_happy));
+        moodList.add(new SpinnerItem("Relaxed", R.drawable.ic_relaxed));
+        moodList.add(new SpinnerItem("Confused", R.drawable.ic_confused));
+        moodList.add(new SpinnerItem("Other", R.drawable.ic_other));
 
-
+        locationsList = new ArrayList<>();
+        locationsList.add(new SpinnerItem("Select Location", R.drawable.ic_tap));
+        locationsList.add(new SpinnerItem("Socialising", R.drawable.ic_chat));
+        locationsList.add(new SpinnerItem("At Home", R.drawable.ic_home_img));
+        locationsList.add(new SpinnerItem("Work", R.drawable.ic_work));
+        locationsList.add(new SpinnerItem("Shopping", R.drawable.ic_shopping_bag));
+        locationsList.add(new SpinnerItem("Other", R.drawable.ic_tap));
     }
 
 
