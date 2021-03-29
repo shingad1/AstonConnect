@@ -1,5 +1,8 @@
 package com.devin.astonconnect.Journal;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.devin.astonconnect.Model.JournalItem;
@@ -23,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class JournalEntry2Fragment extends Fragment {
@@ -30,6 +38,8 @@ public class JournalEntry2Fragment extends Fragment {
     private EditText moodWhatHappened, moodThoughts;
     private Button submitBtn;
     private ImageView backBtn;
+    private RelativeLayout selectDateButton;
+    private String entryTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +63,37 @@ public class JournalEntry2Fragment extends Fragment {
             }
         });
 
+        selectDateButton = view.findViewById(R.id.selectDateButton);
+        selectDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                                calendar.set(Calendar.MINUTE,minute);
+
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
+                                Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                                entryTime = simpleDateFormat.format(calendar.getTime());
+                                //dateTimeText.setText(entryTime);
+                            }
+                        };
+                        new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+                    }
+                };
+                new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +101,7 @@ public class JournalEntry2Fragment extends Fragment {
                 if(moodWhatHappened != null && moodThoughts != null) {
                     item.setEntryThoughts(moodThoughts.getText().toString());
                     item.setEntryWhatHappened(moodWhatHappened.getText().toString());
+                    item.setEntryTime(entryTime);
 
                     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Journal").child(firebaseUser.getUid());

@@ -56,7 +56,7 @@ public class JournalEntry1Fragment extends Fragment {
 
 
     //final set of values from user's input
-    private String entryMood, entryLocation, entryIntensity, entryTime, entryName;
+    private String entryMood, entryLocation, entryIntensity, entryName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,7 +128,9 @@ public class JournalEntry1Fragment extends Fragment {
         moodLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedMoodLocation = adapterView.getItemAtPosition(i).toString();
+
+                SpinnerItem item = (SpinnerItem) adapterView.getItemAtPosition(i);
+                String selectedMoodLocation = item.getSpinnerItemName();
 
                 if (selectedMoodLocation.equals("Select Location")) {
                     entryLocation = null;
@@ -178,38 +180,6 @@ public class JournalEntry1Fragment extends Fragment {
         });
 
 
-
-        selectDateButton = view.findViewById(R.id.selectDateButton);
-        selectDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, month);
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                        TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                                calendar.set(Calendar.MINUTE,minute);
-
-                                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
-                                Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
-                                entryTime = simpleDateFormat.format(calendar.getTime());
-                                //dateTimeText.setText(entryTime);
-                            }
-                        };
-                        new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
-                    }
-                };
-                new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
         //Entry name
         entryNameTv = view.findViewById(R.id.entryName);
         entryNameTv.addTextChangedListener(new TextWatcher() {
@@ -231,12 +201,11 @@ public class JournalEntry1Fragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((entryMood != null && entryLocation != null && entryIntensity != null && entryTime !=null && entryName != null)){
+                if((entryMood != null && entryLocation != null && entryIntensity != null  && entryName != null)){
                     JournalItem item = new JournalItem();
                     item.setEntryMood(entryMood);
                     item.setEntryLocation(entryLocation);
                     item.setEntryIntensity(entryIntensity);
-                    item.setEntryTime(entryTime);
                     item.setEntryName(entryName);
 
                     //Fragment fragment = new JournalEntry2Fragment();
@@ -269,7 +238,7 @@ public class JournalEntry1Fragment extends Fragment {
 
         locationsList = new ArrayList<>();
         locationsList.add(new SpinnerItem("Select Location", R.drawable.ic_tap));
-        locationsList.add(new SpinnerItem("Socialising", R.drawable.ic_chat));
+        locationsList.add(new SpinnerItem("Socialising", R.drawable.ic_chat2));
         locationsList.add(new SpinnerItem("At Home", R.drawable.ic_home_img));
         locationsList.add(new SpinnerItem("Work", R.drawable.ic_work));
         locationsList.add(new SpinnerItem("Shopping", R.drawable.ic_shopping_bag));
