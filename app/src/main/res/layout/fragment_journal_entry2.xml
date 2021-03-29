@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,163 +7,181 @@
     android:orientation="vertical"
     tools:context=".Journal.JournalEntry2Fragment">
 
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back"
+        app:tint="#000000" />
+
+    <TextView
+        android:id="@+id/newJournalEntryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtn"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/sf_font"
+        android:text="New Journal Entry"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:id="@+id/moodTimeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/newJournalEntryText"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/moodIntensityLayout"
-        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="When did you feel this way?"
-            android:textSize="15sp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"/>
+            android:text="When did you feel this way?"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <RelativeLayout
             android:id="@+id/selectDateButton"
             android:layout_width="wrap_content"
-            android:padding="10dp"
             android:layout_height="40dp"
-            android:elevation="10dp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/blue_rounded">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/blue_rounded"
+            android:elevation="10dp"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/timeIcon"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_time"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_time" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Date/Time"
-                android:layout_toRightOf="@id/timeIcon"
                 android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/timeIcon"
                 android:fontFamily="@font/sf_font"
-                android:textColor="@color/white"/>
+                android:text="Select Date/Time"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/recordThoughtsText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/moodTimeLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sf_font"
+        android:text="Record your thoughts"
+        android:textColor="#C1007AAA"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/whenFeltText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recordThoughtsText"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sf_font"
+        android:text="When did you feel this way?"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/moodWhatHappened"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/whenFeltText"
+        android:hint="What happened before and after you felt this mood?"
+        android:textColorHint="#333333"
+        android:gravity="left"
+        android:textSize="15sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:fontFamily="@font/sf_font"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp" />
+
+
+    <TextView
+        android:id="@+id/whatThoughtsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/moodWhatHappened"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sf_font"
+        android:text="What were your thoughts at the time?"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/moodThoughts"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/whatThoughtsText"
+        android:hint="What was going through your mind?"
+        android:textColorHint="#333333"
+        android:gravity="left"
+        android:textSize="15sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:fontFamily="@font/sf_font"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_bg"
+        android:padding="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/submitBtn"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/moodThoughts"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
 
         <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_back"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            app:tint="#000000" />
-
-
-        <TextView
-            android:id="@+id/newJournalEntryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Journal Entry"
-            android:layout_toRightOf="@id/backButton"
-            android:textSize="24sp"
-            android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_toEndOf="@id/backButton"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"/>
-
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newJournalEntryText"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+            android:id="@+id/submitIcon"
+            android:layout_toRightOf="@id/submitText"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_check" />
 
         <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/submitText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Record your thoughts"
+            android:text="Submit"
             android:fontFamily="@font/sf_font"
-            android:textStyle="bold"
-            android:textColor="#C1007AAA"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
 
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What happened at the time?"
-            android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
-
-        <EditText
-            android:id="@+id/moodWhatHappened"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:hint="What happened before and after you felt this mood?"
-            android:textColorHint="#333333"
-            android:gravity="left"
-            android:textSize="15sp"
-            android:fontFamily="@font/sf_font"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_bg"
-            android:padding="10dp" />
-
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What were your thoughts at the time?"
-            android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
-
-        <EditText
-            android:id="@+id/moodThoughts"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:hint="What was going through your mind?"
-            android:textColorHint="#333333"
-            android:gravity="left"
-            android:textSize="15sp"
-            android:fontFamily="@font/sf_font"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_bg"
-            android:padding="10dp" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#01A4AA"
-        android:text="Submit"
-        android:textAllCaps="false" />
-
-</LinearLayout>
+</RelativeLayout>

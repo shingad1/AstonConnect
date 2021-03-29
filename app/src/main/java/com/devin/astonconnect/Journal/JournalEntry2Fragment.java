@@ -36,7 +36,7 @@ import java.util.HashMap;
 public class JournalEntry2Fragment extends Fragment {
 
     private EditText moodWhatHappened, moodThoughts;
-    private Button submitBtn;
+    private RelativeLayout submitBtn;
     private ImageView backBtn;
     private RelativeLayout selectDateButton;
     private String entryTime;
