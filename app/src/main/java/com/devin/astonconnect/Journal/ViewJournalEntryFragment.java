@@ -21,7 +21,7 @@ import com.devin.astonconnect.R;
 public class ViewJournalEntryFragment extends Fragment {
     private JournalItem item;
     private TextView entryOverViewText, whatHappenedText, thoughtsText, addReflectionText;
-    private ImageView goBackImageView;
+    private ImageView goBackImageView, emoji;
     private RelativeLayout goBackBtn;
     private RelativeLayout addReflectionBtn;
 
@@ -47,6 +47,7 @@ public class ViewJournalEntryFragment extends Fragment {
         entryOverViewText.setText("You felt " + item.getEntryMood() + ", " + "Strength " + item.getEntryIntensity() + " on " + item.getEntryTime() + " at " + item.getEntryLocation());
         whatHappenedText.setText(item.getEntryWhatHappened());
         thoughtsText.setText(item.getEntryThoughts());
+        emoji = view.findViewById(R.id.emoji);
         goBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +75,22 @@ public class ViewJournalEntryFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_viewJournalEntryFragment_to_addReflectionFragment, bundle);
             }
         });
+
+        if(item.getEntryMood() != null){
+            if(item.getEntryMood() == "Anxious"){
+                emoji.setImageResource(R.drawable.ic_anxious);
+            } else if (item.getEntryMood() == "Depressed"){
+                emoji.setImageResource(R.drawable.ic_depressed);
+            } else if (item.getEntryMood() == "Angry"){
+                emoji.setImageResource(R.drawable.ic_angry);
+            } else if (item.getEntryMood() == "Happy"){
+                emoji.setImageResource(R.drawable.ic_happy);
+            } else if (item.getEntryMood() == "Relaxed"){
+                emoji.setImageResource(R.drawable.ic_relaxed);
+            } else if (item.getEntryMood() == "Confused"){
+                emoji.setImageResource(R.drawable.ic_confused);
+            }
+        }
 
 
 
