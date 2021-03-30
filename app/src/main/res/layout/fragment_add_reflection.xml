@@ -45,8 +45,7 @@
         android:orientation="vertical"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        tools:ignore="NotSibling">
+        android:layout_marginRight="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,10 +108,16 @@
             android:textColor="#000000"
             android:textSize="15sp" />
 
-        <Spinner
+        <com.google.android.material.slider.Slider
             android:id="@+id/changedMoodIntensity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="5" />
+
+
 
     </LinearLayout>
 

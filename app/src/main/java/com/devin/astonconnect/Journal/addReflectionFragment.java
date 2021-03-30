@@ -23,6 +23,7 @@ import com.devin.astonconnect.Model.JournalItem;
 import com.devin.astonconnect.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ public class addReflectionFragment extends Fragment {
 
     private TextView entryOutlookChanged;
     private TextView moodText;
-    private Spinner changedMoodIntensity;
+    private Slider changedMoodIntensity;
     private Button submitButton;
     private TextView reflectedMoodText;
 
@@ -65,27 +66,28 @@ public class addReflectionFragment extends Fragment {
         submitButton        = view.findViewById(R.id.submitButton);
         reflectedMoodText   = view.findViewById(R.id.reflectedMoodText);
 
+
         if(item.getEntrychangedIntensity() != null){
             reflectedMoodText.setVisibility(View.VISIBLE);
-           int originalIntensity = Integer.parseInt(item.getEntryIntensity());
-           int changedIntensity = Integer.parseInt(item.getEntrychangedIntensity());
+            float originalIntensity = Float.parseFloat(item.getEntryIntensity());
+            float changedIntensity  = Float.parseFloat(item.getEntrychangedIntensity());
 
-           if(originalIntensity > changedIntensity){
-               int difference = originalIntensity - changedIntensity;
-               reflectedMoodText.setText("After reflecting, your mood decreased by " + String.valueOf(difference) + " strengths");
-           }
+            if(originalIntensity > changedIntensity){
+                float difference = originalIntensity - changedIntensity;
+                reflectedMoodText.setText("After reflecting, your mood decreased by " + String.valueOf(difference) + " strengths");
+            }
 
             if(originalIntensity < changedIntensity){
-                int difference = changedIntensity - originalIntensity;
+                float difference = changedIntensity - originalIntensity;
                 reflectedMoodText.setText("After reflecting, your mood increased by " + String.valueOf(difference) + " strengths");
-            }
 
-            if(originalIntensity == changedIntensity){
-                reflectedMoodText.setText("After reflecting, your mood intensity stayed the same");
-            }
+                if(originalIntensity == changedIntensity){
+                    reflectedMoodText.setText("After reflecting, your mood intensity stayed the same");
+                }
 
-        } else {
-            reflectedMoodText.setVisibility(View.GONE);
+            } else {
+                reflectedMoodText.setVisibility(View.GONE);
+            }
         }
 
         if(item.getOutlookReflection() != null){
@@ -118,6 +120,23 @@ public class addReflectionFragment extends Fragment {
         //Set mood text
         moodText.setText("Your mood was: " + item.getEntryMood() + ", Strength " + item.getEntryIntensity());
 
+        changedMoodIntensity = view.findViewById(R.id.changedMoodIntensity);
+        changedMoodIntensity.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                String selectedIntensity = Float.toString(value);
+                if(selectedIntensity.equals("Select Intensity")){
+                    entrychangedIntensity = null;
+                } else if (selectedIntensity.equals("Mood not changed")) { //checkbox
+                    entrychangedIntensity = item.getEntryIntensity(); //set to the older value
+                } else {
+                    entrychangedIntensity = selectedIntensity;
+                    Toast.makeText(getActivity(), entrychangedIntensity, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    /**
         //Changed Mood intensity spinner
         changedMoodIntensity = view.findViewById(R.id.changedMoodIntensity);
         ArrayAdapter<CharSequence> intensityAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.changed_intensity, android.R.layout.simple_spinner_item);
@@ -143,7 +162,7 @@ public class addReflectionFragment extends Fragment {
 
             }
         });
-
+    **/
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

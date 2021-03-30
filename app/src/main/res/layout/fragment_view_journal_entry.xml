@@ -6,136 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".Journal.ViewJournalEntryFragment">
 
-
     <ImageView
         android:id="@+id/backImageView"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/ic_back"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back"
         app:tint="#000000" />
 
     <TextView
         android:id="@+id/journalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mood Journal"
-        android:layout_toRightOf="@id/backImageView"
-        android:textSize="24sp"
+        android:layout_below="@id/backImageView"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/sf_font"
+        android:text="Mood Journal"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_toEndOf="@id/backImageView"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"/>
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/journalText"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_anxious" />
 
         <TextView
             android:id="@+id/entryOverViewText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/journalText"
+            android:layout_gravity="center_horizontal"
             android:fontFamily="@font/sf_font"
-            android:layout_margin="10dp"
-            android:textStyle="bold"
+            android:gravity="center"
+            android:text="You felt Anxiety, Strength 2 on Wednesday 3rd December at Home"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
-            android:text="You felt Anxiety, Strength 2 on Wednesday 3rd December at Home"/>
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_font"
-        android:layout_below="@id/entryOverViewText"
+        android:layout_below="@id/headerLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:layout_gravity="center_horizontal"
-        android:text="What happened"/>
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/sf_font"
+        android:text="What happened?"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/whatHappenedText"
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/entryOverViewText"
-        android:layout_height="150dp"
-        android:gravity="left"
+        android:layout_height="120dp"
+        android:layout_below="@+id/headerLayout"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        android:scrollbars="vertical"
-        android:textColor="#000000"
         android:background="@drawable/edit_text_bg"
-        android:padding="10dp"
         android:fontFamily="@font/sf_font"
-        android:textSize="16sp"
-        android:text="consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"/>
-
+        android:gravity="left"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:text="consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/thoughtsAtTime"
+        android:id="@+id/yourThoughtsAtTheTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_font"
         android:layout_below="@id/whatHappenedText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:layout_gravity="center_horizontal"
-        android:text="Your thoughts at the time"/>
-
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/sf_font"
+        android:text="Your thoughts at the time"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/thoughtsText"
         android:layout_width="match_parent"
-        android:layout_below="@+id/thoughtsAtTime"
-        android:layout_height="150dp"
-        android:gravity="left"
+        android:layout_height="120dp"
+        android:layout_below="@+id/yourThoughtsAtTheTime"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:scrollbars="vertical"
-        android:textColor="#000000"
         android:background="@drawable/edit_text_bg"
-        android:padding="10dp"
         android:fontFamily="@font/sf_font"
-        android:textSize="16sp"
-        android:text="consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"/>
+        android:gravity="left"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:text="consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
-
-
-
-    <Button
+    <RelativeLayout
         android:id="@+id/goBackBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="125dp"
-        android:text="Go back"
-        android:textAllCaps="false"
-        android:backgroundTint="#00C2FF"
-        android:textSize="18sp"/>
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/thoughtsText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:layout_marginLeft="120dp">
 
-    <Button
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submitIcon"
+            android:layout_toLeftOf="@id/goBackText"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/goBackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go Back"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
         android:id="@+id/addReflectionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="70dp"
-        android:backgroundTint="#032D3A"
-        android:text="Add Reflection"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/goBackBtn"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/blue_rounded"
+        android:backgroundTint="#001E39"
+        android:layout_marginLeft="120dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plusIcon"
+            android:layout_toLeftOf="@id/addReflectionText"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_add"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/addReflectionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Reflection"
+            android:fontFamily="@font/sf_font"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

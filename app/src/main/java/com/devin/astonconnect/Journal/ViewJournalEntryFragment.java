@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +20,10 @@ import com.devin.astonconnect.R;
 
 public class ViewJournalEntryFragment extends Fragment {
     private JournalItem item;
-    private TextView entryOverViewText, whatHappenedText, thoughtsText;
+    private TextView entryOverViewText, whatHappenedText, thoughtsText, addReflectionText;
     private ImageView goBackImageView;
-    private Button goBackBtn;
-    private Button addReflectionBtn;
+    private RelativeLayout goBackBtn;
+    private RelativeLayout addReflectionBtn;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,6 +43,7 @@ public class ViewJournalEntryFragment extends Fragment {
         goBackImageView = view.findViewById(R.id.backImageView);
         goBackBtn = view.findViewById(R.id.goBackBtn);
         addReflectionBtn = view.findViewById(R.id.addReflectionButton);
+        addReflectionText = view.findViewById(R.id.addReflectionText);
         entryOverViewText.setText("You felt " + item.getEntryMood() + ", " + "Strength " + item.getEntryIntensity() + " on " + item.getEntryTime() + " at " + item.getEntryLocation());
         whatHappenedText.setText(item.getEntryWhatHappened());
         thoughtsText.setText(item.getEntryThoughts());
@@ -59,7 +61,7 @@ public class ViewJournalEntryFragment extends Fragment {
         });
 
         if(item.getOutlookReflection() != null){
-            addReflectionBtn.setText("Update/View Reflection");
+            addReflectionText.setText("Update/View Reflection");
         }
 
         addReflectionBtn.setOnClickListener(new View.OnClickListener() {

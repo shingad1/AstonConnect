@@ -3,6 +3,7 @@ package com.devin.astonconnect.Journal;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -169,12 +170,12 @@ public class JournalEntry1Fragment extends Fragment {
         moodIntensitySlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                String selectedIntensity = Float.toString(value);
+                String selectedIntensity = Float.toString((int) value);
                 if(selectedIntensity.equals("Select Intensity")){
                     entryIntensity = null;
                 } else {
                     entryIntensity = selectedIntensity;
-                    Toast.makeText(getActivity(), entryIntensity, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), selectedIntensity, Toast.LENGTH_SHORT).show();
                 }
             }
         });
