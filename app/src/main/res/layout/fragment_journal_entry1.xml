@@ -3,54 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".Journal.JournalEntry1Fragment">
 
     <ImageView
         android:id="@+id/backBtn"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/ic_back"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back"
         app:tint="@color/black" />
 
     <TextView
         android:id="@+id/journalEntryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Journal Entry"
-        android:textSize="25sp"
-        android:fontFamily="@font/sf_font"
-        android:textColor="@color/black"
         android:layout_below="@id/backBtn"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/sf_font"
+        android:text="New Journal Entry"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/journalEntryText"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="wrap_content">
+        android:layout_marginRight="20dp">
 
 
         <LinearLayout
+            android:id="@+id/entryNameLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/entryNameLayout"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/entryNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Entry name"
                 android:fontFamily="@font/sf_font"
-                android:textStyle="bold"
+                android:text="Entry name"
                 android:textColor="#C1007AAA"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="25dp"
@@ -65,54 +65,59 @@
             android:id="@+id/entryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_input"
-            android:hint="What would you like to call this entry?"
             android:layout_below="@id/entryNameLayout"
             android:layout_marginTop="10dp"
-            android:padding="5dp"/>
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/ic_textpost"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/systemBlue"
+            android:hint="What would you like to call this entry?"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp" />
 
         <TextView
             android:id="@+id/recordMoodText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Record your mood"
-            android:fontFamily="@font/sf_font"
-            android:textStyle="bold"
             android:layout_below="@id/entryName"
             android:layout_marginTop="25dp"
+            android:fontFamily="@font/sf_font"
+            android:text="Record your mood"
             android:textColor="#C1007AAA"
-            android:textSize="20sp" />
-
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
             android:id="@+id/moodExperiencedLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_below="@id/recordMoodText"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="What mood did you experience?"
-                android:textSize="15sp"
                 android:fontFamily="@font/sf_font"
-                android:textColor="@color/black"/>
+                android:text="What mood did you experience?"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <Spinner
-                android:layout_marginTop="10dp"
                 android:id="@+id/moodSpinner"
                 android:layout_width="300dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp" />
 
             <EditText
                 android:id="@+id/customMood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Specify a mood here..."
                 android:layout_marginTop="10dp"
+                android:hint="Specify a mood here..."
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -121,30 +126,30 @@
             android:id="@+id/moodLocationLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_below="@id/moodExperiencedLayout"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Where did you feel this way?"
-                android:textSize="15sp"
                 android:fontFamily="@font/sf_font"
-                android:textColor="@color/black"/>
+                android:text="Where did you feel this way?"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <Spinner
-                android:layout_marginTop="10dp"
-                android:layout_width="300dp"
                 android:id="@+id/moodLocationSpinner"
-                android:layout_height="wrap_content" />
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
 
             <EditText
                 android:id="@+id/customMoodLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Specify a mood location here..."
                 android:layout_marginTop="10dp"
+                android:hint="Specify a mood location here..."
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -153,70 +158,71 @@
             android:id="@+id/moodIntensityLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_below="@id/moodLocationLayout"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mood Intensity"
-                android:textSize="15sp"
                 android:fontFamily="@font/sf_font"
-                android:textColor="@color/black"/>
+                android:text="Mood Intensity"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="(1 = least intense, 5 = max intensity)"
-                android:textSize="13sp"
                 android:fontFamily="@font/sf_font"
-                android:textColor="@color/black"/>
+                android:text="(1 = least intense, 5 = max intensity)"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
 
             <com.google.android.material.slider.Slider
+                android:id="@+id/moodIntensitySlider"
                 android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:stepSize="1"
                 android:valueFrom="1"
-                android:valueTo="5"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:id="@+id/moodIntensitySlider"/>
+                android:valueTo="5" />
 
         </LinearLayout>
 
 
         <RelativeLayout
             android:id="@+id/nextButton"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/moodIntensityLayout"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:elevation="10dp"
+            android:layout_below="@id/moodIntensityLayout"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/blue_rounded"
-            android:layout_marginLeft="120dp">
+            android:elevation="10dp"
+            android:gravity="center">
 
             <ImageView
+                android:id="@+id/nextIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/nextIcon"
-                android:layout_toRightOf="@id/nextText"
-                android:layout_marginLeft="5dp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/nextText"
                 android:src="@drawable/ic_next" />
 
             <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:id="@+id/nextText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:fontFamily="@font/sf_font"
+                android:text="Next"
                 android:textColor="@color/white"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
         </RelativeLayout>
     </RelativeLayout>

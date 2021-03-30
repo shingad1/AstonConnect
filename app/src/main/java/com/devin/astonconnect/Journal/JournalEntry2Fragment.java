@@ -98,7 +98,7 @@ public class JournalEntry2Fragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(moodWhatHappened != null && moodThoughts != null) {
+                if(moodWhatHappened != null && moodThoughts != null && entryTime != null) {
                     item.setEntryThoughts(moodThoughts.getText().toString());
                     item.setEntryWhatHappened(moodWhatHappened.getText().toString());
                     item.setEntryTime(entryTime);
