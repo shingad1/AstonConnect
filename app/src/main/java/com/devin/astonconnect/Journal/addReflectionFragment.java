@@ -40,8 +40,8 @@ public class addReflectionFragment extends Fragment {
     private TextView reflectedMoodText;
 
     //Values to push to DB
-    private String  entrychangedIntensity;
-    private String  entryOutlookChangedText;
+    private String entrychangedIntensity;
+    private String entryOutlookChangedText;
 
     //Firebase
     private FirebaseUser firebaseUser;
@@ -53,7 +53,7 @@ public class addReflectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_add_reflection, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_reflection, container, false);
 
         //get object from previous fragment
         Bundle bundle = getArguments();
@@ -62,35 +62,36 @@ public class addReflectionFragment extends Fragment {
 
         //assign values
         entryOutlookChanged = view.findViewById(R.id.outlookChanged);
-        moodText            = view.findViewById(R.id.moodText);
-        submitButton        = view.findViewById(R.id.submitButton);
-        reflectedMoodText   = view.findViewById(R.id.reflectedMoodText);
+        moodText = view.findViewById(R.id.moodText);
+        submitButton = view.findViewById(R.id.submitButton);
+        reflectedMoodText = view.findViewById(R.id.reflectedMoodText);
 
 
-        if(item.getEntrychangedIntensity() != null){
+        if (item.getEntrychangedIntensity() != null) {
             reflectedMoodText.setVisibility(View.VISIBLE);
             float originalIntensity = Float.parseFloat(item.getEntryIntensity());
-            float changedIntensity  = Float.parseFloat(item.getEntrychangedIntensity());
+            float changedIntensity = Float.parseFloat(item.getEntrychangedIntensity());
 
-            if(originalIntensity > changedIntensity){
+            if (originalIntensity > changedIntensity) {
                 float difference = originalIntensity - changedIntensity;
                 reflectedMoodText.setText("After reflecting, your mood decreased by " + String.valueOf(difference) + " strengths");
             }
 
-            if(originalIntensity < changedIntensity){
+            if (originalIntensity < changedIntensity) {
                 float difference = changedIntensity - originalIntensity;
                 reflectedMoodText.setText("After reflecting, your mood increased by " + String.valueOf(difference) + " strengths");
-
-                if(originalIntensity == changedIntensity){
-                    reflectedMoodText.setText("After reflecting, your mood intensity stayed the same");
-                }
-
-            } else {
-                reflectedMoodText.setVisibility(View.GONE);
             }
+
+            if (originalIntensity == changedIntensity) {
+                reflectedMoodText.setText("After reflecting, your mood intensity stayed the same");
+            }
+
+        } else {
+            reflectedMoodText.setVisibility(View.GONE);
         }
 
-        if(item.getOutlookReflection() != null){
+
+        if (item.getOutlookReflection() != null) {
             entryOutlookChanged.setText(item.getOutlookReflection());
             entryOutlookChangedText = item.getOutlookReflection();
         }
@@ -98,10 +99,12 @@ public class addReflectionFragment extends Fragment {
 
         entryOutlookChanged.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -125,7 +128,7 @@ public class addReflectionFragment extends Fragment {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
                 String selectedIntensity = Float.toString(value);
-                if(selectedIntensity.equals("Select Intensity")){
+                if (selectedIntensity.equals("Select Intensity")) {
                     entrychangedIntensity = null;
                 } else if (selectedIntensity.equals("Mood not changed")) { //checkbox
                     entrychangedIntensity = item.getEntryIntensity(); //set to the older value
@@ -136,39 +139,11 @@ public class addReflectionFragment extends Fragment {
             }
         });
 
-    /**
-        //Changed Mood intensity spinner
-        changedMoodIntensity = view.findViewById(R.id.changedMoodIntensity);
-        ArrayAdapter<CharSequence> intensityAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.changed_intensity, android.R.layout.simple_spinner_item);
-        intensityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        changedMoodIntensity.setAdapter(intensityAdapter);
-        changedMoodIntensity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedIntensity = adapterView.getItemAtPosition(i).toString();
-
-                if(selectedIntensity.equals("Select Intensity")){
-                    entrychangedIntensity = null;
-                } else if (selectedIntensity.equals("Mood not changed")) {
-                    entrychangedIntensity = item.getEntryIntensity(); //set to the older value
-                } else {
-                    entrychangedIntensity = selectedIntensity;
-                    Toast.makeText(getActivity(), entrychangedIntensity, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    **/
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(entrychangedIntensity != null && entryOutlookChangedText != null){
+                if (entrychangedIntensity != null && entryOutlookChangedText != null) {
                     item.setOutlookReflection(entryOutlookChangedText);
                     item.setEntrychangedIntensity(entrychangedIntensity);
 
@@ -182,7 +157,7 @@ public class addReflectionFragment extends Fragment {
                     databaseReference.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Journal entry saved! " + ("\ud83d\ude01"), Toast.LENGTH_SHORT).show();
                                 Navigation.findNavController(view).navigate(R.id.action_addReflectionFragment_to_newsfeedFragment);
                             }
