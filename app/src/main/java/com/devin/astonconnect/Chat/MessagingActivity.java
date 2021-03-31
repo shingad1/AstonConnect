@@ -218,6 +218,7 @@ public class MessagingActivity extends AppCompatActivity {
     }
 
     /**
+    CAUSES THE ACTIVITY TO CRASH
 
     private void setUserStatus(String userStatus){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
