@@ -51,7 +51,7 @@
     </RelativeLayout>
     
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/studentPostRecyclerView"
+        android:id="@+id/messagesRecyclerView"
         android:layout_below="@id/header"
         android:layout_above="@id/bottom"
         android:layout_width="match_parent"

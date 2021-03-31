@@ -78,7 +78,7 @@ public class MessagingActivity extends AppCompatActivity {
         userid = intent.getStringExtra("userid"); //passed from the profilefragment when the chat button is clicked (this is the other guy's ID)
 
         //Recyclerview stuff
-        recyclerView = findViewById(R.id.studentPostRecyclerView);
+        recyclerView = findViewById(R.id.messagesRecyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -217,11 +217,8 @@ public class MessagingActivity extends AppCompatActivity {
         });
     }
 
-    /** User Status  - We need this here because it gets reset when you go from the chatsFragment to the messaging activity**/
     /**
-     * ChatsFragment (Online) -> Chat clicked -> MainActivity OnPause Run, setting it offline -> MessagingActivity Set to online -> When app exit, set to offline from main activity
-     *
-     */
+
     private void setUserStatus(String userStatus){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -229,20 +226,23 @@ public class MessagingActivity extends AppCompatActivity {
         reference.updateChildren(hashMap);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setUserStatus("online");
-        Log.w("status", "Setting the user status to online in the MessagingActivity");
-    }
+   @Override
+   protected void onResume() {
+       super.onResume();
+       setUserStatus("online");
+       Log.w("status", "Setting the user status to online in the MessagingActivity");
+   }
 
     @Override
     protected void onPause() {
         super.onPause();
-        reference.removeEventListener(messageSeenListener); /**Remove the listener when the user exits the messaging activity **/
+        reference.removeEventListener(messageSeenListener); // Remove the listener when the user exits the messaging activity
         setUserStatus("offline");
         Log.w("status", "Setting the user status to be offline from the MessagingActivity");
     }
+
+    **/
+
 
     /** Set the message seen functionality - set it to true here **/
     /** This is the messaging activity. If the user has this activity opened and the message is retrieved then it is seen by them...and therefore 'messageseen' set to true **/
