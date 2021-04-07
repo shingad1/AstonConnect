@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void searchUsers(String s){
-        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username")
+        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("fullname")
                 .startAt(s)
                 .endAt(s+"\uf8ff");
 

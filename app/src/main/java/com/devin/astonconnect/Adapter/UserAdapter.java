@@ -81,16 +81,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        String interest = snapshot.getValue(String.class);
-                        Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
-                        holder.interests.add(interest);
+                    if (holder.chipGroup.getChildCount() == 0) { //If the chip count is 0, then display them only. 
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String interest = snapshot.getValue(String.class);
+                            Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
+                            holder.interests.add(interest);
 
-                        //Add Chip
-                        Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item2, null, false);
-                        chip_item.setTextSize(15f);
-                        chip_item.setText(interest);
-                        holder.chipGroup.addView(chip_item);
+                            //Add Chip
+                            Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item2, null, false);
+                            chip_item.setTextSize(15f);
+                            chip_item.setText(interest);
+                            holder.chipGroup.addView(chip_item);
+                        }
                     }
                 }
             }
