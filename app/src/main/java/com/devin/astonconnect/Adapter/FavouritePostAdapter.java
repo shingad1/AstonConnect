@@ -1,7 +1,9 @@
 package com.devin.astonconnect.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,15 +44,22 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = favouritePostList.get(position);
         if(post.getIsImagePost()){
+
             holder.postImage.setVisibility(View.VISIBLE);
+            Glide.with(context).load(post.getPostImage()).into(holder.postImage);
             holder.postTitle.setText(post.getTitle());
             holder.postid = post.getPostId();
-            Glide.with(context).load(post.getPostImage()).into(holder.postImage);
+            holder.postImage.setVisibility(View.VISIBLE);
+            holder.textIcon.setVisibility(View.GONE);
+
         } else { //then it is a textual post
+
             holder.postTitle.setVisibility(View.VISIBLE);
             holder.postImage.setVisibility(View.GONE);
             holder.postTitle.setText(post.getTitle());
             holder.postid = post.getPostId();
+            holder.postImage.setVisibility(View.GONE);
+            holder.textIcon.setVisibility(View.VISIBLE);
         }
     }
 
@@ -60,14 +71,20 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView postTitle;
-        public ImageView postImage;
+        public ImageView postImage, textIcon;
         public String postid;
+        public CardView postImageCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             postTitle = itemView.findViewById(R.id.postTitle);
             postImage = itemView.findViewById(R.id.postImage);
+            textIcon  = itemView.findViewById(R.id.textIcon);
+            postImageCardView = itemView.findViewById(R.id.postImageCardView);
+
+            postImageCardView.setCardElevation(0f);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -94,7 +94,7 @@ public class ProfileFragment extends Fragment {
         //Recyclerview stuff showing mixed image and text posts for favourites
         recyclerViewFavourites = view.findViewById(R.id.recycler_view_favourites);
         recyclerViewFavourites.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager3 = new GridLayoutManager(getContext(), 3);
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
         recyclerViewFavourites.setLayoutManager(linearLayoutManager3);
         favouritePostList = new ArrayList<>();
         favouritePostAdapter = new FavouritePostAdapter(getContext(), favouritePostList);
