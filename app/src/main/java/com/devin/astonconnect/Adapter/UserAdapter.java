@@ -81,7 +81,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    if (holder.chipGroup.getChildCount() == 0) { //If the chip count is 0, then display them only. 
+                    if (holder.chipGroup.getChildCount() == 0) { //If the chip count is 0, then display them only.
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             String interest = snapshot.getValue(String.class);
                             Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
