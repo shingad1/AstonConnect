@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,16 @@
     android:background="#ffffff"
     tools:context=".NewsfeedFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:id="@+id/appBarLayout">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,32 +88,19 @@
                     android:layout_marginTop="13dp"/>
 
             </RelativeLayout>
+
         </com.google.android.material.appbar.MaterialToolbar>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/studentPostRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="110dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/noPostsLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar"
-        app:layout_constraintVertical_bias="0.295">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/searchingAnimation"
@@ -140,20 +134,14 @@
             android:textSize="18sp"/>
 
     </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/noPostsLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar"
-        app:layout_constraintVertical_bias="0.295">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/searchingAnimation2"
@@ -189,56 +177,67 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/staffPostRecyclerView"
+        android:id="@+id/studentPostRecyclerView"
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="110dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/staffPostRecyclerView"
         android:visibility="gone"
-        android:layout_marginBottom="?android:attr/actionBarSize"
-        app:layout_constraintTop_toBottomOf="@+id/bar" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_btn"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="40dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:orientation="vertical"
+        android:layout_gravity="end|bottom">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createPostBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_textpost"
-        app:tint="@color/white"
-        android:backgroundTint="#07719A"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/add_btn"
-        app:layout_constraintEnd_toEndOf="@+id/add_btn" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createImagePostBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="invisible"
-        android:src="@drawable/ic_image_icon"
-        android:backgroundTint="#07719A"
-        app:tint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/createPostBtn"
-        app:layout_constraintEnd_toEndOf="@+id/createPostBtn" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createPostBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_textpost"
+            app:tint="@color/white"
+            android:backgroundTint="#07719A"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/add_btn"
+            app:layout_constraintEnd_toEndOf="@+id/add_btn" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createImagePostBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            android:src="@drawable/ic_image_icon"
+            android:backgroundTint="#07719A"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/createPostBtn"
+            app:layout_constraintEnd_toEndOf="@+id/createPostBtn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

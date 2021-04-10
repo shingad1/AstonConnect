@@ -31,6 +31,8 @@ import com.devin.astonconnect.LoginRegister.StartActivity;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Post.ReviewImagePostActivity;
 import com.devin.astonconnect.Post.ReviewTextPostActivity;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +44,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
+import static com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL;
 
 public class NewsfeedFragment extends Fragment {
 
@@ -73,6 +78,11 @@ public class NewsfeedFragment extends Fragment {
     private LinearLayout noPostsLayout2;
     private LottieAnimationView searchingAnimation2;
     private Boolean switchChecked = false;
+
+
+    //MaterialToolbar - Set the custom scrolling functionality for when there are no posts
+    private MaterialToolbar bar;
+    private AppBarLayout.LayoutParams params;
 
 
 
@@ -114,6 +124,9 @@ public class NewsfeedFragment extends Fragment {
         searchingAnimation = view.findViewById(R.id.searchingAnimation);
         searchingAnimation2 = view.findViewById(R.id.searchingAnimation2);
 
+        //MaterialToolbar
+        bar = view.findViewById(R.id.bar);
+        params = (AppBarLayout.LayoutParams) bar.getLayoutParams();
 
         /** Toggle button for showing one recyclerview over another **/
         changePostSwitch = view.findViewById(R.id.changePostSwitch);
@@ -132,8 +145,16 @@ public class NewsfeedFragment extends Fragment {
                         searchingAnimation2.setAnimation(getRandomAnimationFile());
                         searchingAnimation2.setSpeed(1);
                         searchingAnimation2.playAnimation();
+
+                        //Disable toolbar scrolling
+                        params.setScrollFlags(0);
+                        bar.setLayoutParams(params);
+
                     } else {
+                        //Enable toolbar scrolling
                         noPostsLayout2.setVisibility(View.GONE);
+                        params.setScrollFlags(SCROLL_FLAG_SCROLL|SCROLL_FLAG_ENTER_ALWAYS);
+                        bar.setLayoutParams(params);
                     }
 
                 }
@@ -283,6 +304,12 @@ public class NewsfeedFragment extends Fragment {
                     if(studentPostAdapter.getItemCount() == 0){
                         noPostsLayout1.setVisibility(View.VISIBLE);
                         searchingAnimation.setAnimation(getRandomAnimationFile());
+                        //disable toolbar scrolling
+                        params.setScrollFlags(0);
+                        bar.setLayoutParams(params);
+                    } else{
+                        params.setScrollFlags(SCROLL_FLAG_SCROLL|SCROLL_FLAG_ENTER_ALWAYS);
+                        bar.setLayoutParams(params);
                     }
                 }
             }
