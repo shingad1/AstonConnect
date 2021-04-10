@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:text="Chat"
         android:fontFamily="@font/sf_font"
+        android:text="Chat"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -23,33 +23,48 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="70dp"
-        android:text="Chat with anyone you follow"
         android:fontFamily="@font/sf_font"
+        android:text="Chat with anyone you follow"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/search_bar"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/rounded_background_white"
-        android:drawableLeft="@drawable/ic_search_light"
         android:layout_below="@id/descriptionText"
-        android:layout_marginTop="30dp"
-        android:drawablePadding="5dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_background_white"
         android:elevation="4dp"
-        android:hint="Search for a user"
         android:paddingStart="5dp"
-        android:shadowColor="#5A5757" />
+        android:shadowColor="#5A5757"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/black" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/studentPostRecyclerView"
-        android:layout_marginTop="20dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_below="@id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_bar"/>
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

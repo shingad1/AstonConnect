@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chat.ChatUserSearchFragment">
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_background_white"
+        android:drawableLeft="@drawable/ic_search_light"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:elevation="4dp"
+        android:hint="Search for a user"
+        android:paddingStart="5dp"
+        android:shadowColor="#5A5757" />
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recyclerView"
+       android:layout_below="@id/search_bar"
+       android:layout_marginTop="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
+
+</RelativeLayout>

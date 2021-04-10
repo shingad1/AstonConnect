@@ -33,7 +33,7 @@
         android:src="#717171"
         android:layout_below="@id/profile_image"
         android:layout_marginTop="-20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_toEndOf="@id/profile_image"
         android:layout_marginLeft="-25dp" />
 
