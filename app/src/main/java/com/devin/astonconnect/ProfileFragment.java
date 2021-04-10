@@ -66,6 +66,10 @@ public class ProfileFragment extends Fragment {
     //Views to show different colours for when a button is clicked / not
     private View postsBackgroundUnSelected, postsBackgroundSelected, textPostsUnSelected, textPostsSelected;
 
+    //Check if the current (viewing) user is a member of CS Staff or not.
+    private SharedPreferencesManager manager;
+    private Boolean currentUserIsStaff = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,8 +124,7 @@ public class ProfileFragment extends Fragment {
         textPostAdapter = new TextPostAdapter(getContext(), textPostList);
         recyclerViewText.setAdapter(textPostAdapter);
 
-
-        //Get the profile id of the user, passed in from the mainactviity newsfeedfragment
+        //Get the profile id of the user, passed in from the MainActivity / ActivityOverviewFragment, etc
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profileId = prefs.getString("profileid", "none");
 
@@ -131,6 +134,17 @@ public class ProfileFragment extends Fragment {
             followBtn.setText("Favourite posts");
         } else {
            checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
+        }
+
+        //If the current user is a member of CS Staff
+        //Then hide the chat button when they are viewing someone else's profile
+        //When they are viewing their own profile, the chat button turns into edit profile button.
+        manager = new SharedPreferencesManager(getContext());
+        currentUserIsStaff = manager.getisStaff();
+        if(currentUserIsStaff && profileId != firebaseUser.getUid()){
+            chatBtn.setVisibility(View.GONE);
+        } else {
+            chatBtn.setVisibility(View.VISIBLE);
         }
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
