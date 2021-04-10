@@ -30,6 +30,7 @@ public class ChatUserSearchFragment extends Fragment {
     private EditText search_bar;
     private RecyclerView recyclerView;
     private List<User> userList;
+    private List<String> userIdList;
     private ChatUserSearchAdapter chatUserSearchAdapter;
     private FirebaseUser firebaseUser;
 
@@ -40,6 +41,7 @@ public class ChatUserSearchFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         search_bar   = view.findViewById(R.id.search_bar);
         userList     = new ArrayList<>();
+        userIdList   = new ArrayList<>();
         chatUserSearchAdapter = new ChatUserSearchAdapter(getContext(), userList);
 
         //recyclerview stuff
@@ -50,9 +52,27 @@ public class ChatUserSearchFragment extends Fragment {
         //Firebase user
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        checkChats();
         readUsers();
 
         return view;
+    }
+
+    //Get the list of the people that the user has already talked to
+    private void checkChats(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    userIdList.add(dataSnapshot.getKey()); //the id of the other person you have a chat with
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void readUsers(){
@@ -63,12 +83,37 @@ public class ChatUserSearchFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
                     if(!user.getId().equals(firebaseUser.getUid())){
+                        if(!userIdList.contains(user.getId())){
+                            if(user.getisStaff() == false){
+                                userList.add(user);
+                            }
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    /**
+    private void readUsers(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    if(!user.getId().equals(firebaseUser.getUid())){
                         if(user.getisStaff() == false){
+                            userIdList.add(user.getId());
                             userList.add(user);
                         }
                     }
                 }
-                chatUserSearchAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -77,4 +122,26 @@ public class ChatUserSearchFragment extends Fragment {
             }
         });
     }
+
+    private void checkChats(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for(String id : userIdList){
+                        if(id.equals(dataSnapshot.getKey())){
+                            userIdList.remove(id);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+     **/
 }
