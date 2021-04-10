@@ -36,7 +36,7 @@ public class LoginActivityTest {
     private EditText password_text = null;
     private RelativeLayout login_btn = null;
 
-    //Activity Monitor
+    //Activity Monitor - this is to check if it has visited the next activity
     Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
 
     @Before
@@ -47,7 +47,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testLaunchOfMainActivityOnButtonClick(){
+    public void testLaunchOfMainActivityonLogin(){
         login_btn = mLoginActivity.findViewById(R.id.login_btn);
         assertNotNull(login_btn);
 
