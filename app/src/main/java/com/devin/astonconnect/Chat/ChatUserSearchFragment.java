@@ -116,6 +116,7 @@ public class ChatUserSearchFragment extends Fragment {
                         }
                     }
                 }
+                //Need to set up recyclerview here otherwise the list won't be added in full 
                 setUpRecyclerView();
                 chatUserSearchAdapter.notifyDataSetChanged();
             }
