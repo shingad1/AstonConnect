@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.devin.astonconnect.Model.User;
 import com.devin.astonconnect.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class MyChatsFragment extends Fragment {
@@ -34,6 +37,11 @@ public class MyChatsFragment extends Fragment {
     private DatabaseReference reference;
     private List<ChatList> userIdList; //List of user id's (other people who you have a conversation with) -> used to populate userList
 
+    //LinearLayout for no chats animation
+    private LinearLayout noChatsLayout;
+    private LottieAnimationView searchingAnimation;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_my_chats, container, false);
@@ -44,6 +52,8 @@ public class MyChatsFragment extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        noChatsLayout = view.findViewById(R.id.noChatsLayout);
+        searchingAnimation = view.findViewById(R.id.searchingAnimation);
 
         /**
          * UserIdList holds the Id's of the users you have talked to, whereas userList holds the actual user objects to be then displayed using chatUserAdapter.
@@ -79,7 +89,6 @@ public class MyChatsFragment extends Fragment {
 
             }
         });
-
         return view;
     }
 
@@ -103,6 +112,12 @@ public class MyChatsFragment extends Fragment {
                 chatUserAdapter = new ChatUserAdapter(getContext(), userlist);
                 recyclerView.setAdapter(chatUserAdapter);
                 chatUserAdapter.notifyDataSetChanged();
+
+                if (chatUserAdapter.getItemCount() == 0){
+                    noChatsLayout.setVisibility(View.VISIBLE);
+                } else {
+                    noChatsLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
