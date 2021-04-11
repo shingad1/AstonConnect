@@ -75,6 +75,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             holder.btn_follow.setVisibility(View.GONE);
         }
 
+        if(user.getisStaff()){
+            holder.userType.setText("CS Staff");
+        } else {
+            holder.userType.setText("Student");
+        }
+
         //Get the user's interests
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId()).child("interests");
         reference.addValueEventListener(new ValueEventListener() {
@@ -138,7 +144,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             }
         });
 
-        //Add interests to chipGroup
+
 
     }
 
@@ -170,6 +176,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         private ImageView personIcon;
         private List<String> interests = new ArrayList<>();
         private ChipGroup chipGroup;
+        private TextView userType;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -182,6 +189,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             followText    = itemView.findViewById(R.id.followText);
             personIcon    = itemView.findViewById(R.id.personIcon);
             chipGroup     = itemView.findViewById(R.id.chipGroup);
+            userType      = itemView.findViewById(R.id.userType);
         }
 
     }
