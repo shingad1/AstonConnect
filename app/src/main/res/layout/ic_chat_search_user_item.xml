@@ -4,48 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:background="@drawable/rounded_background_white"
-    android:elevation="4dp"
-    android:layout_margin="10dp">
+    android:elevation="4dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/fullname"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_font"
-        android:textSize="17sp"
-        android:maxLines="1"
-        android:layout_toRightOf="@id/image_profile"
-        android:layout_marginTop="25dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:textColor="#2C2C2C"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@id/image_profile"
         android:ellipsize="end"
-        android:text="Devin Shingadia"/>
+        android:fontFamily="@font/sf_font"
+        android:maxLines="1"
+        android:text="Devin Shingadia"
+        android:textColor="#2C2C2C"
+        android:textSize="17sp" />
 
     <RelativeLayout
         android:id="@+id/btn_chat"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/blue_rounded"
         android:layout_width="wrap_content"
-        android:layout_marginRight="15dp"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/blue_rounded"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_height="35dp">
+        android:paddingRight="5dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/personIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
