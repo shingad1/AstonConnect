@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class MyChatsFragment extends Fragment {
@@ -35,7 +34,7 @@ public class MyChatsFragment extends Fragment {
     private List<User> userlist;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-    private List<ChatList> userIdList; //List of user id's (other people who you have a conversation with) -> used to populate userList
+    private List<ChatList> userIdList; //List of chats (other people who you have a conversation with) -> used to populate userList
 
     //LinearLayout for no chats animation
     private LinearLayout noChatsLayout;
@@ -78,10 +77,10 @@ public class MyChatsFragment extends Fragment {
                 userIdList.clear(); //id's of the user's to display
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    ChatList chatList = snapshot.getValue(ChatList.class); //get the id of the other user that you have talked to
+                    ChatList chatList = snapshot.getValue(ChatList.class);
                     userIdList.add(chatList);
                 }
-                readChats();
+                getChatUsers();
             }
 
             @Override
@@ -92,8 +91,7 @@ public class MyChatsFragment extends Fragment {
         return view;
     }
 
-    /** Make sure to only add users who are non-staff members **/
-    public void readChats(){
+    public void getChatUsers(){
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,10 +99,10 @@ public class MyChatsFragment extends Fragment {
                 userlist.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     User user = snapshot.getValue(User.class);
-                    for(ChatList chatList : userIdList){             //Iterate through the people you have talked to
+                    for(ChatList chatList : userIdList){
                         if(user.getId().equals(chatList.getId())){
                             if(user.getisStaff() == false){
-                                userlist.add(user);                  //Add the user to the userList to be viewed
+                                userlist.add(user);
                             }
                         }
                     }

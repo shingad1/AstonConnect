@@ -135,7 +135,7 @@ public class MessagingActivity extends AppCompatActivity {
         seenMessage(userid);
     }
 
-    /** COULD further optimise the messaging process through storing it inside of another collection? **/
+
     private void sendMessage(String senderid, String recieverid, String message){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -146,8 +146,11 @@ public class MessagingActivity extends AppCompatActivity {
 
         reference.child("Chats").push().setValue(hashMap);
 
-        //Send a ChatList Reference -> Keep Reference of who has talked to who
-        //So that we now do not have to iterate through every chat message in order to determine who has talked to who
+        /**
+         * Set up a new ChatList Reference if one does not exist already.
+         * First, set up the DatabaseReference using the current User's ID and with the other participants ID as the child.
+         * Then if the dataSnapshot does not exist, then set the chatReference value.
+         */
         DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("ChatList")
                 .child(firebaseUser.getUid())
                 .child(userid);
