@@ -270,11 +270,6 @@ public class RegisterFragment3 extends Fragment {
                                                 if(task.isSuccessful()){
                                                     Toast.makeText(getActivity(), "Please check your email for verification.", Toast.LENGTH_SHORT).show();
                                                     Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4, bundle);
-                                                    //Navigation.findNavController(view).navigate(R.id.action_registerFragment3_to_registerFragment4);
-                                                    //navController.navigateUp();
-                                                    //NavController navController = NavHostFragment.findNavController(RegisterFragment3.this);
-                                                    //navController.navigate(R.id.action_registerFragment3_to_registerFragment4);
-
                                                 } else {
                                                     Toast.makeText(getActivity(), "An error has occured. Please try again later..", Toast.LENGTH_SHORT).show();
                                                     return;

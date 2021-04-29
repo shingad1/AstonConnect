@@ -190,7 +190,6 @@ public class MessagingActivity extends AppCompatActivity {
         });
     }
 
-    /** Could further optimise this through reading it from modified, more optimised collection??**/
     private void recieveMessages(String currentuserId, String otherUserId){
         userChats = new ArrayList<>();
         DatabaseReference chatDatabaseReference = FirebaseDatabase.getInstance().getReference("Chats");
@@ -201,8 +200,7 @@ public class MessagingActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
 
-                    /**Covers if you're sender, and the other guy reciever, and if they're sender, and you're the reciever **/
-                    /** Gets ALL messages sent between you and them **/
+                    /** Gets ALL messages sent between you and the other chat participant. Adds to the userChats Collection **/
                     if(chat.getRecieverid().equals(currentuserId) && chat.getSenderid().equals(otherUserId) ||
                         chat.getRecieverid().equals(otherUserId) && chat.getSenderid().equals(currentuserId)){
                         userChats.add(chat);
