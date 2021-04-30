@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class JournalEntry2Fragment extends Fragment {
     private ImageView backBtn;
     private RelativeLayout selectDateButton;
     private String entryTime;
+    private TextView displayDateTimeText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class JournalEntry2Fragment extends Fragment {
         moodWhatHappened = view.findViewById(R.id.moodWhatHappened);
         moodThoughts     = view.findViewById(R.id.moodThoughts);
         submitBtn = view.findViewById(R.id.submitBtn);
+        displayDateTimeText = view.findViewById(R.id.displayDateTimeText);
 
         backBtn = view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +87,8 @@ public class JournalEntry2Fragment extends Fragment {
                                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yy K:mm a");
                                 Toast.makeText(getActivity(), simpleDateFormat.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
                                 entryTime = simpleDateFormat.format(calendar.getTime());
-                                //dateTimeText.setText(entryTime);
+                                displayDateTimeText.setVisibility(View.VISIBLE);
+                                displayDateTimeText.setText(entryTime);
                             }
                         };
                         new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
