@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -75,7 +76,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView entryName;
         public TextView descriptionText;
-        public TextView deleteEntry;
+        public RelativeLayout deleteEntry;
         public JournalItem item;
         public String entryId;
 
