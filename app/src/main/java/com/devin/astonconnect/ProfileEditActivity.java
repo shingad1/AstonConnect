@@ -12,6 +12,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ import java.util.HashMap;
 public class ProfileEditActivity extends AppCompatActivity {
 
     private ImageView profile_image, backButton;
-    private Button changePhotoButton, saveButton, cancelButton;
+    private RelativeLayout changePhotoButton, saveButton, cancelButton;
     private TextView fullnameText, usernameText, bioText;
 
     private FirebaseUser firebaseUser;
