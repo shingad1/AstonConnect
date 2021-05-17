@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 import com.devin.astonconnect.R;
 import com.google.android.material.tabs.TabLayout;
 
-//holds the active chats that the user can click on and open
+/**
+ * Class which contains a viewpager to enable a tablayout functionality
+ * The viewpager contains the 'chatCreateFragment' and 'myChatsFragment' which are used to create and view current chats.
+ */
 public class ChatFragment extends Fragment {
 
     //Tab layout stuff

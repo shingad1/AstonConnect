@@ -1,5 +1,8 @@
 package com.devin.astonconnect.Chat;
 
+/**
+ * Model class for the chat
+ */
 public class Chat {
 
     private String senderid;
@@ -15,7 +18,6 @@ public class Chat {
     }
 
     public Chat(){ }
-
 
     //Setters and getters
     public String getSenderid()     { return senderid; }

@@ -62,16 +62,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         } else {
             holder.messageSeen.setVisibility(View.GONE);
         }
-
-
-
-       /**
-        if(imageurl.equals(null)){
-            holder.userImage.setImageResource(R.mipmap.ic_launcher);
-        } else {
-            Glide.with(context).load(imageurl).into(holder.userImage);
-        }
-        **/
     }
 
     @Override
