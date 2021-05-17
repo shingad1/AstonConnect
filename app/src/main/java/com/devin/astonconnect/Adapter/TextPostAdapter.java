@@ -16,7 +16,7 @@ import com.devin.astonconnect.R;
 
 import java.util.List;
 
-/** Used in displaying textual post items on the user profile page (not for favorurite posts) **/
+/** Used in displaying textual post items on the user profile page  **/
 public class TextPostAdapter extends RecyclerView.Adapter<TextPostAdapter.ViewHolder>{
 
     private Context context;

@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.devin.astonconnect.Model.Post;
 import com.devin.astonconnect.Model.User;
@@ -27,11 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.List;
 
-/** Used to display posts in the newsfeed and selectedPostFragment**/
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
+/**
+ * Adapter which is used within the newsfeed fragment. Handles the post interaction along with passing data to the view layer
+ **/
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    public  Context context;
-    public  List<Post> postList;
+    public Context context;
+    public List<Post> postList;
     private FirebaseUser firebaseUser;
 
     public PostAdapter(Context context, List<Post> postList) {
@@ -47,8 +51,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,22 +61,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         holder.postid = post.getPostId();
         holder.publisherId = post.getPublisher();
 
-        /** Change the visibility of the post (viewholder) based on values **/
-        if(post.getIsImagePost() == false){
+        /** Change the visibility of post elements based on whether it is an image post or textual post. **/
+        if (post.getIsImagePost() == false) {
             holder.post_image.setVisibility(View.GONE);
             holder.bottomDescription.setVisibility(View.GONE);
             holder.mainDescription.setVisibility(View.VISIBLE);
             holder.mainDescription.setText(post.getDescription());
 
-        } else if(post.getIsImagePost() == true){
-
+        } else if (post.getIsImagePost() == true) {
             holder.post_image.setVisibility(View.VISIBLE);
             holder.bottomDescription.setVisibility(View.VISIBLE);
             Glide.with(context).load(post.getPostImage()).into(holder.post_image);
             holder.bottomDescription.setText(post.getDescription());
         }
 
-        //Get bits of information for the current post (publisher info, likes, etc...)
+        //Get bits of information for the current post by performing database calls  (publisher info, likes, etc...)
+        //Pass the retrieved information to the viewholder to view
         getPublisherInfo(holder.profile_image, holder.fullname, holder.publisher, post.getPublisher());
         isLiked(post.getPostId(), holder.like);
         numberOfLikes(holder.likeText, post.getPostId());
@@ -87,8 +89,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         return postList.size();
     }
 
-
-    private void isLiked(String postid, ImageView imageView){
+    /**
+     * Checks if the post is liked or not. If it is liked, then change the associated ImageView
+     **/
+    private void isLiked(String postid, ImageView imageView) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Likes")
@@ -97,7 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(firebaseUser.getUid()).exists()){
+                if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
                     imageView.setImageResource(R.drawable.ic_heart);
                     imageView.setTag("liked");
                 } else {
@@ -116,7 +120,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     /**
      * Get the number of likes on the current post
      */
-    private void numberOfLikes(TextView likes, String postid){
+    private void numberOfLikes(TextView likes, String postid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Likes")
                 .child(postid);
@@ -135,7 +139,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     }
 
 
-    private void getPublisherInfo(ImageView profile_image,  TextView fullname, TextView publisher, String userid){
+    /**
+     * Get details about the poster
+     */
+    private void getPublisherInfo(ImageView profile_image, TextView fullname, TextView publisher, String userid) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid); //Get the database location based on the user id
 
@@ -155,7 +162,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         });
     }
 
-    private void getComments(String postid, final TextView comments){
+    /**
+     * Count the number of comments for the current post
+     */
+    private void getComments(String postid, final TextView comments) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Comments").child(postid);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -171,7 +181,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         });
     }
 
-    private void isBookmarked(String postid, ImageView imageView){
+    /**
+     * Check if the post is bookmarked or not.
+     * Depending on this, display a different Imageview
+     */
+    private void isBookmarked(String postid, ImageView imageView) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Bookmarked")
@@ -180,7 +194,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(postid).exists()){
+                if (dataSnapshot.child(postid).exists()) {
                     imageView.setImageResource(R.drawable.ic_bookmarked);
                     imageView.setTag("Bookmarked");
                 } else {
@@ -196,16 +210,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         });
     }
 
-    //Needed to have the 'no item' animation, we need to know if the adapter is empty or not
-
 
     /**
-     * Contains the onclick functionality
+     * Contains the onclick functionality of post elements. Recieves values from the database calls made above.
      */
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView profile_image, post_image, like, comment, bookmark;
-        public TextView  title, mainDescription, likeText, username, fullname, publisher, bottomDescription, comments;
+        public TextView title, mainDescription, likeText, username, fullname, publisher, bottomDescription, comments;
         public Boolean isImagePost;
         public String postid;
         public String publisherId;
@@ -215,25 +227,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             super(itemView);
 
             profile_image = itemView.findViewById(R.id.profile_image);
-            post_image    = itemView.findViewById(R.id.post_image);
-            like          = itemView.findViewById(R.id.like);
-            comment       = itemView.findViewById(R.id.comment);
-            bookmark      = itemView.findViewById(R.id.bookmark);
+            post_image = itemView.findViewById(R.id.post_image);
+            like = itemView.findViewById(R.id.like);
+            comment = itemView.findViewById(R.id.comment);
+            bookmark = itemView.findViewById(R.id.bookmark);
 
             //Textview
-            title               = itemView.findViewById(R.id.title);
-            mainDescription     = itemView.findViewById(R.id.mainDescription);
-            likeText            = itemView.findViewById(R.id.likeText);
-            fullname            = itemView.findViewById(R.id.fullname);
-            publisher           = itemView.findViewById(R.id.publisher);
-            bottomDescription   = itemView.findViewById(R.id.bottomDescription);
-            comments            = itemView.findViewById(R.id.comments);
+            title = itemView.findViewById(R.id.title);
+            mainDescription = itemView.findViewById(R.id.mainDescription);
+            likeText = itemView.findViewById(R.id.likeText);
+            fullname = itemView.findViewById(R.id.fullname);
+            publisher = itemView.findViewById(R.id.publisher);
+            bottomDescription = itemView.findViewById(R.id.bottomDescription);
+            comments = itemView.findViewById(R.id.comments);
 
             /** OnClick functionality to save a post **/
             bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (bookmark.getTag().equals("Bookmark")){
+                    if (bookmark.getTag().equals("Bookmark")) {
                         FirebaseDatabase.getInstance().getReference().child("Bookmarked").child(firebaseUser.getUid())
                                 .child(postid).setValue(true);
                     } else {
@@ -249,7 +261,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(like.getTag().equals("like")) { //meaning the user has not liked the post yet
+                    if (like.getTag().equals("like")) { //meaning the user has not liked the post yet
                         FirebaseDatabase.getInstance().getReference().child("Likes").child(postid)
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(true);
@@ -291,7 +303,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     editor.putString("profileid", publisherId);
                     editor.apply();
 
-                    if(Navigation.findNavController(view).getCurrentDestination().getId() == R.id.newsfeedFragment){
+                    if (Navigation.findNavController(view).getCurrentDestination().getId() == R.id.newsfeedFragment) {
                         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                     }
                 }
@@ -304,14 +316,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     editor.putString("profileid", publisherId);
                     editor.apply();
 
-                    if(Navigation.findNavController(view).getCurrentDestination().getId() == R.id.newsfeedFragment){
+                    if (Navigation.findNavController(view).getCurrentDestination().getId() == R.id.newsfeedFragment) {
                         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
                     }
                 }
             });
         }
 
-        private void addActivityItem(String userid, String postid){
+        private void addActivityItem(String userid, String postid) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
 
             HashMap<String, Object> hashMap = new HashMap<>();

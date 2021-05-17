@@ -21,12 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Date;
 import java.util.List;
 
-public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder>{
+/**
+ * Used to populate the recyclerview within the JournalFragment
+ */
+public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
     private Context context;
     private List<JournalItem> journalItems;
     private RecyclerView recyclerView; //the recyclerview that the adapter is attached to
 
-    public JournalAdapter(Context context, List<JournalItem> journalItems){
+    public JournalAdapter(Context context, List<JournalItem> journalItems) {
         this.context = context;
         this.journalItems = journalItems;
     }
@@ -51,9 +54,9 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         holder.entryId = item.getEntryId();
     }
 
-    public void updateList(JournalItem removedItem){
-        for(int i = 0; i < journalItems.size(); i++){
-            if(journalItems.get(i).getEntryId().equals(removedItem.getEntryId())){
+    public void updateList(JournalItem removedItem) {
+        for (int i = 0; i < journalItems.size(); i++) {
+            if (journalItems.get(i).getEntryId().equals(removedItem.getEntryId())) {
                 journalItems.remove(i);
                 this.notifyDataSetChanged();
                 recyclerView.invalidate();
@@ -73,7 +76,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView entryName;
         public TextView descriptionText;
         public RelativeLayout deleteEntry;
@@ -86,10 +89,11 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
             entryName = itemView.findViewById(R.id.entryName);
             descriptionText = itemView.findViewById(R.id.descriptionText);
-            deleteEntry     = itemView.findViewById(R.id.deleteEntry);
+            deleteEntry = itemView.findViewById(R.id.deleteEntry);
 
-
-
+            /**
+             * Deleting an entry means creating a new database reference and removing it from the database by calling .removeValue()
+             */
             deleteEntry.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -97,7 +101,6 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
                             .child(entryId);
                     reference.removeValue();
                     updateList(item);
-
                 }
             });
 
@@ -107,7 +110,6 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("JournalItem", item);
-
                     Navigation.findNavController(view).navigate(R.id.action_journalFragment_to_viewJournalEntryFragment, bundle);
                 }
             });

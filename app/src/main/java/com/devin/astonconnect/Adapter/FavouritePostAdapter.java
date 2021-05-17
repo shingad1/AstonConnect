@@ -22,13 +22,16 @@ import com.devin.astonconnect.R;
 
 import java.util.List;
 
-public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdapter.ViewHolder>{
-    /** Used in ProfileFragment **/
+/**
+ * Adapter used for populating recyclerview within the ProfileFragment (display favourited posts)
+ * Data is retrieved from the profile fragment
+ */
+public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdapter.ViewHolder> {
 
     private Context context;
     private List<Post> favouritePostList;
 
-    public FavouritePostAdapter(Context context, List<Post> favouritePostList){
+    public FavouritePostAdapter(Context context, List<Post> favouritePostList) {
         this.context = context;
         this.favouritePostList = favouritePostList;
     }
@@ -40,10 +43,13 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
         return new FavouritePostAdapter.ViewHolder(view);
     }
 
+    /**
+     * The viewholder displayed differently depending if it is a textual or image post
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = favouritePostList.get(position);
-        if(post.getIsImagePost()){
+        if (post.getIsImagePost()) {
 
             holder.postImage.setVisibility(View.VISIBLE);
             Glide.with(context).load(post.getPostImage()).into(holder.postImage);
@@ -68,7 +74,7 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
         return favouritePostList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView postTitle;
         public ImageView postImage, textIcon;
@@ -80,22 +86,25 @@ public class FavouritePostAdapter extends RecyclerView.Adapter<FavouritePostAdap
 
             postTitle = itemView.findViewById(R.id.postTitle);
             postImage = itemView.findViewById(R.id.postImage);
-            textIcon  = itemView.findViewById(R.id.textIcon);
+            textIcon = itemView.findViewById(R.id.textIcon);
             postImageCardView = itemView.findViewById(R.id.postImageCardView);
 
             postImageCardView.setCardElevation(0f);
 
-
+            /**
+             * Clicking on a post item will navigate to the selectedPostFragment to display it
+             * SharedPreferences is used to pass the post details to the selectedPostFragment
+             * Postid gets passed to SelectedPostFragment which populates the adapter (mPosts list) accordingly based on postid
+             */
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("postid", postid); //gets passed to selectedpostfragment which populates the adapter (mPosts list) accordingly based on postid
+                    editor.putString("postid", postid);
                     editor.apply();
                     Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_selectedPostFragment);
                 }
             });
-
         }
     }
 }

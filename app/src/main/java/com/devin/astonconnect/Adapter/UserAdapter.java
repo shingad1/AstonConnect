@@ -36,6 +36,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Used to display user items within the user adapter.
+ */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     private Context context;
@@ -81,7 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             holder.userType.setText("Student");
         }
 
-        //Get the user's interests
+        //Get the user's interests and pass the data to the holder, which contains a chip group
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId()).child("interests");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,7 +96,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             Toast.makeText(context, interest, Toast.LENGTH_SHORT).show();
                             holder.interests.add(interest);
 
-                            //Add Chip
                             Chip chip_item = (Chip) LayoutInflater.from(context).inflate(R.layout.chip_item2, null, false);
                             chip_item.setTextSize(15f);
                             chip_item.setText(interest);
