@@ -309,18 +309,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                     }
                 }
             });
-
-            /**
-            post_image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", publisherId);
-                    editor.apply();
-                    Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_profileFragment);
-                }
-            });
-             **/
         }
 
         private void addActivityItem(String userid, String postid){

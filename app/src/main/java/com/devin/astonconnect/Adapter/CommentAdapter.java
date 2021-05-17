@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+/**
+ * Comment Adapter class used within the CommenmtActivity
+ */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
 
     private Context context;
@@ -42,6 +45,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return new CommentAdapter.ViewHolder(view);
     }
 
+    /**
+     * Sets viewholder values based on the data passed from the CommentsActivity
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -51,16 +57,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         //Retrieves the user details based on the comment.getpublisher() value.
         getUserDetails(holder.profile_image, holder.fullname, comment.getPublisher());
 
-       /**
-        holder.comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("publisherid", comment.getpublisher());
-                mContext.startActivity(intent);
-            }
-        });
-        **/
         holder.profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

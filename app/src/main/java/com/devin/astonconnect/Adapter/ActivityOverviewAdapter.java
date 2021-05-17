@@ -27,9 +27,18 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Adapter for displaying Activity overview items
+ * An ActivityOverviewAdapter object is created within the ActivityOverviewFragment
+ */
 public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOverviewAdapter.ViewHolder> {
 
+
     private Context context;
+
+    /**
+     * ActivityItems retrieved from the ActivityOverviewObject
+     */
     private List<ActivityItem> activityItemList;
 
     public ActivityOverviewAdapter(Context context, List<ActivityItem> activityItemList) {
@@ -44,6 +53,9 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
         return new ActivityOverviewAdapter.ViewHolder(view);
     }
 
+    /**
+     * OnBindViewHolder method which passes data to the view layer using the activityItem
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActivityItem activityItem = activityItemList.get(position);
@@ -55,7 +67,10 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
         getUserDetails(holder.profileImage, holder.fullnameText, activityItem.getUserId());
 
 
-        if(activityItem.getIsPost()){
+        /**
+         * Call getPostDetails using the activityItem postID value
+         */
+        if (activityItem.getIsPost()) {
             holder.postImage.setVisibility(View.VISIBLE);
             getPostDetails(holder.postImage, activityItem.getPostId());
         } else {
@@ -69,6 +84,9 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
         return activityItemList.size();
     }
 
+    /**
+     * ViewHolder class which describes an activity item
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView profileImage;
@@ -87,29 +105,32 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
             fullnameText = itemView.findViewById(R.id.fullname);
             detailsText = itemView.findViewById(R.id.detailsText);
 
-        /** OnClick functionality for the activity item **/
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(ispost){
-                    SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("postid", postid);
-                    editor.apply();
+            /** OnClick functionality for the activity item **/
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ispost) {
+                        SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                        editor.putString("postid", postid);
+                        editor.apply();
 
-                    Navigation.findNavController(view).navigate(R.id.action_activityOverviewFragment_to_selectedPostFragment);
-                } else {
-                    SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
-                    editor.putString("profileid", profileid);
-                    editor.apply();
+                        Navigation.findNavController(view).navigate(R.id.action_activityOverviewFragment_to_selectedPostFragment);
+                    } else {
+                        SharedPreferences.Editor editor = context.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
+                        editor.putString("profileid", profileid);
+                        editor.apply();
 
-                    Navigation.findNavController(view).navigate(R.id.action_activityOverviewFragment_to_profileFragment);
+                        Navigation.findNavController(view).navigate(R.id.action_activityOverviewFragment_to_profileFragment);
+                    }
                 }
-            }
-        });
+            });
 
         }
     }
 
+    /**
+     * Performs a Database call to retrieve the user's details
+     */
     private void getUserDetails(ImageView profileImage, TextView fullname, String publisherid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(publisherid);
 
@@ -128,7 +149,10 @@ public class ActivityOverviewAdapter extends RecyclerView.Adapter<ActivityOvervi
         });
     }
 
-    private void getPostDetails(ImageView postImage, String postid){
+    /**
+     * Retrieves post  details from the database using the postid
+     */
+    private void getPostDetails(ImageView postImage, String postid) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
