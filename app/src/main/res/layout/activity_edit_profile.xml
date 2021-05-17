@@ -14,13 +14,14 @@
         android:layout_marginTop="22dp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:fontFamily="@font/sf_font"
         android:text="Edit Your Profile"
         android:textColor="@color/black"
