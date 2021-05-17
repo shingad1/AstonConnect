@@ -10,32 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/topLayout"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
         android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/ic_back"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             app:tint="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
             android:text="Profile"
+            android:paddingBottom="5dp"
             android:fontFamily="@font/sf_font"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
     </LinearLayout>
-
-
 
     <RelativeLayout
         android:id="@+id/infoRelativeLayout"
