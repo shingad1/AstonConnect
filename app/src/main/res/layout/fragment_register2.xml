@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Register.RegisterFragment2">
 
     <View
         android:id="@+id/topView"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:background="#0099ff"/>
+        android:background="#0099ff" />
 
 
     <View
@@ -18,106 +18,106 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@id/topView"
-        android:background="@drawable/ic_waves2"/>
+        android:background="@drawable/ic_waves2" />
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="23dp"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"/>
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
         android:id="@+id/createAccountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create an account"
-        android:fontFamily="@font/sf_font"
         android:layout_alignParentLeft="true"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"/>
+        android:fontFamily="@font/sf_font"
+        android:text="Create an account"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_below="@id/createAccountText"
         android:id="@+id/lottieAnimation"
-        android:layout_marginTop="-30dp"
         android:layout_width="350dp"
         android:layout_height="240dp"
+        android:layout_below="@id/createAccountText"
         android:layout_centerHorizontal="true"
-        app:lottie_rawRes="@raw/register"
-        app:lottie_speed="0.5"
+        android:layout_marginTop="-30dp"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/register"
+        app:lottie_speed="0.5" />
 
     <RelativeLayout
         android:id="@+id/passwordLayout"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/waves"
-        android:elevation="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_blue_border">
+        android:layout_below="@id/waves"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_blue_border"
+        android:elevation="2dp">
 
         <EditText
             android:id="@+id/password_text"
-            android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:background="@android:color/transparent"
-            android:maxLines="1"
             android:layout_toRightOf="@id/password_icon"
+            android:background="@android:color/transparent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <ImageView
+            android:id="@+id/password_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/password_icon"
-            android:layout_marginLeft="17dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
             android:src="@drawable/ic_password"
             app:tint="#0099ff" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/confirmPasswordLayout"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/passwordLayout"
-        android:elevation="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_blue_border">
+        android:layout_below="@id/passwordLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_blue_border"
+        android:elevation="2dp">
 
         <EditText
             android:id="@+id/confirm_password_text"
-            android:hint="Confirm Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:background="@android:color/transparent"
-            android:maxLines="1"
             android:layout_toRightOf="@id/password_icon2"
+            android:background="@android:color/transparent"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <ImageView
+            android:id="@+id/password_icon2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/password_icon2"
-            android:layout_marginLeft="17dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
             android:src="@drawable/ic_password"
             app:tint="#0099ff" />
     </RelativeLayout>
@@ -125,68 +125,68 @@
 
     <RelativeLayout
         android:id="@+id/enterImageLayout"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/confirmPasswordLayout"
-        android:elevation="2dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmPasswordLayout"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/profilePictureText"
-            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:fontFamily="@font/sf_font"
+            android:text="Add a Profile picture"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="15dp"
-            android:text="Add a Profile picture"/>
+            android:textStyle="bold" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImage"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/profilePictureText"
-            android:layout_centerHorizontal="true"
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:layout_below="@id/profilePictureText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_person"
             app:civ_border_color="#303030"
-            app:civ_border_width="1dp"
-            android:src="@drawable/ic_person"/>
+            app:civ_border_width="1dp" />
 
         <RelativeLayout
             android:id="@+id/addButtonLayout"
-            android:layout_below="@id/userImage"
             android:layout_width="50dp"
             android:layout_height="25dp"
-            android:background="@drawable/blue_rounded"
+            android:layout_below="@id/userImage"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-15dp">
+            android:layout_marginTop="-15dp"
+            android:background="@drawable/blue_rounded">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add"
-                android:fontFamily="@font/sf_font"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/sf_font"
+                android:text="Add"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/checkBoxLayout"
             android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/addButtonLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:layout_height="40dp"
-            android:elevation="10dp"
-            android:padding="10dp"
             android:background="@drawable/rounded_rectangle"
             android:backgroundTint="#F1F1F1"
-            android:layout_below="@id/addButtonLayout">
+            android:elevation="10dp"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/doLaterText"
@@ -202,48 +202,48 @@
             <CheckBox
                 android:id="@+id/checkBoxLater"
                 android:layout_width="33dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/doLaterText" />
 
         </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/finishButtonLayout"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="30dp"
-        android:layout_below="@+id/checkBoxLayout"
-        android:elevation="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/blue_rounded"
-        android:layout_marginLeft="120dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/nextButton"
-            android:layout_toRightOf="@id/nextText"
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:scaleX="-1"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
-
-        <TextView
+        <RelativeLayout
+            android:id="@+id/finishButtonLayout"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/checkBoxLayout"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:id="@+id/nextText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:fontFamily="@font/sf_font"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/blue_rounded"
+            android:elevation="10dp"
+            android:gravity="center">
 
+            <ImageView
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/nextText"
+                android:scaleX="-1"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            <TextView
+                android:id="@+id/nextText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/sf_font"
+                android:text="Next"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.devin.astonconnect.Loading.LoadingDialog;
@@ -30,7 +31,7 @@ import java.util.HashMap;
 public class ReviewTextPostActivity extends AppCompatActivity {
 
     private ImageView close;
-    private Button postBtn, cancelBtn;
+    private RelativeLayout postBtn, cancelBtn;
     private EditText description, title;
     private LoadingDialog loadingDialog;
     private User currentUser;

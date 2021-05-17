@@ -13,6 +13,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.devin.astonconnect.Loading.LoadingDialog;
@@ -44,7 +45,7 @@ public class ReviewImagePostActivity extends AppCompatActivity {
     private StorageReference storageReference;
 
     private ImageView close, image_taken;
-    private Button postBtn, cancelBtn;
+    private RelativeLayout postBtn, cancelBtn;
     private EditText description, title;
     private LoadingDialog loadingDialog;
 

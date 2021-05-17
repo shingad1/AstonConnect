@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Register.RegisterFragment3">
 
     <View
         android:id="@+id/topView"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:background="#0099ff"/>
+        android:background="#0099ff" />
 
 
     <View
@@ -18,123 +18,124 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_below="@id/topView"
-        android:background="@drawable/ic_waves2"/>
+        android:background="@drawable/ic_waves2" />
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="23dp"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"/>
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
         android:id="@+id/createAccountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create an account"
-        android:fontFamily="@font/sf_font"
         android:layout_alignParentLeft="true"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"/>
+        android:fontFamily="@font/sf_font"
+        android:text="Create an account"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_below="@id/createAccountText"
         android:id="@+id/lottieAnimation"
-        android:layout_marginTop="-30dp"
         android:layout_width="350dp"
         android:layout_height="240dp"
+        android:layout_below="@id/createAccountText"
         android:layout_centerHorizontal="true"
-        app:lottie_rawRes="@raw/register"
-        app:lottie_speed="0.5"
+        android:layout_marginTop="-30dp"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/register"
+        app:lottie_speed="0.5" />
 
     <RelativeLayout
         android:id="@+id/aboutMeLayout"
-        android:layout_marginLeft="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/waves"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/waves"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="70dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About Me"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/sf_font"
-            android:textColor="@color/black"
-            android:layout_marginLeft="5dp"/>
+            android:text="About Me"
+            android:textColor="@color/black" />
 
 
         <EditText
             android:id="@+id/aboutMe_text"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_rectangle"
             android:backgroundTint="#F1F1F1"
             android:elevation="2dp"
-            android:hint="About Me"
-            android:textColorHint="#2E2E2E"
             android:gravity="left"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:hint="About Me"
             android:inputType="text"
             android:maxLines="1"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:textSize="15dp"/>
+            android:scrollHorizontally="false"
+            android:textColorHint="#2E2E2E"
+            android:textSize="15dp" />
 
     </RelativeLayout>
 
 
     <LinearLayout
-        android:layout_below="@+id/aboutMeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
+        android:layout_below="@+id/aboutMeLayout"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/interestsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Interests"
             android:fontFamily="@font/sf_font"
+            android:text="Interests"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/maxText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/interestsText"
-            android:text="Maxiumum of 5."
             android:fontFamily="@font/sf_font"
+            android:text="Maxiumum of 5."
             android:textColor="@color/black"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <Spinner
-            android:layout_below="@id/maxText"
+            android:id="@+id/interestsSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/interestsSpinner"/>
+            android:layout_below="@id/maxText" />
 
         <LinearLayout
             android:id="@+id/customInterestsLayout"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/customInterestsEditText"
@@ -151,54 +152,55 @@
 
             <RelativeLayout
                 android:id="@+id/addBtn"
-                android:layout_gravity="center_vertical"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/rounded_rectangle">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add"
-                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:fontFamily="@font/sf_font"
+                    android:text="Add"
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
 
         </LinearLayout>
+
         <ScrollView
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/rounded_rectangle"
             android:backgroundTint="#F1F1F1"
-            android:elevation="2dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:elevation="2dp">
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_below="@id/interestsSpinner"
-            android:id="@+id/chipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/interestsSpinner" />
         </ScrollView>
 
 
         <RelativeLayout
             android:id="@+id/checkBoxLayout"
             android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="40dp"
-            android:elevation="10dp"
-            android:padding="10dp"
             android:background="@drawable/rounded_rectangle"
-            android:backgroundTint="#F1F1F1">
+            android:backgroundTint="#F1F1F1"
+            android:elevation="10dp"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/doLaterText"
@@ -214,9 +216,9 @@
             <CheckBox
                 android:id="@+id/checkBoxLater"
                 android:layout_width="33dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/doLaterText" />
 
         </RelativeLayout>
@@ -224,42 +226,39 @@
     </LinearLayout>
 
 
+    <RelativeLayout
+        android:id="@+id/finishButtonLayout"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_rounded"
+        android:elevation="10dp"
+        android:gravity="center">
 
+        <ImageView
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/nextText"
+            android:scaleX="-1"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
 
-
-        <RelativeLayout
-            android:id="@+id/finishButtonLayout"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="30dp"
-            android:layout_alignParentBottom="true"
-            android:elevation="10dp"
+        <TextView
+            android:id="@+id/nextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/blue_rounded"
-            android:layout_marginLeft="120dp">
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/sf_font"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/nextButton"
-                android:layout_toRightOf="@id/nextText"
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
-                android:scaleX="-1"
-                android:src="@drawable/ic_baseline_arrow_back_24" />
-
-            <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/nextText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next"
-                android:fontFamily="@font/sf_font"
-                android:textColor="@color/white"
-                android:textSize="15sp"/>
-
-        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

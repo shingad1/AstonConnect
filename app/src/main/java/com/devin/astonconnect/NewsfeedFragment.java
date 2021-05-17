@@ -93,7 +93,6 @@ public class NewsfeedFragment extends Fragment {
 
         /**Get local user details (shared preferences) **/
         sharedPreferencesManager = new SharedPreferencesManager(getActivity().getApplicationContext());
-        Toast.makeText(getActivity(), sharedPreferencesManager.getString("fullname"), Toast.LENGTH_SHORT).show();
 
         /** Staff post recyclerview **/
         staffPostRecyclerView = view.findViewById(R.id.staffPostRecyclerView);

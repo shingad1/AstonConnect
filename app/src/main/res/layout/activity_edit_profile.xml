@@ -137,7 +137,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/saveText"
+            android:layout_toRightOf="@id/savePostText"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_check" />
@@ -145,7 +145,7 @@
         <TextView
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:id="@+id/saveText"
+            android:id="@+id/savePostText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save Details"
