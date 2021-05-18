@@ -50,7 +50,7 @@ public class ActivityOverviewFragment extends Fragment {
         return view;
     }
 
-    private void readActivityItems(){
+    private void readActivityItems() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(firebaseUser.getUid());
@@ -59,7 +59,7 @@ public class ActivityOverviewFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 activityItemList.clear();
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ActivityItem activityItem = snapshot.getValue(ActivityItem.class);
                     activityItemList.add(activityItem);
                 }

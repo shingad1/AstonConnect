@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         //Programatically change the bottom navigation based on whether the user is staff or student
-        if(manager.getisStaff() == true){
+        if (manager.getisStaff() == true) {
             bottomNavigationView.inflateMenu(R.menu.bottom_menu_staff);
         } else {
             bottomNavigationView.inflateMenu(R.menu.bottom_menu_student);
         }
 
-        NavController navController = Navigation.findNavController(this,  R.id.fragment);
+        NavController navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         Bundle intent = getIntent().getExtras();
@@ -53,25 +53,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** User Status **/
-    private void setUserStatus(String userStatus){
-       /**
-        if(fAuth.getCurrentUser() != null){
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("userstatus", userStatus);
-            reference.updateChildren(hashMap);
-        } else {
-            Log.i("status", "fAuth is null. Cannot update user status");
-        }
-        **/
-    }
 
     //When the user pauses the app set their status to be offline
     @Override
     protected void onPause() {
         super.onPause();
-       // setUserStatus("offline");
+        // setUserStatus("offline");
         Log.w("status", "Setting user status to offline in the MainActivity");
     }
 
@@ -79,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // setUserStatus("online");
+        // setUserStatus("online");
         Log.w("status", "Setting the user status to online in the MainActvity");
     }
 
@@ -91,13 +78,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(fUser == null){
+        if (fUser == null) {
             sendToStart();
         }
     }
 
-    /** Simply sends the user to the startActivity (state not logged in) **/
-    private void sendToStart(){
+    /**
+     * Simply sends the user to the startActivity (state not logged in)
+     **/
+    private void sendToStart() {
         Intent intent = new Intent(MainActivity.this, StartActivity.class);
         startActivity(intent);
         finish();

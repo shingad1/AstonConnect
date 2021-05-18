@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +36,7 @@ public class CommentsActivity extends AppCompatActivity {
 
     private EditText userComment;
     private ImageView profileImage;
-    private Button postBtn;
+    private RelativeLayout postBtn;
     private ImageView back;
     private String postid;
     private String publisherid;
@@ -72,17 +73,6 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
-
-
-                //NavController navController = Navigation.findNavController(view);
-
-                //navController.navigateUp();
-                //navController.navigate(R.id.newsfeedFragment);
-
-                /**
-                startActivity(new Intent(CommentsActivity.this, MainActivity.class));
-                finish();
-                 **/
             }
         });
 

@@ -48,15 +48,14 @@ public class RegisterFragment1 extends Fragment {
     //private Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+.+"); //FOR TESTING PURPOSES
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_register1, container, false);
+        View view = inflater.inflate(R.layout.fragment_register1, container, false);
 
         //get values
         username_text = view.findViewById(R.id.username_text);
-        fullnameText  = view.findViewById(R.id.fullnameText);
-        emailText     = view.findViewById(R.id.emailText);
+        fullnameText = view.findViewById(R.id.fullnameText);
+        emailText = view.findViewById(R.id.emailText);
         emailConfirmText = view.findViewById(R.id.emailConfirmText);
         csStaffSwitch = view.findViewById(R.id.csStaffSwitch);
         isStaff = false;
@@ -65,7 +64,7 @@ public class RegisterFragment1 extends Fragment {
         csStaffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     isStaff = true;
                 } else {
                     isStaff = false;
@@ -84,40 +83,39 @@ public class RegisterFragment1 extends Fragment {
         });
 
 
-
         nextButtonLayout = view.findViewById(R.id.nextButtonLayout);
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String str_username = username_text.getText().toString();
                 String str_fullname = fullnameText.getText().toString();
-                String str_email    = emailText.getText().toString();
+                String str_email = emailText.getText().toString();
                 String str_email_confirm = emailConfirmText.getText().toString();
 
                 Matcher matcher1 = pattern.matcher(str_email);
                 Matcher matcher2 = pattern.matcher(str_email_confirm);
 
-                if(TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_fullname) || TextUtils.isEmpty(str_email)
+                if (TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_fullname) || TextUtils.isEmpty(str_email)
                         || TextUtils.isEmpty(str_email_confirm)) {
                     Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
-                } else if (str_username.length() < 4){
+                } else if (str_username.length() < 4) {
                     Toast.makeText(getActivity(), "Password length cannot be less than 4 characters", Toast.LENGTH_SHORT).show();
-                } else if (str_fullname.length() < 3){
+                } else if (str_fullname.length() < 3) {
                     Toast.makeText(getActivity(), "Fullname length cannot be less than 3 characters", Toast.LENGTH_SHORT).show();
-                } else if (!matcher1.matches()){
+                } else if (!matcher1.matches()) {
                     Toast.makeText(getActivity(), "Please enter an aston email", Toast.LENGTH_SHORT).show();
-                } else if (!matcher2.matches()){
+                } else if (!matcher2.matches()) {
                     Toast.makeText(getActivity(), "Please enter an aston email for 'confirmed mail", Toast.LENGTH_SHORT).show();
                 } else if (!str_email.equals(str_email_confirm)) {
                     Toast.makeText(getActivity(), "Please make sure both emails are matching", Toast.LENGTH_SHORT).show();
-                } else if (isStaff){
+                } else if (isStaff) {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("cs_staff");
 
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 String staff_mail = snapshot.getValue().toString();
                                 Log.w("staff_mail", staff_mail);
 
@@ -138,8 +136,10 @@ public class RegisterFragment1 extends Fragment {
                                 }
                             }
                         }
+
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) { }
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
                     });
 
                 } else {

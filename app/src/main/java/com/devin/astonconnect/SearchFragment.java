@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        search_bar   = view.findViewById(R.id.search_bar);
+        search_bar = view.findViewById(R.id.search_bar);
         userList = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), userList);
 
@@ -55,33 +55,36 @@ public class SearchFragment extends Fragment {
         readUsers();
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchUsers(charSequence.toString());
             }
+
             @Override
-            public void afterTextChanged(Editable editable) { }
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
         return view;
     }
 
-    private void searchUsers(String s){
+    private void searchUsers(String s) {
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("fullname")
                 .startAt(s)
-                .endAt(s+"\uf8ff");
+                .endAt(s + "\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
 
-                    if(!user.getId().equals(fUser.getUid())){
+                    if (!user.getId().equals(fUser.getUid())) {
                         userList.add(user);
                     }
                 }
@@ -95,17 +98,17 @@ public class SearchFragment extends Fragment {
         });
     }
 
-    private void readUsers(){
+    private void readUsers() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(search_bar.getText().toString().equals("")){
+                if (search_bar.getText().toString().equals("")) {
                     userList.clear();
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);
 
-                        if(!user.getId().equals(fUser.getUid())){
+                        if (!user.getId().equals(fUser.getUid())) {
                             userList.add(user);
                         }
                     }

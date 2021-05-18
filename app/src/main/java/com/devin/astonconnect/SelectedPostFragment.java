@@ -66,7 +66,7 @@ public class SelectedPostFragment extends Fragment {
         return view;
     }
 
-    private void getPostInformation(){
+    private void getPostInformation() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override

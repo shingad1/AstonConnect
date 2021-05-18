@@ -13,9 +13,9 @@ public class SharedPreferencesManager {
     private SharedPreferences.Editor editor;
     private SharedPreferences preferences;
 
-    public SharedPreferencesManager(Context context){
+    public SharedPreferencesManager(Context context) {
         preferences = context.getSharedPreferences("PREFS", 0);
-        editor      = preferences.edit();
+        editor = preferences.edit();
     }
 
     public void setId(String id) {
@@ -68,16 +68,16 @@ public class SharedPreferencesManager {
         editor.commit();
     }
 
-    public String getString(String id){
+    public String getString(String id) {
         return preferences.getString(id, null);
     }
 
-    public Boolean getisStaff(){
+    public Boolean getisStaff() {
         return preferences.getBoolean("isStaff", false);
     }
 
     //Called when the user leaves the app (In Newsfeed Fragment)
-    public void clearPrefs(){
+    public void clearPrefs() {
         editor.clear();
         editor.commit();
     }

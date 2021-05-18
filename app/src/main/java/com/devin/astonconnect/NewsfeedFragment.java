@@ -85,7 +85,6 @@ public class NewsfeedFragment extends Fragment {
     private AppBarLayout.LayoutParams params;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -134,12 +133,12 @@ public class NewsfeedFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                 Toast.makeText(getActivity(), "Toggle changed to: " + isChecked, Toast.LENGTH_SHORT).show();
-                if(isChecked){
+                if (isChecked) {
                     staffPostRecyclerView.setVisibility(View.VISIBLE);
                     studentPostRecyclerView.setVisibility(View.GONE);
                     switchChecked = isChecked;
 
-                    if(staffPostAdapter.getItemCount() == 0){
+                    if (staffPostAdapter.getItemCount() == 0) {
                         noPostsLayout2.setVisibility(View.VISIBLE);
                         searchingAnimation2.setAnimation(getRandomAnimationFile());
                         searchingAnimation2.setSpeed(1);
@@ -152,13 +151,13 @@ public class NewsfeedFragment extends Fragment {
                     } else {
                         //Enable toolbar scrolling
                         noPostsLayout2.setVisibility(View.GONE);
-                        params.setScrollFlags(SCROLL_FLAG_SCROLL|SCROLL_FLAG_ENTER_ALWAYS);
+                        params.setScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS);
                         bar.setLayoutParams(params);
                     }
 
                 }
 
-                if(!isChecked){
+                if (!isChecked) {
                     studentPostRecyclerView.setVisibility(View.VISIBLE);
                     staffPostRecyclerView.setVisibility(View.GONE);
                     switchChecked = !isChecked;
@@ -169,7 +168,7 @@ public class NewsfeedFragment extends Fragment {
 
 
         /** Floating action button stuff **/
-        add_btn            = view.findViewById(R.id.add_btn);
+        add_btn = view.findViewById(R.id.add_btn);
         createTextPostBtn = view.findViewById(R.id.createPostBtn);
         createImagePostBtn = view.findViewById(R.id.createImagePostBtn);
 
@@ -199,10 +198,10 @@ public class NewsfeedFragment extends Fragment {
         });
 
         //Animations for the buttons
-        rotateOpen  = AnimationUtils.loadAnimation((getActivity()), R.anim.rotate_open_anim);
+        rotateOpen = AnimationUtils.loadAnimation((getActivity()), R.anim.rotate_open_anim);
         rotateClose = AnimationUtils.loadAnimation((getActivity()), R.anim.rotate_close_anim);
-        fromBottom  = AnimationUtils.loadAnimation((getActivity()), R.anim.from_bottom_anim);
-        toBottom    = AnimationUtils.loadAnimation((getActivity()), R.anim.to_bottom_anim);
+        fromBottom = AnimationUtils.loadAnimation((getActivity()), R.anim.from_bottom_anim);
+        toBottom = AnimationUtils.loadAnimation((getActivity()), R.anim.to_bottom_anim);
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,31 +228,11 @@ public class NewsfeedFragment extends Fragment {
 
         checkFollowing();
 
-    /** Not working as intended
-        //Back press functionality
-        getActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                new AlertDialog.Builder(getActivity())
-                        .setMessage("Are you sure you want to exit?")
-                        .setCancelable(true)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                getActivity().finish();
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            }
-        });
-    **/
-
         return view;
     }
 
 
-    private void checkFollowing(){
+    private void checkFollowing() {
         followingList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -263,7 +242,7 @@ public class NewsfeedFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 followingList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     followingList.add(snapshot.getKey());
                 }
                 //Read posts to populate recyclerviews
@@ -280,18 +259,18 @@ public class NewsfeedFragment extends Fragment {
     }
 
 
-    private void readStudentPosts(){
+    private void readStudentPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 studentPostList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    for(String id : followingList){
-                        if(post.getPublisher().equals(id)){
-                            if(post.getPosttype().equals("student")){
+                    for (String id : followingList) {
+                        if (post.getPublisher().equals(id)) {
+                            if (post.getPosttype().equals("student")) {
                                 studentPostList.add(post);
                             }
                         }
@@ -299,15 +278,15 @@ public class NewsfeedFragment extends Fragment {
                 }
                 studentPostAdapter.notifyDataSetChanged();
 
-                if(!changePostSwitch.isChecked()){
-                    if(studentPostAdapter.getItemCount() == 0){
+                if (!changePostSwitch.isChecked()) {
+                    if (studentPostAdapter.getItemCount() == 0) {
                         noPostsLayout1.setVisibility(View.VISIBLE);
                         searchingAnimation.setAnimation(getRandomAnimationFile());
                         //disable toolbar scrolling
                         params.setScrollFlags(0);
                         bar.setLayoutParams(params);
-                    } else{
-                        params.setScrollFlags(SCROLL_FLAG_SCROLL|SCROLL_FLAG_ENTER_ALWAYS);
+                    } else {
+                        params.setScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS);
                         bar.setLayoutParams(params);
                     }
                 }
@@ -321,40 +300,24 @@ public class NewsfeedFragment extends Fragment {
     }
 
 
-    private void readStaffPosts(){
+    private void readStaffPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 staffPostList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    for(String id : followingList){
-                        if(post.getPublisher().equals(id)){
-                            if(post.getPosttype().equals("staff")){
+                    for (String id : followingList) {
+                        if (post.getPublisher().equals(id)) {
+                            if (post.getPosttype().equals("staff")) {
                                 staffPostList.add(post);
                             }
                         }
                     }
                 }
                 staffPostAdapter.notifyDataSetChanged();
-
-                /**
-                changePostSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if(b){
-                            if(staffPostAdapter.getItemCount() == 0){
-                                noPostsLayout2.setVisibility(View.VISIBLE);
-                                searchingAnimation2.setAnimation(getRandomAnimationFile());
-                            }
-                        } else {
-                            noPostsLayout2.setVisibility(View.GONE);
-                        }
-                    }
-                });
-                 **/
             }
 
 
@@ -370,7 +333,7 @@ public class NewsfeedFragment extends Fragment {
         Random random = new Random();
         int randomInt = random.nextInt(4);
         int id;
-        switch(randomInt){
+        switch (randomInt) {
             case 0:
                 id = R.raw.searching_1;
                 break;
@@ -393,8 +356,8 @@ public class NewsfeedFragment extends Fragment {
         clicked = !clicked;
     }
 
-    private void setVisibility(Boolean clicked){
-        if(!clicked){
+    private void setVisibility(Boolean clicked) {
+        if (!clicked) {
             createTextPostBtn.setVisibility(View.VISIBLE);
             createImagePostBtn.setVisibility(View.VISIBLE);
         } else {
@@ -403,8 +366,8 @@ public class NewsfeedFragment extends Fragment {
         }
     }
 
-    private void setAnimation(Boolean clicked){
-        if(!clicked){
+    private void setAnimation(Boolean clicked) {
+        if (!clicked) {
             createTextPostBtn.startAnimation(fromBottom);
             createImagePostBtn.startAnimation(fromBottom);
             add_btn.startAnimation(rotateOpen);

@@ -57,14 +57,14 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        profile_image     = findViewById(R.id.profile_image);
-        backButton        = findViewById(R.id.backButton);
+        profile_image = findViewById(R.id.profile_image);
+        backButton = findViewById(R.id.backButton);
         changePhotoButton = findViewById(R.id.changePhotoButton);
-        saveButton        = findViewById(R.id.saveButton);
-        cancelButton      = findViewById(R.id.cancelButton);
-        fullnameText      = findViewById(R.id.fullnameText);
-        usernameText      = findViewById(R.id.usernameText);
-        bioText           = findViewById(R.id.bioText);
+        saveButton = findViewById(R.id.saveButton);
+        cancelButton = findViewById(R.id.cancelButton);
+        fullnameText = findViewById(R.id.fullnameText);
+        usernameText = findViewById(R.id.usernameText);
+        bioText = findViewById(R.id.bioText);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
@@ -107,7 +107,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CropImage.activity()
-                        .setAspectRatio(1,1)
+                        .setAspectRatio(1, 1)
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .start(ProfileEditActivity.this);
             }
@@ -117,7 +117,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CropImage.activity()
-                        .setAspectRatio(1,1)
+                        .setAspectRatio(1, 1)
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .start(ProfileEditActivity.this);
             }
@@ -127,14 +127,14 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateDetails(usernameText.getText().toString(),
-                              fullnameText.getText().toString(),
-                              bioText.getText().toString());
+                        fullnameText.getText().toString(),
+                        bioText.getText().toString());
 
             }
         });
     }
 
-    private void updateDetails(String username, String fullname, String bio){
+    private void updateDetails(String username, String fullname, String bio) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -151,22 +151,22 @@ public class ProfileEditActivity extends AppCompatActivity {
         });
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadImage(){
-        if(imageUri != null){
-            final StorageReference fileReference = storageReference.child(System.currentTimeMillis()+
+    private void uploadImage() {
+        if (imageUri != null) {
+            final StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
                     "." + getFileExtension(imageUri));
 
             storageTask = fileReference.putFile(imageUri);
             storageTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         throw task.getException();
                     }
                     return fileReference.getDownloadUrl();
@@ -174,7 +174,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         String myUrl = downloadUri.toString();
 
@@ -182,7 +182,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                                 .child(firebaseUser.getUid());
 
                         HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("imageurl", ""+myUrl);
+                        hashMap.put("imageurl", "" + myUrl);
 
                         reference.updateChildren(hashMap);
                     } else {
@@ -204,7 +204,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Toast.makeText(ProfileEditActivity.this, "Profile Picture updated successfully", Toast.LENGTH_SHORT).show();
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();

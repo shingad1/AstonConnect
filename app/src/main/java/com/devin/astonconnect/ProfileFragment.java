@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment {
 
     private ImageView backBtn, profileImage;
     private RelativeLayout viewPhotoPostBtn, viewTextPostBtn;
-    private TextView fullname,bioText;
+    private TextView fullname, bioText;
     private Button chatBtn, followBtn;
     private RecyclerView recyclerViewPost, recyclerViewText, recyclerViewFavourites;
     private FirebaseUser firebaseUser;
@@ -74,17 +74,17 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        firebaseUser     = FirebaseAuth.getInstance().getCurrentUser();
-        backBtn          = view.findViewById(R.id.backBtn);
-        profileImage     = view.findViewById(R.id.profile_image);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        backBtn = view.findViewById(R.id.backBtn);
+        profileImage = view.findViewById(R.id.profile_image);
         viewPhotoPostBtn = view.findViewById(R.id.viewPhotoPostBtn);
-        viewTextPostBtn  = view.findViewById(R.id.viewTextPostBtn);
-        fullname         = view.findViewById(R.id.fullname);
-        bioText          = view.findViewById(R.id.bioText);
-        chatBtn          = view.findViewById(R.id.chatBtn);
-        followBtn        = view.findViewById(R.id.followBtn);
+        viewTextPostBtn = view.findViewById(R.id.viewTextPostBtn);
+        fullname = view.findViewById(R.id.fullname);
+        bioText = view.findViewById(R.id.bioText);
+        chatBtn = view.findViewById(R.id.chatBtn);
+        followBtn = view.findViewById(R.id.followBtn);
         recyclerViewText = view.findViewById(R.id.recycler_view_text);
 
         //Views for changign colour based on click
@@ -92,7 +92,6 @@ public class ProfileFragment extends Fragment {
         postsBackgroundSelected = view.findViewById(R.id.postsBackgroundSelected);
         textPostsUnSelected = view.findViewById(R.id.textPostsUnSelected);
         textPostsSelected = view.findViewById(R.id.textPostsSelected);
-
 
 
         //Recyclerview stuff showing mixed image and text posts for favourites
@@ -129,11 +128,11 @@ public class ProfileFragment extends Fragment {
         profileId = prefs.getString("profileid", "none");
 
         /**If the profileid is the current user's ID then they will be able to see edit profile, instead of chat (Chat -> Edit Profile) */
-        if(profileId.equals(firebaseUser.getUid())){
+        if (profileId.equals(firebaseUser.getUid())) {
             chatBtn.setText("Edit Profile");
             followBtn.setText("Favourite posts");
         } else {
-           checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
+            checkFollow(); //Check to see if the OTHER user follows you or not, and based on that change the follow button
         }
 
         //If the current user is a member of CS Staff
@@ -141,7 +140,7 @@ public class ProfileFragment extends Fragment {
         //When they are viewing their own profile, the chat button turns into edit profile button.
         manager = new SharedPreferencesManager(getContext());
         currentUserIsStaff = manager.getisStaff();
-        if(currentUserIsStaff && profileId != firebaseUser.getUid()){
+        if (currentUserIsStaff && profileId != firebaseUser.getUid()) {
             chatBtn.setVisibility(View.GONE);
         } else {
             chatBtn.setVisibility(View.VISIBLE);
@@ -152,9 +151,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 String btnText = chatBtn.getText().toString();
 
-                if(btnText.equals("Edit Profile")){
+                if (btnText.equals("Edit Profile")) {
                     startActivity(new Intent(getContext(), ProfileEditActivity.class));
-                } else if (btnText.equals("Chat")){
+                } else if (btnText.equals("Chat")) {
                     Intent intent = new Intent(getContext(), MessagingActivity.class);
                     intent.putExtra("userid", profileId);
                     startActivity(intent);
@@ -168,11 +167,11 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 String btnText = followBtn.getText().toString();
 
-                if(followBtn.getText().equals("Favourite posts")){ //meaning you are viewing your own profile
+                if (followBtn.getText().equals("Favourite posts")) { //meaning you are viewing your own profile
                     recyclerViewText.setVisibility(View.GONE);
                     recyclerViewPost.setVisibility(View.GONE);
                     recyclerViewFavourites.setVisibility(View.VISIBLE);
-                } else if (btnText.equals("follow")){
+                } else if (btnText.equals("follow")) {
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileId).setValue(true);
@@ -181,7 +180,7 @@ public class ProfileFragment extends Fragment {
 
                     addActivityItem();//Set activity item
 
-                } else if (btnText.equals("following")){
+                } else if (btnText.equals("following")) {
 
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("following").child(profileId).removeValue();
@@ -241,7 +240,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    private void getUserInfo(){
+    private void getUserInfo() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(profileId);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -253,20 +252,23 @@ public class ProfileFragment extends Fragment {
                 User user = snapshot.getValue(User.class);
                 System.out.println(profileId);
                 String profileid = profileId;
-                if(user.getImageurl() != null) { Glide.with(getContext()).load(user.getImageurl()).into(profileImage); }
+                if (user.getImageurl() != null) {
+                    Glide.with(getContext()).load(user.getImageurl()).into(profileImage);
+                }
                 fullname.setText(user.getFullname());
                 bioText.setText(user.getBio());
                 isStaff = user.getisStaff();
 
                 //Hide the chat button if the other person is a member of CS Staff and it is someone elses profile
                 //If the member of CS Staff were to view their own profile, it would show 'Edit Profile'
-                if(!profileId.equals(firebaseUser.getUid())){
-                    if(isStaff){
+                if (!profileId.equals(firebaseUser.getUid())) {
+                    if (isStaff) {
                         chatBtn.setVisibility(View.GONE);
                     }
                 }
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -276,14 +278,14 @@ public class ProfileFragment extends Fragment {
 
     //Checks to see if the 'profileid' is currently followed by the current user
     //This method is only triggered if the user is looking at another user's profile, and not their own.
-    private void checkFollow(){
+    private void checkFollow() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child("Follow").child(firebaseUser.getUid()).child("following");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(profileId).exists()){
+                if (snapshot.child(profileId).exists()) {
                     followBtn.setText("following");
                 } else {
                     followBtn.setText("follow");
@@ -297,20 +299,20 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getPosts(){
+    private void getPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 imagePostList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    if(post.getIsImagePost() == true){
+                    if (post.getIsImagePost() == true) {
                         if (post.getPublisher().equals(profileId)) {
                             imagePostList.add(post);
                         }
-                    } else if (post.getIsImagePost() == false){
-                        if (post.getPublisher().equals(profileId)){
+                    } else if (post.getIsImagePost() == false) {
+                        if (post.getPublisher().equals(profileId)) {
                             textPostList.add(post);
                         }
                     }
@@ -329,14 +331,14 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void readSavedPosts(){
+    private void readSavedPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Bookmarked").child(firebaseUser.getUid());
         savedPostList = new ArrayList<>();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     savedPostList.add(snapshot.getKey());
                 }
                 getSavedPosts(); //have the ID's of the saved posts, now need to retrieve the actual posts..and add them to the favouritedPosts list
@@ -349,15 +351,15 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getSavedPosts(){
+    private void getSavedPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 favouritePostList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    for(String id :savedPostList){
+                    for (String id : savedPostList) {
                         if (post.getPostId().equals(id)) {
                             favouritePostList.add(post);
                         }
@@ -373,7 +375,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void addActivityItem(){
+    private void addActivityItem() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(profileId);
 
         HashMap<String, Object> hashMap = new HashMap<>();
