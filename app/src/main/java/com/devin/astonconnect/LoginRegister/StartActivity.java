@@ -65,7 +65,7 @@ public class StartActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        StartActivity.super.finish();
+                        finish();
                     }
                 })
                 .setNegativeButton("No", null)
